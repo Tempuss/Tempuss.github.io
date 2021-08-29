@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Mysql 프로시저 생성시 특수문자 escape
+title: PHP Type Confusion 
 date: 2018-12-20 16:18:00 +0900
 category: Hacking 
 ---

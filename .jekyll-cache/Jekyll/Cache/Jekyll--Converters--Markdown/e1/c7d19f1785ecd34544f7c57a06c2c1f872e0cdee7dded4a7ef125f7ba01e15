@@ -1,3 +1,0 @@
-I"�<p>```mysql
-select host from user_tb where host=’m0ai’ and if(FOUND_ROWS()&lt;1, sleep(1), sleep(2)) &amp;&amp; ‘1’=’1’;</p>
-:ET

@@ -4,30 +4,23 @@ title: About
 permalink: /about/
 ---
 
-## Theme Monos
-> Simple and lightweight theme for Jekyll
+![profile](/assets/img/profile.png){:height="417px" width="556px"}.
 
-### Features
-- Responsive.
-- Syntax Highlight
-- Most optimized theme for tech blog.
-- Lightweight with minimum stylesheet.
-- Easy to customize.
-- Offers category menu.
+### Contact.
 
-### _config.yml
-> Code block will look like this.
-```yml
-highlighter-theme: monokai //you can change your syntax color scheme.
-date_format: "%Y-%M-%D" //and date format.
-```
+Name : 지용빈(YONGBIN JI) 
+Email :  ben3787@gmail.com
 
-### Screenshots
-#### Page
-![alt text](/public/img/screenshot-1.png)
-#### Articles
-![alt text](/public/img/screenshot-2.png)
-#### Page - Mobile
-![alt text](/public/img/screenshot-m1.png)
-#### Page - Articles
-![alt text](/public/img/screenshot-m2.png)
+### Channel.
+
+[Blog](https://tempuss.github.io/)
+
+[Facebook](https://www.facebook.com/profile.php?id=100002595891006)
+
+[GitHub](https://github.com/Tempuss)
+
+[Resume](https://www.notion.so/tempuss/2f22942266c645daa8c266b5ae5da113)
+
+---
+
+

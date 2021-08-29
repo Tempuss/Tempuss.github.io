@@ -1,6 +1,0 @@
-I"�<p>자 문제를 보면</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  if(@ereg("'",$_GET[id])) exit("HeHe"); 
-  if(@ereg("'",$_GET[pw])) exit("HeHe"); 
-</code></pre></div></div>
-<p>ereg가 있다.</p>
-:ET
