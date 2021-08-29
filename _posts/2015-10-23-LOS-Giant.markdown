@@ -1,0 +1,28 @@
+---
+layout: post
+title: LOS Giant 
+date: 2015-10-23 00:29:00 +0900
+category: Hacking
+---
+select 1234 fromprob_giant where 1
+
+
+
+fromprob_giant가 붙어있다.
+
+저걸 \n이나 \r로 띄어줘야 하는데 죄다 필터링 되있다 하지만 url encoding 표를 보면 %0a, %0b %0c 등을 쓰고 있다.
+
+
+
+
+
+```
+http://los.sandbox.cash/chall/giant_0ea82d6bd3e3cb4614e318f096753475.php?shit=%0c
+```
+
+
+끝
+
+
+
+

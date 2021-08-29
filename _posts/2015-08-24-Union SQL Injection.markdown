@@ -1,0 +1,136 @@
+---
+layout: post
+title: Union SQL Injection 
+date: 2015-08-24 13:42:00 +0900
+category: Hacking 
+---
+
+Union이란 것은 SQL에서 한개 이상의 쿼리문을 실행할때 사용하는 함수다.
+
+Select id, pwd from user where id='admin' union select id,pwd from user where id='guest';
+
+이렇게 실행하게 된다.
+
+보통 Union SQL Injection을 많이 사용하게 되는 환경은 게시판의 형태다
+
+보통 게시판에 작성자, 제목,내용,시간등을 넣게 되는데 이때의 컬럼수는 4개다.
+
+Union SQL Injection의 특징은 먼저 앞에서 실행되는 
+
+Select id, pwd from user where id='admin' 이 쿼리문과 뒤에 추가하게 되는 쿼리문의 컬럼 수가 같아야 한다는 점이다.
+
+
+
+
+
+- ![폴더 구조](/assets/img/214AB93E55E82DB80B.png)
+
+
+
+
+
+위에서 현재 게시판을 담고
+
+있는 테이블의 컬럼수는 9인것을 알 수 있다. 내가 설계했으니까 핳 먼저 0번 idx를 호출하면 아무값도 나오지 않는다 존재하지 않는 게시판 번호이기 때문이다. 여기에 union select 1,1,1,1,1,1,1,1,1 구문을 날리게 되면 SQL 쿼리의 결과값을 담은 배열에 1만 9개가 들어가게 된다. 떄문에 1만 출력 되는 것이다. 만약 여기서 DB 전체에 대한 구조를 알고 싶다면 천천히 DB명 부터 뺴오면 된다.
+
+
+
+
+
+
+- ![폴더 구조](/assets/img/2641DE3C55E82E4724.png)
+
+
+
+
+
+
+
+database()라는 것은 현재 자신의 DB명을 불러오는 것이다.
+
+즉 현재 게시판 테이블이 포함되어 있는 DB는 syssecu 라는 DB다.
+
+
+
+그 외에도 PHP 에는 예약 상수라는 것이 있다 
+
+
+
+PHP_VERSION ()
+
+은 현재 PHP 버전에 대한 값은 반환하는 PHP 예약상수다. 
+
+관련 정보
+
+http://php.net/manual/kr/reserved.constants.php
+
+
+
+여기서 이제 테이블명을 알고 싶으면 DB의 구조에 대해서 좀더 자세하게 알아야 한다.
+
+MySQL에는 information_schema라는 DB가 있다. 어... 쉽게 표현하자면 메타 데이터에 대한 메타데이터 라고 표현 할 수 있다. 
+
+즉 DB의 모든 정보를 함축하고 있는 것이다. Information_schema에 대해서는 후에 자세하게 분석한 문서를 올리겠다.
+
+
+
+사실 지금까지 웹해킹을 공부하면서 문서를 써놓은게 아니라 대충 요약 정리만 해놓아서 글쓰기 굉장히 힘들다. 
+
+스샷도 찍어야 한다. 아오
+
+
+
+자 이제
+
+더 자세한 정보를 털어보자 
+
+
+
+
+
+- ![폴더 구조](/assets/img/2545A53E55E82FCE18.png)
+
+
+
+
+
+
+
+
+쉽게 설명하자면 현재 syssecu라는 DB에 있는 모든 Table 명을 뽑아온것이다.
+
+group_concat이라는 함수는 문자열을 묶어주는 함수라고 보면 된다.
+
+
+
+즉 현재 syssecu DB 안에는 3가지 테이블이 존재한다. 딱봐도 게시판은 board다.
+
+
+
+
+
+
+
+- ![폴더 구조](/assets/img/2702C34655E830A51E.png)
+
+
+
+
+
+
+자 현재 board 라는 테이블은 9가지 컬럼을 갖고 있다. 
+
+이런 식으로 DB에 있는 정보를 순차적으로 빼올때 유용한 것이 union SQL Injection이다. 
+
+만약 다른 테이블에 접근 할 수 있다면 user 테이블에 있는 정보도 빼올 수 있을 것이다. 
+
+
+
+물론 이건 Union SQL Injection의 완전 생기초다 기본적인 필터링도 모두 지워논 상태다
+
+더 어려운 내용들은 기억나는 대로 추가하겠습니다.
+
+아 정리하기 귀찮다....
+
+
+

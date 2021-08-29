@@ -1,0 +1,129 @@
+---
+layout: post
+title: 토큰 저장소의 왕은 누구인가?
+date: 2021-08-15 00:00:00 +0900
+category: Web
+---
+
+aka. Cookie VS LocalStorage VS SessionStorage
+
+## 질문
+
+- JWT 토큰을 어디에 저장해야하는가?
+
+## 대화의 흐름
+
+- 쿠키에 저장하는게 국룰이다
+- 요즘엔 웹 스토리지에 저장하는게 표준이다
+- 스토리지는 세션 스토리지가 정통이다 vs 로컬 스토리지도 모르는 사파 놈들
+
+결론적으로 보면 셋중 둘은 다른놈이다(두놈은 형제)
+
+일단 분류를 하자면 
+
+Cookie는 HTTP 요청 헤더에 들어가는 속성이고
+
+Local, Session Storage는 HTML5에서 지원하는 클라이언트 Web Storage 종류 중 하나다
+
+
+|Name|Cookie|Local Storage|Session Storage|
+|------|------|---|---|
+|분류|HTTP|Web Storage(HTML5)|Web Storage(HTML5)|
+|데이터 크기|4KB|없음|무제한|
+|데이터 개수|도메인당 20개|무제한|무제한|
+|자동 전송 여부|O|X (JS에서 가져와서 추가작업을 해주어야함)|X (JS에서 가져와서 추가작업을 해주어야함)|
+|데이터 영속성|소멸함|영구적|브라우저 종료시 삭제|
+|JS 접근 가능 여부|O(httponly 옵션이 꺼져 있을 경우)|O|O|
+|취약한 공격|CSRF|XSS|XSS|
+|접근 가능자|httponly옵션을 할 경우 브라우저에서 접근 불가|JS를 통해서만|JS를 통해서만|
+|서브도메인 접근 가능 여부|같은 서브 도메인의 쿠키만 접근가능(쿠키는 일부 보안 기능에 대해 서버측에서 설정 가능)|동일 도메인 주소만|동일 도메인 주소만|
+|탭 별 데이터 공유 여부|O|O|X|
+|저장 자료형|문자열|문자열 + 객체 정보 저장 가능|문자열 + 객체 정보 저장 가능|
+|만료|시간설정 |X|X|
+|브라우저 종료시|만료되지 않는 이상 재사용가능|재시작 후에도 사용 가능|종료시 삭제|
+|접근 범위|제한 없음|동일 도메인일 경우에만|동일 도메인 + 같은 브라우저 컨텍스트에서만(탭)|
+
+
+취약점 면에서 보면 양쪽다 비슷하며
+개발 목적,기능 혹은 아키텍처 설계에 따라 Cookie VS Web Storage를 골라서 쓰면 된다
+
+## 서브도메인 테스트 결과
+
+### LocalStorage
+
+[tempus.com](http://tempus.com) → [test.tempus.com](http://test.tempus.com) 스토리지 접근 가능
+
+[tempus.com](http://tempus.com) ← test.tempus.com 스토리지 접근 불가
+
+[tempus.com](http://tempus.com) → [test.com](http://test.com) 스토리지 접근 불가
+
+### SessionStorage
+
+[tempus.com](http://tempus.com)  → [test.tempus.com](http://test.tempus.com) 스토리지 접근 불가
+
+[tempus.com](http://tempus.com) ← [test.tempus.com](http://test.tempus.com) 스토리지 접근 불가
+
+[tempus.com](http://tempus.com) → [test.com](http://test.com) 스토리지 접근 불가
+
+[tempus.com](http://tempus.com) → tempus.com 스토리지 접근 불가(다른 탭) 
+
+### Cookie(Domain 설정 X)
+
+[tempus.com](http://tempus.com) → [test.tempus.com](http://test.tempus.com) 쿠키 접근 불가
+
+[tempus.com](http://tempus.com) → [te](http://test.com)mpus.com 쿠키 접근 가능
+
+[tempus.com](http://tempus.com) ← [test.tempus.com](http://test.tempus.com) 쿠키 접근 불가
+
+[tempus.com](http://tempus.com) ← [test.com](http://test.com) 쿠기 접근 불가
+
+### Cookie(Domain 설정 O )
+
+[tempus.com](http://tempus.com) → [test.tempus.com](http://test.tempus.com) 쿠키 접근 가능
+
+[tempus.com](http://tempus.com) ← [test.tempus.com](http://test.tempus.com) 쿠키 접근 가능
+
+[tempus.com](http://tempus.com) ← [test.com](http://test.com) 쿠키 접근 불가
+
+[tempus.com](http://tempus.com) → [a.test.tempus.com](http://a.test.tempus.com) 쿠키 접근 가능
+
+[tempus.com](http://tempus.com) ← [a.test.tempus.com](http://a.test.tempus.com) 쿠키 접근 불가
+
+
+### 추가 확인 사항
+```
+SOP정책
+document.cookie로 변경하면 타 도메인의 쿠키탈취가 가능한가? ⇒ 가능함
+subdomain - take over
+
+[a.naver.com](http://a.naver.com) → naver.com → [b.na](http://b.na)ver.com으로 쿠키 를 생성할 수 있는가?
+
+a.naver.com -> naver.com
+
+domain=.naver.com 확인 해보기
+```
+
+사용한 코드 
+
+```jsx
+localStorage.setItem('testValue', 'abc');
+let value = localStorage.getItem('testValue');
+console.log(value)
+
+sessionStorage.setItem('myCat', 'Tom');
+sessionStorage.getItem("myCat");
+
+document.cookie = "user=John; domain=tempus.com"
+document.cookie = "user=John;"
+document.cookie = "abc = www; domain=tempus.com"
+document.cookie = "test=www; domain=a.test.tempus.com"
+console.log(document.cookie)
+```
+
+### 참고
+
+- [https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)
+- [https://velog.io/@ejchaid/localstorage-sessionstorage-cookie의-차이점](https://velog.io/@ejchaid/localstorage-sessionstorage-cookie%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90)
+- [https://datatracker.ietf.org/doc/html/rfc2109](https://datatracker.ietf.org/doc/html/rfc2109)
+- [https://medium.com/swlh/whats-the-secure-way-to-store-jwt-dd362f5b7914](https://medium.com/swlh/whats-the-secure-way-to-store-jwt-dd362f5b7914)
+- [https://velog.io/@0307kwon/JWT는-어디에-저장해야할까-localStorage-vs-cookie](https://velog.io/@0307kwon/JWT%EB%8A%94-%EC%96%B4%EB%94%94%EC%97%90-%EC%A0%80%EC%9E%A5%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C-localStorage-vs-cookie)

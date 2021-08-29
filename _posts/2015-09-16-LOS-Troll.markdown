@@ -1,0 +1,13 @@
+---
+layout: post
+title: LOS Troll 
+date: 2015-09-16 11:07:00 +0900
+category: Hacking
+---
+```
+http://los.sandbox.cash/chall/troll_4db5bdeebb8a99cbe4534cf1fcfc37eb.php?id=Admin
+
+
+```
+
+

