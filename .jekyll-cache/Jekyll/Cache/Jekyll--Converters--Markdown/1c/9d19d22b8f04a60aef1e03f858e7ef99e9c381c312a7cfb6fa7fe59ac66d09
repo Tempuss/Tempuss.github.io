@@ -1,0 +1,30 @@
+I"<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'LARAVEL_START'</span><span class="p">,</span> <span class="nb">microtime</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">'/../../vendor/autoload.php'</span><span class="p">;</span>
+
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">require_once</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">'/../../bootstrap/app.php'</span><span class="p">;</span>
+
+<span class="nv">$kernel</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nx">Illuminate\Contracts\Http\Kernel</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Illuminate\Http\Request</span><span class="o">::</span><span class="na">capture</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">terminate</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
+
+
+<span class="c1">//클래스 생성</span>
+<span class="nv">$elaClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\App\Http\Controllers\ElasticController</span><span class="p">();</span>
+
+<span class="c1">//커넥션 생성</span>
+<span class="nv">$elaClass</span><span class="o">-&gt;</span><span class="na">setClient</span><span class="p">();</span>
+
+<span class="c1">//Data insert</span>
+<span class="nv">$elaClass</span><span class="o">-&gt;</span><span class="na">insertCount</span><span class="p">();</span>
+
+
+<span class="nx">출처</span><span class="o">:</span> <span class="nx">https</span><span class="o">://</span><span class="nx">tempuss</span><span class="o">.</span><span class="nx">tistory</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">entry</span><span class="o">/</span><span class="nx">Laravel에서</span><span class="o">-</span><span class="nx">PHP</span><span class="o">-</span><span class="nx">CLI</span><span class="o">-</span><span class="nx">실행</span> <span class="p">[</span><span class="nx">Tempus</span><span class="p">]</span>
+</code></pre></div></div>
+:ET

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			Union SQL Injection
+		</div>
+		<time class="post-date dt-published" datetime="2015-08-24T13:42:00+09:00" itemprop="datePublished">2015/08/24
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<p>Union이란 것은 SQL에서 한개 이상의 쿼리문을 실행할때 사용하는 함수다.</p>
+
+<p>Select id, pwd from user where id=’admin’ union select id,pwd from user where id=’guest’;</p>
+
+<p>이렇게 실행하게 된다.</p>
+
+<p>보통 Union SQL Injection을 많이 사용하게 되는 환경은 게시판의 형태다</p>
+
+<p>보통 게시판에 작성자, 제목,내용,시간등을 넣게 되는데 이때의 컬럼수는 4개다.</p>
+
+<p>Union SQL Injection의 특징은 먼저 앞에서 실행되는</p>
+
+<p>Select id, pwd from user where id=’admin’ 이 쿼리문과 뒤에 추가하게 되는 쿼리문의 컬럼 수가 같아야 한다는 점이다.</p>
+
+<ul>
+  <li><img src="/assets/img/214AB93E55E82DB80B.png" alt="폴더 구조" /></li>
+</ul>
+
+<p>위에서 현재 게시판을 담고</p>
+
+<p>있는 테이블의 컬럼수는 9인것을 알 수 있다. 내가 설계했으니까 핳 먼저 0번 idx를 호출하면 아무값도 나오지 않는다 존재하지 않는 게시판 번호이기 때문이다. 여기에 union select 1,1,1,1,1,1,1,1,1 구문을 날리게 되면 SQL 쿼리의 결과값을 담은 배열에 1만 9개가 들어가게 된다. 떄문에 1만 출력 되는 것이다. 만약 여기서 DB 전체에 대한 구조를 알고 싶다면 천천히 DB명 부터 뺴오면 된다.</p>
+
+<ul>
+  <li><img src="/assets/img/2641DE3C55E82E4724.png" alt="폴더 구조" /></li>
+</ul>
+
+<p>database()라는 것은 현재 자신의 DB명을 불러오는 것이다.</p>
+
+<p>즉 현재 게시판 테이블이 포함되어 있는 DB는 syssecu 라는 DB다.</p>
+
+<p>그 외에도 PHP 에는 예약 상수라는 것이 있다</p>
+
+<p>PHP_VERSION ()</p>
+
+<p>은 현재 PHP 버전에 대한 값은 반환하는 PHP 예약상수다.</p>
+
+<p>관련 정보</p>
+
+<p>http://php.net/manual/kr/reserved.constants.php</p>
+
+<p>여기서 이제 테이블명을 알고 싶으면 DB의 구조에 대해서 좀더 자세하게 알아야 한다.</p>
+
+<p>MySQL에는 information_schema라는 DB가 있다. 어… 쉽게 표현하자면 메타 데이터에 대한 메타데이터 라고 표현 할 수 있다.</p>
+
+<p>즉 DB의 모든 정보를 함축하고 있는 것이다. Information_schema에 대해서는 후에 자세하게 분석한 문서를 올리겠다.</p>
+
+<p>사실 지금까지 웹해킹을 공부하면서 문서를 써놓은게 아니라 대충 요약 정리만 해놓아서 글쓰기 굉장히 힘들다.</p>
+
+<p>스샷도 찍어야 한다. 아오</p>
+
+<p>자 이제</p>
+
+<p>더 자세한 정보를 털어보자</p>
+
+<ul>
+  <li><img src="/assets/img/2545A53E55E82FCE18.png" alt="폴더 구조" /></li>
+</ul>
+
+<p>쉽게 설명하자면 현재 syssecu라는 DB에 있는 모든 Table 명을 뽑아온것이다.</p>
+
+<p>group_concat이라는 함수는 문자열을 묶어주는 함수라고 보면 된다.</p>
+
+<p>즉 현재 syssecu DB 안에는 3가지 테이블이 존재한다. 딱봐도 게시판은 board다.</p>
+
+<ul>
+  <li><img src="/assets/img/2702C34655E830A51E.png" alt="폴더 구조" /></li>
+</ul>
+
+<p>자 현재 board 라는 테이블은 9가지 컬럼을 갖고 있다.</p>
+
+<p>이런 식으로 DB에 있는 정보를 순차적으로 빼올때 유용한 것이 union SQL Injection이다.</p>
+
+<p>만약 다른 테이블에 접근 할 수 있다면 user 테이블에 있는 정보도 빼올 수 있을 것이다.</p>
+
+<p>물론 이건 Union SQL Injection의 완전 생기초다 기본적인 필터링도 모두 지워논 상태다</p>
+
+<p>더 어려운 내용들은 기억나는 대로 추가하겠습니다.</p>
+
+<p>아 정리하기 귀찮다….</p>
+
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

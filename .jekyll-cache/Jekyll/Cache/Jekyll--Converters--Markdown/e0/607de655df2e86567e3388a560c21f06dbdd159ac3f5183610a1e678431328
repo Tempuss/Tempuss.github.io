@@ -1,0 +1,293 @@
+I"',<h2 id="1-소개">1. <strong>소개</strong></h2>
+
+<ul>
+  <li>소프트웨어, 하드웨어 및 펌웨어 취약점은 컴퓨터 네트워크등에 영향을 끼치는 취약점에 대해 주요 특징을 선별하여 해당 취약점을 위험도에 대한 점수를 제공하는 시스템</li>
+  <li>CVSS의 장점 3가지
+    <ul>
+      <li>표준화 된 취약성 점수 시스템 제공</li>
+      <li>개방형 프레임 워크를 제공(투명한 판단 기준)</li>
+      <li>우선 순위 지정 가능(취약점종류에 따른 우선대응)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>1.1 Metrics(측정항목)</p>
+
+<ul>
+  <li>Base Metric (취약점이 가지는 고유한 특성)
+ex)공격경로, 복잡도, 인증필요 유무 등</li>
+  <li>Temporal Metric(일시적 특성이지만 사용자 환경에서는 변하지 않는 취약점의 특성)
+ex) 익스플로잇 kit의 유무, 취약점 패치 가능 여부, 보고서 신뢰도</li>
+  <li>Environmental Metric (취약점 발생 시스템의 환경적 평가 요소)
+ex)보안요구사항, 변경된 Base metric</li>
+</ul>
+
+<p>1.2 Scoring</p>
+
+<ul>
+  <li>분석가가 위의 3요소에 따라 평가하게 되면 2.0 ~ 10.0에 해당되는 점수를 계산하게 된다</li>
+  <li>일반적으로 Base, Temporal Metrics는 취약점에 대해 잘 알고 있는 분석가(해커), 보안업체들이 판단하게 되며 Environmental  Metrics는 취약점이 발생한 시스템에 대해 잘 알고 있는 기업들이 자체적으로 판단하게 된다</li>
+</ul>
+
+<h2 id="2-기본점수base-score">2. <strong>기본점수(Base Score)</strong></h2>
+
+<p>2.1 Exploitability Metrics</p>
+
+<ul>
+  <li>취약점이 갖고 있는 분야별 고유한 특성</li>
+</ul>
+
+<p>2.1.1 Attack Vector (AV) : 공격경로</p>
+
+<ul>
+  <li>네트워크 (N) : 네트워크를 통한 원격 실행 가능한 취약점</li>
+  <li>인접 네트워크 (A) : 제한된(사설망) 네트워크를 통한 원격 실행 가능한 취약점</li>
+  <li>로컬 (L) : 사용자 환경(OS)에서 실행 가능한 취약점</li>
+  <li>물리 (P) : 물리적 접근이 있어야 실행 가능한 취약점</li>
+</ul>
+
+<p>2.1.2. Attack Complexity (AC) : 공격 복잡성</p>
+
+<ul>
+  <li>낮음 (L) : 특수한 조건 없이 늘 공격이 성공할 경우</li>
+  <li>높음 (H) : 특수한 조건 혹은 확률적으로 공격이 성공 할 경우
+ex) Heap Spray</li>
+</ul>
+
+<p>2.1.3. Privileges Required (PR) : 권한 필요 유무</p>
+
+<ul>
+  <li>없음 (N) : 추가적인 권한이나 인증이 필요 하지 않을 경우 
+ex) 로그인 할 필요 없이 공격가능 할 경우</li>
+  <li>낮음 (L) : 기본적인 사용자가 사용하는 권한이 필요할 경우
+ex) 일반 사용자 계정 권한이 필요할 경우</li>
+  <li>높음 (H) : 시스템에 대한 설정 권한이 필요할 경우 
+ex) 관리자 계정 수준의 권한이 필요할 경우</li>
+</ul>
+
+<p>2.1.4. User Interaction (UI) :  사용자 상호작용 필요 유무(사용자가 추가적인 행위를 해야만 trigger 되는경우)</p>
+
+<ul>
+  <li>없음 (N) : 시스템 사용자가 아무런 행위를 하지 않아도 공격이 가능 한 경우
+ex) 사용자가 웹에 접근만 해도 trigger 되는 취약점의 경우</li>
+  <li>필수 (R) : 사용자가 특정한 행동을 해야 할 경우
+ex) 사용자가 특정 button을 클릭해야만 작동되는 취약점의 경우</li>
+</ul>
+
+<p>2.2. Scope (S) : 공격 피해 범위</p>
+
+<ul>
+  <li>
+    <p>변경 없음 (U) : 동일한 권한의 자원에게만 취약점이 영향을 끼칠 경우</p>
+
+    <p>ex) 동일한 권한의 일반 사용자들의 정보에만 접근 가능한 SQL Injection</p>
+  </li>
+  <li>
+    <p>변경 (C) : 상위권한의 자원에게도 취약점이 영향을 끼칠 경우
+ex) 최고 관리자 계정의 정보에도 접근 가능한 SQL Injection</p>
+  </li>
+</ul>
+
+<p>2.3. Impact Metrics : 영향 지표</p>
+
+<ul>
+  <li>
+    <p>취약점이 기밀성(confidentiality), 무결성(integrity), 가용성(availability) a.k.a CIA</p>
+
+    <p>에 어떤 영향을 끼치는지에 대한 지표</p>
+  </li>
+</ul>
+
+<p>2.3.1. Confidentiality Impact (C) : 기밀성 영향</p>
+
+<ul>
+  <li>높음 (H) : 기밀성이 심각하게 손상된 경우
+ex) 획득한 정보가 시스템에 큰 영향을 끼치는 민감한 정보, 관리자 암호, 암/복호화키</li>
+  <li>낮음 (L) : 기밀성이 약간 손상된 경우. 
+ex) 획득한 정보 자체가 적거나 제어 할 수 없는 경우, 획득한 정보가 시스템에 크게 영향을 끼치지 않을 경우,</li>
+  <li>없음 (N) : 취약점이 시스템의 기밀성에 영향을 끼치지 않습니다.</li>
+</ul>
+
+<p>2.3.2. Integrity Impact (I)  : 무결성 영향</p>
+
+<ul>
+  <li>높음 (H) : 시스템의 자원에 대한 완전한 손실
+ex) 공격자가 시스템의 모든 자원에 대해 수정 할 수 있는 경우, 민감한 자원에 대해 수정 할 수 있는 경우</li>
+  <li>낮음 (L) : 시스템의 자원에 대한 일부 손실
+ex) 자원에 대한 수정이 가능하나 민감하지 않거나 수정 할 수 있는 데이터의 양에 제한 이 있을 경우</li>
+  <li>없음 (N) : 시스템 자원에 대한 무결성 손실이 없음</li>
+</ul>
+
+<p>2.3.3. Availability Impact (A) : 가용성 영향</p>
+
+<ul>
+  <li>
+    <p>높음 (H) : 시스템의 가용성이 완전히 손실 된 경우</p>
+
+    <p>ex) DOS로 인해 웹 서비스의 서버가 완전히 Down된 경우</p>
+  </li>
+  <li>낮음 (L) : 시스템 자원, 성능에 대한 가용성이 일부 손실된 경우
+ex) DOS로 인해 웹 서비스 응답속도가 지연되는 경우</li>
+  <li>없음 (N) : 가용성에 영향을 끼치지 않음</li>
+</ul>
+
+<h2 id="3-temporal-metrics--추후-변경-가능한-취약점-판단-요소">3. <strong>Temporal Metrics</strong> : 추후 변경 가능한 취약점 판단 요소</h2>
+
+<p>3.1. Exploit Code Maturity (E) : exploit 코드에 대한 수준 평가</p>
+
+<ul>
+  <li>정의되지 않음 (X) : 스코어링 점수에 영향을 끼치지 않음(exploit 코드에 대한 판단 불가)</li>
+  <li>높음 (H) : exploit 코드가 자동화 되어 있고 모든 상황에서 실행 신뢰도가 높은 경우, 네트워크 단에서 worm 처럼 탐색 및 감염이 가능한 경우</li>
+  <li>기능성 (F) : exploit 코드가 대부분의 상황에서 작동 가능한 경우</li>
+  <li>개념 증명 (P) : 작동은 하나 대부분의 상황에서 작동하지 않거나 숙련된 사용자가 수정을 해야 작동하는 explit의 경우</li>
+  <li>입증되지 않은 (U) : exploit 코드가 없거나 이론적일 경우</li>
+</ul>
+
+<p>3.2. Remediation Level (RL) : 취약점에 대한 패치 수준 평가(취약점의 패치 가능 등급)</p>
+
+<ul>
+  <li>정의되지 않음 (X) : 취약점 패치 가능 수준에 대한 평가가 불가능 한 경우(스코어링에 영향 없음)</li>
+  <li>사용할 수 없음 (U) : 패치 불가능</li>
+  <li>차선책 (W) : 3rd 파티 업체를 통해 패치가능하거나 사용자가 자체 패치를 할 수 있거나, 취약점을 완화 할 수 있는 방법이 있을 경우</li>
+  <li>임시 수정 (T) : Hot Fix가 가능하거나 또 다른 패치도구 제공이 가능 한경우</li>
+  <li>공식 수정 (O) : 개발사가 공식 패치를 통해 fix 가능한 경우</li>
+</ul>
+
+<p>3.3. Report Confidence (RC) : 취약점 제보에 대한 신뢰도</p>
+
+<ul>
+  <li>정의되지 않음 (X) : 보고서에 대한 신뢰도 판단이 불가능한 경우(스코어링에 영향 없음)</li>
+  <li>확인 됨 (C) : 자세한 보고서가 존재하거나, 작동하는 exploit이 존재하거나, 소스코드 단에서 검증이 가능하거나, 개발사에서 취약점을 확인 해주는 경우</li>
+  <li>합리적인 (R) : POC 코드에 대한 검증(버그or 취약점 재현 가능)은 되었으나 소스코드에 접근 할 수 없어 자세한 내용에 대한 검증이 불가능한 경우</li>
+  <li>불명 (U) : 보고서는 존재하나 PoC 코드 실행 신뢰성이 떨어지는 경우, 취약점에 대한 자세한 내용이 명세되지 않은 경우</li>
+</ul>
+
+<h2 id="4-environmental-metrics--취약점이-시스템-환경에-끼치는-영향에-대한-평가">4. <strong>Environmental Metrics</strong> : 취약점이 시스템 환경에 끼치는 영향에 대한 평가</h2>
+
+<p>4.1. Security Requirements (CR, IR, AR) : CIA 대한 영향도 평가(CIA : 기밀성, 무결성, 가용성)</p>
+
+<ul>
+  <li>정의되지 않음 (X) : CIA 대한  판단이 불가능한 경우(스코어링에 영향 없음)</li>
+  <li>높음 (H) : 기업 및 고객의 CIA에 대한 치명적인 영향</li>
+  <li>중간 (M) : 기업 및 고객의 CIA에 대한 심각한 영향</li>
+  <li>낮음 (L) : 기업 및 고객의 CIA에 대한 부정적인 영향</li>
+</ul>
+
+<p>4.2. Modified Base Metrics : 분석가가 평가한 지수를 기업이 변경하는 요소</p>
+
+<ul>
+  <li>수정 된 공격 벡터 (MAV)</li>
+  <li>수정 된 공격 복잡성 (MAC)</li>
+  <li>수정 된 권한 필요 (MPR)</li>
+  <li>수정 된 사용자 상호 작용 (MUI)</li>
+  <li>수정 된 범위 (MS)</li>
+  <li>수정 된 기밀성 (MC)</li>
+  <li>수정 된 무결성 (MI)</li>
+  <li>수정 된 가용성 (MA)</li>
+</ul>
+
+<h2 id="5-점수-별-위험도-등급">5. 점수 별 위험도 등급</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>평가</th>
+      <th>CVSS 점수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>없음</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>낮음</td>
+      <td>0.1 ~ 3.9</td>
+    </tr>
+    <tr>
+      <td>중간</td>
+      <td>4.0 ~ 6.9</td>
+    </tr>
+    <tr>
+      <td>높음</td>
+      <td>7.0 ~ 8.9</td>
+    </tr>
+    <tr>
+      <td>치명적임</td>
+      <td>9.0 ~ 10.0</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="6-vector-string">6. Vector String</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric Group</th>
+      <th>Metric 이름</th>
+      <th>Vector 문자열</th>
+      <th>필수 여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Base</td>
+      <td>Attack Vector</td>
+      <td>N,A,L,P</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Base</td>
+      <td>Attack Complexity, AC</td>
+      <td>N,A,L,P</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Base</td>
+      <td>Attack Vector</td>
+      <td>N,A,L,P</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Base</td>
+      <td>Attack Vector</td>
+      <td>N,A,L,P</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Base</td>
+      <td>Attack Vector</td>
+      <td>N,A,L,P</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Base</td>
+      <td>Attack Vector</td>
+      <td>N,A,L,P</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Base</td>
+      <td>Attack Vector</td>
+      <td>N,A,L,P</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="7-cvss-v30-equations-cvss-스코어-산정-방정식">7. CVSS v3.0 Equations (CVSS 스코어 산정 방정식)</h2>
+<ul>
+  <li>그냥 링크만 참고<a href="https://www.first.org/cvss/v3.0/specification-document#CVSS-v3-0-Equations">https://www.first.org/cvss/v3.0/specification-document#CVSS-v3-0-Equations</a></li>
+</ul>
+
+<p>8.1. Base</p>
+
+<p>8.2. Temporal</p>
+
+<p>8.3. Environmental</p>
+
+<p>8.4. Metrics Levels</p>
+
+<p>8.5. A word on CVSS v3.0 equations and scoring</p>
+:ET

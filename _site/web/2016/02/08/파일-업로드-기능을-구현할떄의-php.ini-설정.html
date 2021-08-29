@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			파일 업로드 기능을 구현할떄의 php.ini 설정
+		</div>
+		<time class="post-date dt-published" datetime="2016-02-08T12:32:00+09:00" itemprop="datePublished">2016/02/08
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<p>작은 크기의 파일을 업로드할때는 상관이 없지만 
+파일크기가 클 경우에는 파일이 업로드 되지 않는다</p>
+
+<p>이럴떄는 보통 멘붕을 겪게 되는데</p>
+
+<p>php.ini에서 설정을 해주어야 한다.</p>
+
+<p>파일 업로드는 POST 방식으로 전송이 되는데</p>
+
+<p>보통 파일업로드가 되지 않을때는 크게 3가지 설정을 확인해봐야 한다.</p>
+
+<p>upload_max_filesize</p>
+
+<p>memory_limit</p>
+
+<p>post_max_size</p>
+
+<p>이 3가지를 확인 해야한다.</p>
+
+<p>post_max_size는 말 그대로 post 방식으로 보내거나 받는 값의 최대 크기를 설정하는 것이다.</p>
+
+<p>upload_max_filesize는 업로드 할 수 있는 최대 파일크기를 제한하는 것이다.</p>
+
+<p>이미지 파일 올리는대 굳이 2G씩 잡을 필요는 없다.</p>
+
+<p>만약 메모리제한 설정을 활성화 시켰다면</p>
+
+<p>memery_limit이 post_max_size보다 커야 한다.</p>
+
+<p>즉</p>
+
+<p>memory_limit &gt; post_max_size &gt; upload_max_filesize 순으로 크기가 제한되어야 한다.</p>
+
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

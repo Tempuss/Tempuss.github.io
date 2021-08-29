@@ -1,0 +1,30 @@
+I"�<h2 id="개념">개념</h2>
+
+<hr />
+
+<p>DAG(Directed Acyclic Graph, 비순환 방향 그래프)로 각 배치 스케줄을 관리하는 work flow 스케줄링 및 모니터링  도구</p>
+
+<h2 id="단어-설명">단어 설명</h2>
+
+<hr />
+
+<ul>
+  <li>DAG (Directed Acyclic Graph) : 관계와 의존성을 가진 작업(Task)들의 집합이다
+    <ul>
+      <li>ex) a 작업 실행 후 b작업을 실행하라는 명령어를 묶은것</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://medium.com/airbnb-engineering/airflow-a-workflow-management-platform-46318b977fd8">Airflow: a workflow management platform</a></li>
+  <li><a href="https://engineering.linecorp.com/ko/blog/data-engineering-with-airflow-k8s-1/">Kubernetes를 이용한 효율적인 데이터 엔지니어링(Airflow on Kubernetes VS Airflow Kubernetes Executor) – 1</a></li>
+  <li><a href="https://engineering.linecorp.com/ko/blog/data-engineering-with-airflow-k8s-2/">Kubernetes를 이용한 효율적인 데이터 엔지니어링(Airflow on Kubernetes VS Airflow Kubernetes Executor) – 2</a></li>
+  <li><a href="https://bcho.tistory.com/1184">데이타 워크플로우 관리를 위한 Apache Airflow #1 - 소개</a></li>
+  <li><a href="https://blog.si-analytics.ai/59">airflow 튜토리얼</a></li>
+  <li><a href="https://airflow.apache.org/docs/apache-airflow/stable/start/index.html">airflow 공식 문서</a></li>
+</ul>
+
+:ET

@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-08-29T13:28:50+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tempuss Blog</title><subtitle>보안하는 개발자</subtitle><entry><title type="html"></title><link href="http://localhost:4000/2021/08/29/2019-09-25-A-preliminary-analysis-of-vulnerability-scores-for-attacks-in-wild-the-Ekits-and-sym-datasets.html" rel="alternate" type="text/html" title="" /><published>2021-08-29T13:28:50+09:00</published><updated>2021-08-29T13:28:50+09:00</updated><id>http://localhost:4000/2021/08/29/2019-09-25-A%20preliminary%20analysis%20of%20vulnerability%20scores%20for%20attacks%20in%20wild:%20the%20Ekits%20and%20sym%20datasets</id><content type="html" xml:base="http://localhost:4000/2021/08/29/2019-09-25-A-preliminary-analysis-of-vulnerability-scores-for-attacks-in-wild-the-Ekits-and-sym-datasets.html">&lt;h2 id=&quot;아래-글은-bob-8기의-terrarium-팀의-산출물-일부-입니다&quot;&gt;아래 글은 BoB 8기의 Terrarium 팀의 산출물 일부 입니다.&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Created: September 25, 2019 5:07 PM&lt;/li&gt;
+  &lt;li&gt;Quality: Good, 완료&lt;/li&gt;
+  &lt;li&gt;담당자: 지용빈&lt;/li&gt;
+  &lt;li&gt;연도: 2012&lt;/li&gt;
+  &lt;li&gt;인용횟수: 51&lt;/li&gt;
+  &lt;li&gt;출처: 2012 ACM Workshop on Building Analysis Datasets and Gathering Experience Returns for Security&lt;/li&gt;
+  &lt;li&gt;파일: https://www.win.tue.nl/~lallodi/allodi-12-badgers.pdf&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;한줄요약&quot;&gt;한줄요약&lt;/h2&gt;
+
+&lt;p&gt;EKITS(black market exploit으로 구축한 Exploit-kits)및 SYM(Symantec’s Threat Database)에서 추출한 정보를 기반으로 NVD(National Vulnerability Database)와 EDB(Exploit-DB)에 공개된 취약점들의 스코어링에 대한 검증&lt;/p&gt;
+
+&lt;h2 id=&quot;abstract&quot;&gt;Abstract&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;NVD와 EDB는 실제 exploits과 비교했을때 믿을만한 정보들이 아니다.&lt;/strong&gt;
+(cvss와 exploitability subscore 조정했을때도)&lt;/p&gt;
+
+&lt;p&gt;black market의 EKTIS가 CVSS점수 Medium ~ High 일 경우에도 엄청나게 민감(실제 공격 예측도)하다는것을 보여준다(&lt;strong&gt;CVSS 점수가 높아도 실제로 reliable 하지는 않다는것&lt;/strong&gt;)&lt;/p&gt;
+
+&lt;h2 id=&quot;목적&quot;&gt;목적&lt;/h2&gt;
+
+&lt;p&gt;현존하는 exploits Database 들에 대한 취약점 스코어링 신뢰도 분석&lt;/p&gt;
+
+&lt;h2 id=&quot;특장점&quot;&gt;특장점&lt;/h2&gt;
+
+&lt;p&gt;CVSS 스코어링이 실제로 얼마나 reliable 하고 믿을만 한지 검증함&lt;/p&gt;
+
+&lt;p&gt;일반적으로 CVSS관련 논문들이 NVD와 EDB를 신뢰한다는 전제하에 논문을 쓰는데 그 NVD와 EDB를 신뢰하지 않는 다는 관점에서 아주 흥미로움&lt;/p&gt;
+
+&lt;p&gt;실제 블랙마켓에서 수집한 취약점 103개를 EKITS라 칭하고 SYM과 함께 검증 데이터 셋으로 사용함
+(실제 블랙마켓읠 Exploits에 대한 DB를 구축했다는 점)&lt;/p&gt;
+
+&lt;p&gt;White/Black/Wild 처럼 다양한 분야에서의 취약점을 수집함&lt;/p&gt;
+
+&lt;h2 id=&quot;한계점&quot;&gt;한계점&lt;/h2&gt;
+
+&lt;p&gt;직접 수집한 EKITS의 개수가 적고 실제 어떤 데이터 인지 확인할 수 없음&lt;/p&gt;
+
+&lt;p&gt;CVSS의 exploitability factor중 access vector에 대해서 의문점을 던짐(거의 모든 취약점들이 원격이고 추가적인 인증과정이 없기때문)&lt;/p&gt;
+
+&lt;h2 id=&quot;발전-방향&quot;&gt;발전 방향&lt;/h2&gt;</content><author><name></name></author></entry><entry><title type="html">Hadoop</title><link href="http://localhost:4000/data-engineering/2021/08/20/Hadoop.html" rel="alternate" type="text/html" title="Hadoop" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/Hadoop</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/Hadoop.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">ElasticSearch</title><link href="http://localhost:4000/data-engineering/2021/08/20/ElasticSearch.html" rel="alternate" type="text/html" title="ElasticSearch" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/ElasticSearch</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/ElasticSearch.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">ETL Architecture</title><link href="http://localhost:4000/data-engineering/2021/08/20/ETL-Architecture.html" rel="alternate" type="text/html" title="ETL Architecture" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/ETL%20Architecture</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/ETL-Architecture.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">EDW</title><link href="http://localhost:4000/data-engineering/2021/08/20/EDW.html" rel="alternate" type="text/html" title="EDW" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/EDW</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/EDW.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">Apache Nifi</title><link href="http://localhost:4000/data-engineering/2021/08/20/Apache-Nifi.html" rel="alternate" type="text/html" title="Apache  Nifi" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/Apache%20Nifi</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/Apache-Nifi.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">Logstash</title><link href="http://localhost:4000/data-engineering/2021/08/20/Logstash.html" rel="alternate" type="text/html" title="Logstash" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/Logstash</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/Logstash.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">Apache Airflow</title><link href="http://localhost:4000/data-engineering/2021/08/19/Apache-AirFlow.html" rel="alternate" type="text/html" title="Apache Airflow" /><published>2021-08-19T00:00:00+09:00</published><updated>2021-08-19T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/19/Apache%20AirFlow</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/19/Apache-AirFlow.html">&lt;h2 id=&quot;개념&quot;&gt;개념&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;DAG(Directed Acyclic Graph, 비순환 방향 그래프)로 각 배치 스케줄을 관리하는 work flow 스케줄링 및 모니터링  도구&lt;/p&gt;
+
+&lt;h2 id=&quot;단어-설명&quot;&gt;단어 설명&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DAG (Directed Acyclic Graph) : 관계와 의존성을 가진 작업(Task)들의 집합이다
+    &lt;ul&gt;
+      &lt;li&gt;ex) a 작업 실행 후 b작업을 실행하라는 명령어를 묶은것&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/airbnb-engineering/airflow-a-workflow-management-platform-46318b977fd8&quot;&gt;Airflow: a workflow management platform&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/data-engineering-with-airflow-k8s-1/&quot;&gt;Kubernetes를 이용한 효율적인 데이터 엔지니어링(Airflow on Kubernetes VS Airflow Kubernetes Executor) – 1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/data-engineering-with-airflow-k8s-2/&quot;&gt;Kubernetes를 이용한 효율적인 데이터 엔지니어링(Airflow on Kubernetes VS Airflow Kubernetes Executor) – 2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bcho.tistory.com/1184&quot;&gt;데이타 워크플로우 관리를 위한 Apache Airflow #1 - 소개&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.si-analytics.ai/59&quot;&gt;airflow 튜토리얼&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://airflow.apache.org/docs/apache-airflow/stable/start/index.html&quot;&gt;airflow 공식 문서&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Data-Engineering" /><summary type="html">개념</summary></entry><entry><title type="html">토큰 저장소의 왕은 누구인가?</title><link href="http://localhost:4000/web/2021/08/15/%ED%86%A0%ED%81%B0-%EC%A0%80%EC%9E%A5%EC%86%8C%EC%9D%98-%EC%99%95%EC%9D%80-%EB%88%84%EA%B5%AC%EC%9D%B8%EA%B0%80.html" rel="alternate" type="text/html" title="토큰 저장소의 왕은 누구인가?" /><published>2021-08-15T00:00:00+09:00</published><updated>2021-08-15T00:00:00+09:00</updated><id>http://localhost:4000/web/2021/08/15/%ED%86%A0%ED%81%B0%20%EC%A0%80%EC%9E%A5%EC%86%8C%EC%9D%98%20%EC%99%95%EC%9D%80%20%EB%88%84%EA%B5%AC%EC%9D%B8%EA%B0%80</id><content type="html" xml:base="http://localhost:4000/web/2021/08/15/%ED%86%A0%ED%81%B0-%EC%A0%80%EC%9E%A5%EC%86%8C%EC%9D%98-%EC%99%95%EC%9D%80-%EB%88%84%EA%B5%AC%EC%9D%B8%EA%B0%80.html">&lt;p&gt;aka. Cookie VS LocalStorage VS SessionStorage&lt;/p&gt;
+
+&lt;h2 id=&quot;질문&quot;&gt;질문&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;JWT 토큰을 어디에 저장해야하는가?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;대화의-흐름&quot;&gt;대화의 흐름&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;쿠키에 저장하는게 국룰이다&lt;/li&gt;
+  &lt;li&gt;요즘엔 웹 스토리지에 저장하는게 표준이다&lt;/li&gt;
+  &lt;li&gt;스토리지는 세션 스토리지가 정통이다 vs 로컬 스토리지도 모르는 사파 놈들&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;결론적으로 보면 셋중 둘은 다른놈이다(두놈은 형제)&lt;/p&gt;
+
+&lt;p&gt;일단 분류를 하자면&lt;/p&gt;
+
+&lt;p&gt;Cookie는 HTTP 요청 헤더에 들어가는 속성이고&lt;/p&gt;
+
+&lt;p&gt;Local, Session Storage는 HTML5에서 지원하는 클라이언트 Web Storage 종류 중 하나다&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Cookie&lt;/th&gt;
+      &lt;th&gt;Local Storage&lt;/th&gt;
+      &lt;th&gt;Session Storage&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;분류&lt;/td&gt;
+      &lt;td&gt;HTTP&lt;/td&gt;
+      &lt;td&gt;Web Storage(HTML5)&lt;/td&gt;
+      &lt;td&gt;Web Storage(HTML5)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;데이터 크기&lt;/td&gt;
+      &lt;td&gt;4KB&lt;/td&gt;
+      &lt;td&gt;없음&lt;/td&gt;
+      &lt;td&gt;무제한&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;데이터 개수&lt;/td&gt;
+      &lt;td&gt;도메인당 20개&lt;/td&gt;
+      &lt;td&gt;무제한&lt;/td&gt;
+      &lt;td&gt;무제한&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;자동 전송 여부&lt;/td&gt;
+      &lt;td&gt;O&lt;/td&gt;
+      &lt;td&gt;X (JS에서 가져와서 추가작업을 해주어야함)&lt;/td&gt;
+      &lt;td&gt;X (JS에서 가져와서 추가작업을 해주어야함)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;데이터 영속성&lt;/td&gt;
+      &lt;td&gt;소멸함&lt;/td&gt;
+      &lt;td&gt;영구적&lt;/td&gt;
+      &lt;td&gt;브라우저 종료시 삭제&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;JS 접근 가능 여부&lt;/td&gt;
+      &lt;td&gt;O(httponly 옵션이 꺼져 있을 경우)&lt;/td&gt;
+      &lt;td&gt;O&lt;/td&gt;
+      &lt;td&gt;O&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;취약한 공격&lt;/td&gt;
+      &lt;td&gt;CSRF&lt;/td&gt;
+      &lt;td&gt;XSS&lt;/td&gt;
+      &lt;td&gt;XSS&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;접근 가능자&lt;/td&gt;
+      &lt;td&gt;httponly옵션을 할 경우 브라우저에서 접근 불가&lt;/td&gt;
+      &lt;td&gt;JS를 통해서만&lt;/td&gt;
+      &lt;td&gt;JS를 통해서만&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;서브도메인 접근 가능 여부&lt;/td&gt;
+      &lt;td&gt;같은 서브 도메인의 쿠키만 접근가능(쿠키는 일부 보안 기능에 대해 서버측에서 설정 가능)&lt;/td&gt;
+      &lt;td&gt;동일 도메인 주소만&lt;/td&gt;
+      &lt;td&gt;동일 도메인 주소만&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;탭 별 데이터 공유 여부&lt;/td&gt;
+      &lt;td&gt;O&lt;/td&gt;
+      &lt;td&gt;O&lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;저장 자료형&lt;/td&gt;
+      &lt;td&gt;문자열&lt;/td&gt;
+      &lt;td&gt;문자열 + 객체 정보 저장 가능&lt;/td&gt;
+      &lt;td&gt;문자열 + 객체 정보 저장 가능&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;만료&lt;/td&gt;
+      &lt;td&gt;시간설정&lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;브라우저 종료시&lt;/td&gt;
+      &lt;td&gt;만료되지 않는 이상 재사용가능&lt;/td&gt;
+      &lt;td&gt;재시작 후에도 사용 가능&lt;/td&gt;
+      &lt;td&gt;종료시 삭제&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;접근 범위&lt;/td&gt;
+      &lt;td&gt;제한 없음&lt;/td&gt;
+      &lt;td&gt;동일 도메인일 경우에만&lt;/td&gt;
+      &lt;td&gt;동일 도메인 + 같은 브라우저 컨텍스트에서만(탭)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;취약점 면에서 보면 양쪽다 비슷하며
+개발 목적,기능 혹은 아키텍처 설계에 따라 Cookie VS Web Storage를 골라서 쓰면 된다&lt;/p&gt;
+
+&lt;h2 id=&quot;서브도메인-테스트-결과&quot;&gt;서브도메인 테스트 결과&lt;/h2&gt;
+
+&lt;h3 id=&quot;localstorage&quot;&gt;LocalStorage&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 스토리지 접근 가능&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← test.tempus.com 스토리지 접근 불가&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.com&quot;&gt;test.com&lt;/a&gt; 스토리지 접근 불가&lt;/p&gt;
+
+&lt;h3 id=&quot;sessionstorage&quot;&gt;SessionStorage&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt;  → &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 스토리지 접근 불가&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 스토리지 접근 불가&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.com&quot;&gt;test.com&lt;/a&gt; 스토리지 접근 불가&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → tempus.com 스토리지 접근 불가(다른 탭)&lt;/p&gt;
+
+&lt;h3 id=&quot;cookiedomain-설정-x&quot;&gt;Cookie(Domain 설정 X)&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 쿠키 접근 불가&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.com&quot;&gt;te&lt;/a&gt;mpus.com 쿠키 접근 가능&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 쿠키 접근 불가&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://test.com&quot;&gt;test.com&lt;/a&gt; 쿠기 접근 불가&lt;/p&gt;
+
+&lt;h3 id=&quot;cookiedomain-설정-o-&quot;&gt;Cookie(Domain 설정 O )&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 쿠키 접근 가능&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 쿠키 접근 가능&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://test.com&quot;&gt;test.com&lt;/a&gt; 쿠키 접근 불가&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://a.test.tempus.com&quot;&gt;a.test.tempus.com&lt;/a&gt; 쿠키 접근 가능&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://a.test.tempus.com&quot;&gt;a.test.tempus.com&lt;/a&gt; 쿠키 접근 불가&lt;/p&gt;
+
+&lt;h3 id=&quot;추가-확인-사항&quot;&gt;추가 확인 사항&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SOP정책
+document.cookie로 변경하면 타 도메인의 쿠키탈취가 가능한가? ⇒ 가능함
+subdomain - take over
+
+[a.naver.com](http://a.naver.com) → naver.com → [b.na](http://b.na)ver.com으로 쿠키 를 생성할 수 있는가?
+
+a.naver.com -&amp;gt; naver.com
+
+domain=.naver.com 확인 해보기
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;사용한 코드&lt;/p&gt;
+
+&lt;div class=&quot;language-jsx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;localStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;testValue&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;abc&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;localStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;testValue&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;sessionStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;myCat&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Tom&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;sessionStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;myCat&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;user=John; domain=tempus.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;user=John;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;abc = www; domain=tempus.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;test=www; domain=a.test.tempus.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;참고&quot;&gt;참고&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://velog.io/@ejchaid/localstorage-sessionstorage-cookie%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90&quot;&gt;https://velog.io/@ejchaid/localstorage-sessionstorage-cookie의-차이점&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc2109&quot;&gt;https://datatracker.ietf.org/doc/html/rfc2109&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/swlh/whats-the-secure-way-to-store-jwt-dd362f5b7914&quot;&gt;https://medium.com/swlh/whats-the-secure-way-to-store-jwt-dd362f5b7914&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://velog.io/@0307kwon/JWT%EB%8A%94-%EC%96%B4%EB%94%94%EC%97%90-%EC%A0%80%EC%9E%A5%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C-localStorage-vs-cookie&quot;&gt;https://velog.io/@0307kwon/JWT는-어디에-저장해야할까-localStorage-vs-cookie&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Web" /><summary type="html">aka. Cookie VS LocalStorage VS SessionStorage</summary></entry><entry><title type="html">Redis</title><link href="http://localhost:4000/web/2021/07/31/redis.html" rel="alternate" type="text/html" title="Redis" /><published>2021-07-31T00:00:00+09:00</published><updated>2021-07-31T00:00:00+09:00</updated><id>http://localhost:4000/web/2021/07/31/redis</id><content type="html" xml:base="http://localhost:4000/web/2021/07/31/redis.html">&lt;h1 id=&quot;redis&quot;&gt;Redis&lt;/h1&gt;
+
+&lt;h2 id=&quot;목차&quot;&gt;목차&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;a href=&quot;#Redis란&quot;&gt;Redis란?&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#자료형&quot;&gt;자료형&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#KeyDesign&quot;&gt;Key Design&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#성능&quot;&gt;성능&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#메모리관리&quot;&gt;메모리관리&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#FailOver&quot;&gt;Fail-Over&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#Cluster-Sentinel&quot;&gt;Cluster-Sentinel&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#fork&quot;&gt;Fork&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#Reference&quot;&gt;참고자료&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;redis란&quot;&gt;Redis란&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;In-Memory Data Structure Store Based on Key-Value pair&lt;/p&gt;
+
+&lt;h2 id=&quot;자료형&quot;&gt;자료형&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/redis_data_type.png&quot; alt=&quot;자료형&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;string&quot;&gt;String&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Key와 Value가 1:1 의 모든 Binary-safe strings을 key와 value에 담을 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;문자열 길이 값은 최대 512MB&lt;/li&gt;
+  &lt;li&gt;성능 : O(1)
+    &lt;blockquote&gt;
+      &lt;h4 id=&quot;binary-safe-strings&quot;&gt;Binary-Safe Strings?&lt;/h4&gt;
+      &lt;p&gt;이진 안전 문자열이란 byte를 포함한 모든 character로서 한글, 알파벳, 숫자 등 모든 byte base character를 
+담을 수 있으며 여기에는 jpeg같은 이미지 데이터도 가능합니다.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;lists&quot;&gt;Lists&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Key와 value가 1:N 관계의 자료형으로 value는 입력한 순서대로 저장됩니다.&lt;/li&gt;
+  &lt;li&gt;주로 Queue와 Stack을 사용할때 이용합니다.&lt;/li&gt;
+  &lt;li&gt;value가 저장되면 key는 자동 생성됩니다. 반대로 key에 value가 없으면 키는 삭제됩니다.&lt;/li&gt;
+  &lt;li&gt;value에 대한 값은 중복 저장이 가능합니다.&lt;/li&gt;
+  &lt;li&gt;데이터 압축이 가능하여 메모리 절약이 가능합니다.&lt;/li&gt;
+  &lt;li&gt;성능 : O(1)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sets&quot;&gt;Sets&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Key와 value가 1:N 관계의 자료형입니다.&lt;/li&gt;
+  &lt;li&gt;Lists와 다르게 입력된 순서와 상관없이 저장됩니다.&lt;/li&gt;
+  &lt;li&gt;데이터 중복 저장이 되지 않습니다. ex)value A를 두번 저장해도 1개의 value만 남습니다.&lt;/li&gt;
+  &lt;li&gt;집합이라는 의미에서 value를 member라 칭하기도 합니다.&lt;/li&gt;
+  &lt;li&gt;데이터 압축 X&lt;/li&gt;
+  &lt;li&gt;집합 연산이 필요할 경우 사용합니다. ex)특정 데이터를 한번 이상 본 경우를 체크할때, 좋아요, 싫어요 등의 사용자 집합군의 데이터를 저장할때* 성능 : O(1)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sorted-sets&quot;&gt;Sorted sets&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;1개의 key에 여러개의 score, value로 구성되는 자료형&lt;/li&gt;
+  &lt;li&gt;모든 value는 score로 정렬되어 저장되며 score가 같으면 value로 정렬됩니다.&lt;/li&gt;
+  &lt;li&gt;집합이라는 의미에서 value를 member라 칭하기도 합니다.&lt;/li&gt;
+  &lt;li&gt;랭킹과 같이 정렬이 필요한 데이터를 저장할때 사용됩니다.&lt;/li&gt;
+  &lt;li&gt;sorted sets의 자료구조 내부적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;zip list&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;skip list&lt;/code&gt;으로 구성되어 저장됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;hash&quot;&gt;Hash&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Key와 value 가 1:N(field, value) 관계의 자료형입니다.&lt;/li&gt;
+  &lt;li&gt;key하나에 field, value쌍을 40억개(4,294,967,295)개 저장 가능합니다.&lt;/li&gt;
+  &lt;li&gt;Hash는 RDB의 Table과 유사하게 사용할 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;any의 경우 정책, 인증, installer 정보등을 Hash 자료형으로 활용 가능
+&lt;img src=&quot;/assets/img/hash.png&quot; alt=&quot;Hash&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;hyperloglogs&quot;&gt;HyperLogLogs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;중복제거된 값을 매우 적은비용과 매우 빠른 속도로 계산하는데 사용하는 확률적 자료구조 입니다&lt;/li&gt;
+  &lt;li&gt;대용량의 데이터에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;unique value&lt;/code&gt;를 계산하는데 사용되는 자료구조 입니다.&lt;/li&gt;
+  &lt;li&gt;주료 사용처는 대규모 포털사이트의 방문자수, 검색엔진의 검색량 계산등 대용량 데이터에 대한 &lt;code class=&quot;highlighter-rouge&quot;&gt;unique value&lt;/code&gt;와 관련된 연산을 할때 주료 사용합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;streams&quot;&gt;Streams&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;로그 데이터를 처리하기 위해 5.0버전에 새로 도입된 자료형&lt;/li&gt;
+  &lt;li&gt;다른 자료형과 다르게 consumer를 지정해서 데이터를 읽을 수 있고 consumer가 데이터를 처리했는지
+확인할 수 있는 방법을 제공합니다.&lt;/li&gt;
+  &lt;li&gt;즉 rabbitMQ나 kafka와 같이 비동기 큐 처리를 위한 기능을 제공합니다.
+&lt;img src=&quot;/assets/img/redis_streams.png&quot; alt=&quot;Streams&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;keydesign&quot;&gt;KeyDesign&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Key는 줄임말보다는 일반적인 단어를 사용하는것을 권장합니다.&lt;/li&gt;
+  &lt;li&gt;key를 구성할땐 구분자를 사용하는것을 권장합니다. ex) :, -, _, /&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;성능&quot;&gt;성능&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;ul&gt;
+  &lt;li&gt;redis의 성능에 가장 큰 영향을 끼치는 요소 10가지&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Network bandwidth &amp;amp; latency&lt;/li&gt;
+  &lt;li&gt;CPU&lt;/li&gt;
+  &lt;li&gt;RAM speed &amp;amp; memory bandwidth&lt;/li&gt;
+  &lt;li&gt;Virtualization&lt;/li&gt;
+  &lt;li&gt;TCP/IP loop back &amp;amp; unix domain socket&lt;/li&gt;
+  &lt;li&gt;Pipelining&lt;/li&gt;
+  &lt;li&gt;NUMA&lt;/li&gt;
+  &lt;li&gt;Client Connection&lt;/li&gt;
+  &lt;li&gt;NIC&lt;/li&gt;
+  &lt;li&gt;Memory allocator&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;위의 요소 중 가장 영향을 많이 받는것은 CPU, Network입니다.&lt;/li&gt;
+  &lt;li&gt;redis는 Network에 영향을 많이 받습니다. (쿼리량이 많기 때문에) 
+때문에 redis 문서에선 네트워크 환경으로 10 Gbit/s NIC 또는 TCP/IP bonding한 1 Gbit/s NICs를 권장합니다.&lt;/li&gt;
+  &lt;li&gt;redis는 single Thread이기 때문에 때문에 CPU의 코어가 많은 것보다는 CPU의 대용량 캐시가 성능에 더 
+영향을 끼칩니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;메모리관리&quot;&gt;메모리관리&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;ul&gt;
+  &lt;li&gt;redis는 physical 메모리가 부족할 경우 swap 메모리를 사용하지만 swap 메모리 사용시 속도 저하가 발생합니다.&lt;/li&gt;
+  &lt;li&gt;swap은 한번 발생하면 계속 발생합니다.&lt;/li&gt;
+  &lt;li&gt;swap이 없다면 OOM으로 서비스가 죽을 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;Maxmemory설정을 한다고 해도 이보다 더 사용할 가능성이 있습니다.&lt;/li&gt;
+  &lt;li&gt;큰 메모리를 사용하는 instance 하나보다는 적은 메모리를 사용하는 instance 여러개가 안전합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;failover&quot;&gt;FailOver&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;ul&gt;
+  &lt;li&gt;Redis는 master-slave 관계의 failover 기능을 제공합니다.&lt;/li&gt;
+  &lt;li&gt;이 기능은 redis의 replication기능을 이용합니다. 마스터 노드의 데이터를 거의 실시간으로 슬레이브에 복사 하는 작업으로 진행됩니다.&lt;/li&gt;
+  &lt;li&gt;따라서 마스터 노드에 장애가 발생하더라도 데이터 손실을 최소화 하며 슬레이브 노드가 작업을 이어받아 서비스를 유지 할 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;master-slave는 물리적으로 다른 머신에 두는 것을 권장합니다.&lt;/li&gt;
+  &lt;li&gt;슬레이브는 n대를 둘 수 있으며 이 슬레이브는 또다른 슬레이브를 둘 수 있습니다.(3차 백업 개념)&lt;/li&gt;
+  &lt;li&gt;전체 동기화 vs 부분 동기화
+    &lt;blockquote&gt;
+      &lt;p&gt;전체 동기화&lt;/p&gt;
+
+      &lt;p&gt;장애 발생시 자식 프로세스가 즉각 .rdb 파일을 생성하여 슬레이브 서버로 전송 후 복제서버가 서비스를 이어 받는 방&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;부분 동기화&lt;/p&gt;
+
+  &lt;p&gt;마스터-슬레이브는 run id 와 replication offset 있으므로 장애 발생시 압축하여 슬레이브에 전송합니다.
+이를 받은 슬레이브는 자신이 갖고 있는 run id 와 비교하여 그 이후에 생성된 데이터만 저장하여 서비스를 지속합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;슬레이브 서버는 기본적으로 읽기 전용이며 슬레이브에 데이터를 입력해도 마스터의 데이터로 덮어써집니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;cluster-sentinel&quot;&gt;Cluster-Sentinel&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;ul&gt;
+  &lt;li&gt;센티넬은 failover 시스템의 강화판으로 슬레이브가 2대 이상일 경우 사용되는 slave 선정용 서비스입니다.&lt;/li&gt;
+  &lt;li&gt;마스터가 장애가 발생 할 경우 센티넬들은 즉각 투표를 시작하며 현재 준비된 슬레이브들증 마스터를 이어받을 노드를 선정하여 서비스를 이어가도록 합니다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이때 센티넬은 투표 무효될걸 대비해 반드시 홀수로 설정해서 올려야합니다.
+&lt;img src=&quot;/assets/img/sentinel.png&quot; alt=&quot;Sentinel&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;또한 투표가 완료된 후 다운됬던 마스터가 다시 올라올 경우 해당 노드의 redis.conf 파일을 조작하여 slave로 
+변경하여 현재 서비스중인 마스터의 노드를 인식 하도록 자동으로 변경해줍니다.
+&lt;img src=&quot;/assets/img/sentinel2.png&quot; alt=&quot;Sentinel&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;fork--sharding&quot;&gt;Fork &amp;amp; Sharding&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;To Be Continued?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;주의사항&quot;&gt;주의사항&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;ul&gt;
+  &lt;li&gt;redis는 single Thread이기 때문에 하나의 작업이 오래 걸리경우 장애로 이어질 확률이 증가합니다.&lt;/li&gt;
+  &lt;li&gt;O(N) 관련 명령어 사용은 주의
+    &lt;blockquote&gt;
+      &lt;p&gt;KEYS
+FLUSHALL, FLUSHDB
+Delete Collections
+Get All Collections&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;item이 몇만개가 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;hash, sorted set, set&lt;/code&gt; 데이터를 조회 하는 경우 (위 자료형들은 메모리를 많이 사용합니다.)&lt;/li&gt;
+  &lt;li&gt;너무 큰 Collection 을 가져오는건 부담 되기 때문에 collection은 작게 분할하는것을 추천합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://redis.io/documentation&quot;&gt;Redis 공식문서&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://sjh836.tistory.com/178&quot;&gt;Redis 기본 개념&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://redis.io/topics/data-types-intro&quot;&gt;Redis 자료형&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://redis.io/topics/data-types&quot;&gt;Redis 자료형2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://redis.io/topics/memory-optimization&quot;&gt;Redis 메모리 최적화&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://redis.io/topics/lru-cache&quot;&gt;Redis LRU 알고리즘&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://redisgate.kr/redis/configuration/replication.php&quot;&gt;Redis Replication&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://hub.docker.com/r/bitnami/redis-sentinel&quot;&gt;Redis Master-Slave-Sentinel&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jaehun2841.github.io/2018/12/02/2018-12-02-docker-7/#redis-sentinel%EC%9D%B4%EB%9E%80&quot;&gt;Redis Sentinel&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jaehun2841.github.io/archives/archives/9/&quot;&gt;Redis Architecture&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://medium.com/garimoo/%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%A0%88%EB%94%94%EC%8A%A4-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-01-92aaa24ca8cc&quot;&gt;개발자를 위한 레디스 튜토리얼&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ict-nroo.tistory.com/133&quot;&gt;우아한 Redis 세미나&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://brunch.co.kr/@springboot/151&quot;&gt;Cache-Aside Pattern&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://coding-start.tistory.com/128&quot;&gt;Redis - Cluster &amp;amp; Sentinel 차이점 및 Redis에 대해&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/6965451/redis-key-naming-conventions&quot;&gt;Key Convention&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://redisgate.kr/redis/configuration/internal_ziplist.php&quot;&gt;zip list&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://redisgate.kr/redis/configuration/internal_skiplist.php&quot;&gt;skip list&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://timewizhan.tistory.com/entry/Redis-%EC%84%B1%EB%8A%A5%EC%97%90-%EC%98%81%ED%96%A5%EC%9D%84-%EB%81%BC%EC%B9%98%EB%8A%94-%EA%B2%83&quot;&gt;redis 성능 요소&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wariua.github.io/performance/an-optimization-case-redis.html&quot;&gt;redis 성능 개선기&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.joinc.co.kr/w/man/12/REDIS/PerfTest&quot;&gt;redis 100만, 1000만 성능테스트&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="Web" /><summary type="html">Redis</summary></entry></feed>

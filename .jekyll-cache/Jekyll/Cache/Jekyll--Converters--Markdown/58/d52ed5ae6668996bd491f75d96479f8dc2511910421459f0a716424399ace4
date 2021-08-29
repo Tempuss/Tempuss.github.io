@@ -1,0 +1,14 @@
+I"2<h2 id="아래-글은-bob-8기의-terrarium-팀의-산출물-일부-입니다">아래 글은 BoB 8기의 Terrarium 팀의 산출물 일부 입니다.</h2>
+
+<p>애초에 CWSS에서 CVSS를 따와서 만들었다고 할정도로 거의 유사함</p>
+
+<ul>
+  <li>CVSS는 취약점 자체에 대한 평가(취약점의 기술적 부분, 보고서, exploit 코드등)에 대해서 더 많이 다루고
+CWSS는 취약점의 impact에 대해서 좀더 자세하게 다룸</li>
+</ul>
+
+<p>|Metric|CVSS v2 Value|CVSS v3 Value|Comment|Comment|
+|——|——|——|——|——|
+|매트릭	base, Temporal, Environmental	Base Finding, Attack Surface, 
+Environmental	2단계로 구분 / 1단계(Confidentiality,Integrity,Availability) / 2단계 (Access vector, Access complexity, Authentication)	Base Temporal, Environmental</p>
+:ET

