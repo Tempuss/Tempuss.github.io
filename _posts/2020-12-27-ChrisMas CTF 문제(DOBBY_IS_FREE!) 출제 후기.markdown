@@ -2,7 +2,7 @@
 layout: post
 title: Christmas CTF 문제(DOBBY_IS_FREE!) 출제 후기 
 date: 2020-12-27 00:00:00 +0900
-category: Hacking 
+category: BoB 
 ---
 # DOBBY_IS_FREE!
 
