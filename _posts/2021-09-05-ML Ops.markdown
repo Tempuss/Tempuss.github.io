@@ -1,0 +1,98 @@
+---
+layout: post
+title: ML Ops 
+date: 2021-09-05 21:17:00 +0900
+category: Data-Engineering 
+---
+# ML Ops
+
+### 정의
+
+---
+
+- Machine Learning Operations의 약자로서 머신러닝의 지속적 배포 및 자동화 파이프라인을 의미한다
+- ML Ops = 머신러닝 엔지니어링 + 데이터 엔지니어링 + 인프라
+- 머신러닝 모델 개발과 머신러닝 모델 운영에서 사용되는 문제, 반복을 최소화하는것이 목표
+- 머신러닝 모델 개발과 머신러닝 운영 Workflow의 간극을 줄이기 위한 분야
+- Model Development와 Model Prediction으로 나누는 관점으로도 볼 수 있음
+
+![Untitled](/assets/img/ML%20Ops%20d9f536b79cba4b2d8cd26fa30ef0597a/Untitled.png)
+
+### Research에서의 머신러닝 프로세스
+
+---
+
+1. 문제 정의
+2. [EDA](https://eda-ai-lab.tistory.com/13)(Exploratory Data Analysis)
+3. Feature 생성
+4. 모델 학습
+5. 예측
+
+### Production에서의 머신러닝 프로세스
+
+---
+
+- 머신러닝 모델을 실제 서비스화하는 과정을 Production으로 운영하는것
+- 학습시 사용한 데이터와 실데이터가 상이할 수 있음
+- 학습 모델이 production에서 유효하지 않을 수 있음
+- 수 많은 예외 케이스 발생 가능
+- 인프라 레벨의 문제 발생 및 장애 대응 프로세스 필요
+
+### 사용 기술
+
+---
+
+![Untitled](/assets/img/ML%20Ops%20d9f536b79cba4b2d8cd26fa30ef0597a/Untitled%201.png)
+
+- 실제 ML Ops에서 ML 코드는 수많은 기능 중 하나일 뿐이다
+
+### MLOps 수준 2: CI/CD 파이프라인 자동화 (Google이 설명하는 ML Ops)
+
+---
+
+![Untitled](/assets/img/ML%20Ops%20d9f536b79cba4b2d8cd26fa30ef0597a/Untitled%202.png)
+
+### Nvida의 ML Ops 파이프라인
+
+---
+
+![Untitled](/assets/img/ML%20Ops%20d9f536b79cba4b2d8cd26fa30ef0597a/Untitled%203.png)
+
+### 머신러닝 파이프라인
+
+---
+
+![Untitled](/assets/img/ML%20Ops%20d9f536b79cba4b2d8cd26fa30ef0597a/Untitled%204.png)
+
+### 머신러닝 vs DevOps vs 데이터 엔지니링?
+
+---
+
+![Untitled](/assets/img/ML%20Ops%20d9f536b79cba4b2d8cd26fa30ef0597a/Untitled%205.png)
+
+- Machine Learning : Feature생성, 모델 학습 및 예측을 하는 머신러닝
+- DevOps :  서버 인프라 자동화 및 오케스트레이션을 담당하는 DevOps
+- 데이터 엔지니어링 : 데이터 수집과 변환 저장을 하는 데이터 엔지니어링
+
+![Untitled](/assets/img/ML%20Ops%20d9f536b79cba4b2d8cd26fa30ef0597a/Untitled%206.png)
+
+- 위 세가지 모두를 통합하여 Production에서 운영 가능한 ML 소프트웨어를 운영하는 프로세스를 ML Ops라고 한다
+
+### 정리
+
+---
+
+정리하자면 ML Ops는 머신러닝을 활용하는 소프트웨어를 개발하기 위해 필요한 개발 및 운영 프로세스를 지칭하는 용어라고 보면 된다
+
+### Reference
+
+---
+
+- [MLOps: 머신러닝의 지속적 배포 및 자동화 파이프라인](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning?hl=ko)
+- [머신러닝 오퍼레이션 자동화, MLOps](https://zzsza.github.io/mlops/2018/12/28/mlops/)
+- [MLOps 춘추 전국시대](https://www.slideshare.net/zzsza/mlops-kr-mlops-210605)
+- [Hidden Technical Debt in Machine Learning Systems](https://papers.nips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)
+- [https://ml-ops.org/](https://ml-ops.org/)
+- [EDA란?](https://eda-ai-lab.tistory.com/13)
+- [what is ml ops?](https://blogs.nvidia.com/blog/2020/09/03/what-is-mlops/)
+
