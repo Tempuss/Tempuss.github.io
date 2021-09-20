@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">11</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">10</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			HTTP-3&amp;QUIC
+		</div>
+		<time class="post-date dt-published" datetime="2021-09-20T23:05:00+09:00" itemprop="datePublished">2021/09/20
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<h1 id="http3--quic">HTTP/3 &amp; QUIC</h1>
+
+<h3 id="quic-protocol">QUIC Protocol</h3>
+
+<hr />
+
+<ul>
+  <li>Quick UDP Internet Connections의 약자로서 구글이 개발한 UDP 기반에서 구현한 전송 프로토콜</li>
+  <li>즉 UDP 프로토콜을 커스텀하여 속도와 TCP의 연결성을 확보한 프로토콜</li>
+</ul>
+
+<h2 id="구조">구조</h2>
+
+<hr />
+
+<ul>
+  <li>UDP는 일반적으로 연결성을 지향하지 않지만 UDP 프로토콜의 유연함을 이용하여 QUIC 계층을 추가하여 TCP와 같은 신뢰성을 확보한 프로토콜</li>
+</ul>
+
+<p><img src="/assets/img/HTTP%203%20&amp;%20QUIC%206626e80d84ac444eb6a1b78186f96d39/Untitled.png" alt="Untitled" /></p>
+
+<h2 id="특징">특징</h2>
+
+<hr />
+
+<h3 id="전송-속도-향상">전송 속도 향상</h3>
+
+<ul>
+  <li>QUIC 프로토콜은 UDP기반의 프로토콜이기 때문에 RTT가 0이므로 속도적인 면에서 빠르고 오버헤드가 TCP에 비해 감소했음</li>
+  <li>QUIC 프로토콜은 Connection UUID 고유 패킷 식별자를 발급하여 한번이라도 발급할 경우 이동중 로밍이나 IP 변경이 발생 하더라도 커넥션을 다시 수립 할 필요가 없음</li>
+</ul>
+
+<p><img src="/assets/img/HTTP%203%20&amp;%20QUIC%206626e80d84ac444eb6a1b78186f96d39/Untitled%201.png" alt="Untitled" /></p>
+
+<h3 id="보안성-향상">보안성 향상</h3>
+
+<ul>
+  <li>TLS 암호화가 기본적으로 제공됨</li>
+  <li>IP Spoofing / Replay Attack 방지
+    <ul>
+      <li>QUIC에서는 필요에 따라 Source Address Token을 발급하여 출발지 아이피를 변조 및 재생공격에 대한 검증을 수행함</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="멀티플렉싱multiplexing"><strong>멀티플렉싱(multiplexing)</strong></h3>
+
+<ul>
+  <li>단일 채널을 통해 여러 데이터를 보내는 멀티 플렉싱 기능을 제공함
+<em>**</em></li>
+</ul>
+
+<h3 id="향상된-오류정정"><strong>향상된 오류정정</strong></h3>
+
+<ul>
+  <li>QUIC은 전방 오류정정 FEC(Forward Error Correction) 방식을 이용하여 패킷이 전송 중 변조나 훼손이 발생했을 경우 정정비트를 통해 훼손된 비트를 복구하도록 설계되었습니다.</li>
+</ul>
+
+<h3 id="reference">Reference</h3>
+
+<hr />
+
+<ul>
+  <li><a href="https://ko.wikipedia.org/wiki/QUIC">QUIC</a></li>
+  <li><a href="https://devahea.github.io/2019/04/30/5G-%EC%B4%88%EC%97%B0%EA%B2%B0%EC%8B%9C%EB%8C%80%EC%97%90-%EC%9B%B9-HTTP%EC%9D%98-%EB%8C%80%EC%95%88%EC%9D%80-QUIC/">QUIC 소개</a></li>
+  <li><a href="https://blog.naver.com/PostView.nhn?blogId=renucs&amp;logNo=220887163028">QUIC 프로토콜</a></li>
+  <li><a href="https://www.chromium.org/quic">QUIC</a> 공식 문서</li>
+  <li><a href="https://musclebear.tistory.com/51">[Protocol] QUIC 프로토콜이 뭐지?</a></li>
+  <li><a href="https://velog.io/@wsong0101/QUIC%EC%9D%84-%ED%96%A5%ED%95%9C-%EC%97%AC%EC%A0%95%EB%B2%88%EC%97%AD">QUIC을 향한 여정(번역)</a></li>
+  <li><a href="https://www.saturnsoft.net/network/2019/03/21/quic-http3-1/">QUIC과 HTTP/3 - 1. UDP기반 전송 프로토콜의 대두</a></li>
+  <li><a href="https://www.saturnsoft.net/network/2019/03/26/quic-http3-2/">QUIC과 HTTP/3 - 2. 기존의 성능 개선 기법 및 한계</a></li>
+  <li><a href="https://www.saturnsoft.net/network/2019/08/11/http3-curl-quiche/">QUIC과 HTTP/3 - 3. curl + quiche 로 HTTP3 요청해 보기</a></li>
+  <li><a href="https://docs.google.com/document/d/1WJvyZflAO2pq77yOLbp9NsGjC1CHetAXV8I0fQe-B_U/edit?pli=1#">QUIC 프로토콜 공식 스펙</a></li>
+  <li><a href="https://ykarma1996.tistory.com/86">HTTP/3</a></li>
+</ul>
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

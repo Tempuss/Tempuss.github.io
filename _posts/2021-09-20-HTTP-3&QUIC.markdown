@@ -1,0 +1,65 @@
+---
+layout: post
+title: HTTP-3&QUIC
+date: 2021-09-20 23:05:00 +0900
+category: Web  
+---
+
+# HTTP/3 & QUIC
+
+### QUIC Protocol
+
+---
+
+- Quick UDP Internet Connections의 약자로서 구글이 개발한 UDP 기반에서 구현한 전송 프로토콜
+- 즉 UDP 프로토콜을 커스텀하여 속도와 TCP의 연결성을 확보한 프로토콜
+
+## 구조
+
+---
+
+- UDP는 일반적으로 연결성을 지향하지 않지만 UDP 프로토콜의 유연함을 이용하여 QUIC 계층을 추가하여 TCP와 같은 신뢰성을 확보한 프로토콜
+
+![Untitled](/assets/img/HTTP%203%20&%20QUIC%206626e80d84ac444eb6a1b78186f96d39/Untitled.png)
+
+## 특징
+
+---
+
+### 전송 속도 향상
+
+- QUIC 프로토콜은 UDP기반의 프로토콜이기 때문에 RTT가 0이므로 속도적인 면에서 빠르고 오버헤드가 TCP에 비해 감소했음
+- QUIC 프로토콜은 Connection UUID 고유 패킷 식별자를 발급하여 한번이라도 발급할 경우 이동중 로밍이나 IP 변경이 발생 하더라도 커넥션을 다시 수립 할 필요가 없음
+
+![Untitled](/assets/img/HTTP%203%20&%20QUIC%206626e80d84ac444eb6a1b78186f96d39/Untitled%201.png)
+
+### 보안성 향상
+
+- TLS 암호화가 기본적으로 제공됨
+- IP Spoofing / Replay Attack 방지
+    - QUIC에서는 필요에 따라 Source Address Token을 발급하여 출발지 아이피를 변조 및 재생공격에 대한 검증을 수행함
+
+### **멀티플렉싱(multiplexing)**
+
+- 단일 채널을 통해 여러 데이터를 보내는 멀티 플렉싱 기능을 제공함
+****
+
+### **향상된 오류정정**
+
+- QUIC은 전방 오류정정 FEC(Forward Error Correction) 방식을 이용하여 패킷이 전송 중 변조나 훼손이 발생했을 경우 정정비트를 통해 훼손된 비트를 복구하도록 설계되었습니다.
+
+### Reference
+
+---
+
+- [QUIC](https://ko.wikipedia.org/wiki/QUIC)
+- [QUIC 소개](https://devahea.github.io/2019/04/30/5G-%EC%B4%88%EC%97%B0%EA%B2%B0%EC%8B%9C%EB%8C%80%EC%97%90-%EC%9B%B9-HTTP%EC%9D%98-%EB%8C%80%EC%95%88%EC%9D%80-QUIC/)
+- [QUIC 프로토콜](https://blog.naver.com/PostView.nhn?blogId=renucs&logNo=220887163028)
+- [QUIC](https://www.chromium.org/quic) 공식 문서
+- [[Protocol] QUIC 프로토콜이 뭐지?](https://musclebear.tistory.com/51)
+- [QUIC을 향한 여정(번역)](https://velog.io/@wsong0101/QUIC%EC%9D%84-%ED%96%A5%ED%95%9C-%EC%97%AC%EC%A0%95%EB%B2%88%EC%97%AD)
+- [QUIC과 HTTP/3 - 1. UDP기반 전송 프로토콜의 대두](https://www.saturnsoft.net/network/2019/03/21/quic-http3-1/)
+- [QUIC과 HTTP/3 - 2. 기존의 성능 개선 기법 및 한계](https://www.saturnsoft.net/network/2019/03/26/quic-http3-2/)
+- [QUIC과 HTTP/3 - 3. curl + quiche 로 HTTP3 요청해 보기](https://www.saturnsoft.net/network/2019/08/11/http3-curl-quiche/)
+- [QUIC 프로토콜 공식 스펙](https://docs.google.com/document/d/1WJvyZflAO2pq77yOLbp9NsGjC1CHetAXV8I0fQe-B_U/edit?pli=1#)
+- [HTTP/3](https://ykarma1996.tistory.com/86)

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-09-17T12:29:26+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tempuss Blog</title><subtitle>보안하는 개발자</subtitle><entry><title type="html"></title><link href="http://localhost:4000/2021/09/17/2019-09-25-A-preliminary-analysis-of-vulnerability-scores-for-attacks-in-wild-the-Ekits-and-sym-datasets.html" rel="alternate" type="text/html" title="" /><published>2021-09-17T12:29:26+09:00</published><updated>2021-09-17T12:29:26+09:00</updated><id>http://localhost:4000/2021/09/17/2019-09-25-A%20preliminary%20analysis%20of%20vulnerability%20scores%20for%20attacks%20in%20wild:%20the%20Ekits%20and%20sym%20datasets</id><content type="html" xml:base="http://localhost:4000/2021/09/17/2019-09-25-A-preliminary-analysis-of-vulnerability-scores-for-attacks-in-wild-the-Ekits-and-sym-datasets.html">&lt;h2 id=&quot;아래-글은-bob-8기의-terrarium-팀의-산출물-일부-입니다&quot;&gt;아래 글은 BoB 8기의 Terrarium 팀의 산출물 일부 입니다.&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-09-20T23:37:15+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Tempuss Blog</title><subtitle>보안하는 개발자</subtitle><entry><title type="html"></title><link href="http://localhost:4000/2021/09/20/2019-09-25-A-preliminary-analysis-of-vulnerability-scores-for-attacks-in-wild-the-Ekits-and-sym-datasets.html" rel="alternate" type="text/html" title="" /><published>2021-09-20T23:37:15+09:00</published><updated>2021-09-20T23:37:15+09:00</updated><id>http://localhost:4000/2021/09/20/2019-09-25-A%20preliminary%20analysis%20of%20vulnerability%20scores%20for%20attacks%20in%20wild:%20the%20Ekits%20and%20sym%20datasets</id><content type="html" xml:base="http://localhost:4000/2021/09/20/2019-09-25-A-preliminary-analysis-of-vulnerability-scores-for-attacks-in-wild-the-Ekits-and-sym-datasets.html">&lt;h2 id=&quot;아래-글은-bob-8기의-terrarium-팀의-산출물-일부-입니다&quot;&gt;아래 글은 BoB 8기의 Terrarium 팀의 산출물 일부 입니다.&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Created: September 25, 2019 5:07 PM&lt;/li&gt;
@@ -42,7 +42,250 @@
 
 &lt;p&gt;CVSS의 exploitability factor중 access vector에 대해서 의문점을 던짐(거의 모든 취약점들이 원격이고 추가적인 인증과정이 없기때문)&lt;/p&gt;
 
-&lt;h2 id=&quot;발전-방향&quot;&gt;발전 방향&lt;/h2&gt;</content><author><name></name></author></entry><entry><title type="html">ML Ops</title><link href="http://localhost:4000/data-engineering/2021/09/05/ML-Ops.html" rel="alternate" type="text/html" title="ML Ops" /><published>2021-09-05T21:17:00+09:00</published><updated>2021-09-05T21:17:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/09/05/ML%20Ops</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/09/05/ML-Ops.html">&lt;h1 id=&quot;ml-ops&quot;&gt;ML Ops&lt;/h1&gt;
+&lt;h2 id=&quot;발전-방향&quot;&gt;발전 방향&lt;/h2&gt;</content><author><name></name></author></entry><entry><title type="html">HTTP-2</title><link href="http://localhost:4000/web/2021/09/20/HTTP-2.html" rel="alternate" type="text/html" title="HTTP-2" /><published>2021-09-20T23:05:00+09:00</published><updated>2021-09-20T23:05:00+09:00</updated><id>http://localhost:4000/web/2021/09/20/HTTP-2</id><content type="html" xml:base="http://localhost:4000/web/2021/09/20/HTTP-2.html">&lt;h1 id=&quot;http2&quot;&gt;HTTP/2&lt;/h1&gt;
+
+&lt;h2 id=&quot;http2란&quot;&gt;HTTP/2란?&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;HTTP/2는 Hypertext Transfer Protocol Version 2의 약자로 IETF년에 새로 규정된 차기 HTTP 버전이다&lt;/li&gt;
+  &lt;li&gt;SPDY(스피디/speedy로 발음)라는 구글의 비표준 개방형 네트워크 프로토콜에 기반한다. 기존의 HTTP methods, status codes, semantics 개념들이 동일하게 호환된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;frame-구조&quot;&gt;Frame 구조&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled.png&quot; alt=&quot;Untitled&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;기존의 HTTP/1.1 은 plain text형태로 데이터를 전송하지만 HTTP/2는 바이너리 포멧으로 인코딩 된 Message, Frame으로 구성되어 전송된다&lt;/li&gt;
+  &lt;li&gt;기존의 HTTP/1.1 Header는 &lt;code class=&quot;highlighter-rouge&quot;&gt;HEADERS Type Frame&lt;/code&gt; 에, body내용은 &lt;code class=&quot;highlighter-rouge&quot;&gt;DATA Type Frame&lt;/code&gt; 에 해당한다&lt;/li&gt;
+  &lt;li&gt;Frame: HTTP/2에서 통신의 최소 단위. 각 최소 단위에는 하나의 프레임 헤더가 포함된다. 이 프레임 헤더는 최소한으로 프레임이 속하는 스트림을 식별한다. HEADERS Type Frame, DATA Type Frame이 존재한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;stream-구조&quot;&gt;Stream 구조&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%201.png&quot; alt=&quot;Untitled&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Stream: 구성된 연결 내에서 전달되는 바이트의 양방향 흐름, 하나 이상의 메시지가 전달 가능하다&lt;/li&gt;
+  &lt;li&gt;Message: 논리적 요청 또는 응답 메시지에 매핑되는 프레임의 전체 시퀀스이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;특징&quot;&gt;특징&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;HTTP Header Data Compression&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Header중복 전송을 막기 위해 Huffman Coding을 사용하는 HPACK이라는 압축방식으로 변환해 전송하는 특징&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;첫 stream에서만 Header를 전송하구 이후 stream에서는 전송을 하지 않음&lt;/p&gt;
+
+        &lt;p&gt;&lt;img src=&quot;/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%202.png&quot; alt=&quot;Untitled&quot; /&gt;&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Server Push&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;서버에서 클라이언트가 요청하지 않은 자원(css,js,img)등에 대해서도 한번에 리턴할 수 있음&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%203.png&quot; alt=&quot;Untitled&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;HTTP 1.x의 HOL(Head-of-Line) Blocking 문제 해결&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;HTTP/1.1이하에서는 한번에 하나의 파일만 전송 가능했지만 이때문에 앞의 파일이 느려질 경우 뒤에가 모두 느려지는 문제가 있었음. HTTP/2 에서는 여러 파일을 병렬로 전송 할 수 있다&lt;/li&gt;
+      &lt;li&gt;TCP 연결 하나로 모든 요청과 응답들을 병렬로 보낼수 있게됨&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%204.png&quot; alt=&quot;Untitled&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Stream 우선순위&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;HTTP가 많은 프레임으로 분리되어 전송되면서 여러 스트림의 프레임이 다중화됨에 따라 스트림에 우선순위를 부여하여 전송할 수 있도록 되었음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;reference&quot;&gt;Reference&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developers.google.com/web/fundamentals/performance/http2?hl=ko&quot;&gt;HTTP/2 소개&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://velog.io/@ziyoonee/HTTP1-%EB%B6%80%ED%84%B0-HTTP3-%EA%B9%8C%EC%A7%80-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0&quot;&gt;HTTP-1부터-HTTP-3까지&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%ED%97%88%ED%94%84%EB%A8%BC_%EB%B6%80%ED%98%B8%ED%99%94&quot;&gt;Huffman Coding&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Web" /><summary type="html">HTTP/2</summary></entry><entry><title type="html">HTTP-1.1</title><link href="http://localhost:4000/web/2021/09/20/HTTP-1.1.html" rel="alternate" type="text/html" title="HTTP-1.1" /><published>2021-09-20T23:05:00+09:00</published><updated>2021-09-20T23:05:00+09:00</updated><id>http://localhost:4000/web/2021/09/20/HTTP-1.1</id><content type="html" xml:base="http://localhost:4000/web/2021/09/20/HTTP-1.1.html">&lt;h1 id=&quot;http-11&quot;&gt;HTTP 1.1&lt;/h1&gt;
+
+&lt;h3 id=&quot;http란&quot;&gt;HTTP란?&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;HTTP(HyperText Transfer Protocol)의 약자로서  HTML 문서와 같은 리소스들을 가져올 수 있도록 해주는 TCP 기반 프로토콜&lt;/li&gt;
+  &lt;li&gt;HTTP는 웹에서 이루어지는 모든 데이터 교환의 기초이며, 클라이언트-서버 프로토콜&lt;/li&gt;
+  &lt;li&gt;HTTP 문서에는 비디오, 이미지, 텍스트, layout등의 하위문서로 구성됨&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled.png&quot; alt=&quot;Untitled&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;http-프로토콜&quot;&gt;HTTP 프로토콜&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled%201.png&quot; alt=&quot;Untitled&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;HTTP는 Application 계층의 프로토콜로서 TCP혹은 암호화된 TCP인 TLS를 통해 전송 됨&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;http-프로토콜의-작동-순서&quot;&gt;HTTP 프로토콜의 작동 순서&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;브라우저 상에서 naver.com에 접속한다&lt;/li&gt;
+  &lt;li&gt;브라우저는 사용자 PC의 로컬 DNS(/etc/host)에 등록되어 있을경우 해당 서버의 IP로 요청을 날린다&lt;/li&gt;
+  &lt;li&gt;로컬 DNS에 없을 경우 DNS프로토콜을 이용해 Domain 서버에 해당 도메인명이 어떤 IP들과 매핑되어 있는지 질의한다&lt;/li&gt;
+  &lt;li&gt;naver.com의 IP를 얻어 온 후 해당 서버로 요청을 날린다&lt;/li&gt;
+  &lt;li&gt;해당 서버의 Web Server에서 요청한 자원에 대해서 응답값과 함께 컨텐츠를 response한다&lt;/li&gt;
+  &lt;li&gt;브라우저 상에서 해당 요청의 response값을 분석해서 사용자에게 출력한다(이미지, 텍스트,css)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled%202.png&quot; alt=&quot;Untitled&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;https-프로토콜-작동-순서&quot;&gt;HTTPS 프로토콜 작동 순서&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;브라우저 상에서 naver.com에 접속한다&lt;/li&gt;
+  &lt;li&gt;브라우저는 사용자 PC의 로컬 DNS(/etc/host)에 등록되어 있을경우 해당 서버의 IP로 요청을 날린다&lt;/li&gt;
+  &lt;li&gt;로컬 DNS에 없을 경우 DNS프로토콜을 이용해 Domain 서버에 해당 도메인명이 어떤 IP들과 매핑되어 있는지 질의한다&lt;/li&gt;
+  &lt;li&gt;naver.com의 IP를 얻어 온 후 해당 서버로 요청을 날린다&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;서버와 클라이언트 간에 암호화를 이용한 암호화 과정이 진행된다&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled%203.png&quot; alt=&quot;Untitled&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;해당 서버의 Web Server에서 요청한 자원에 대해서 응답값과 함께 컨텐츠를 response한다&lt;/li&gt;
+  &lt;li&gt;브라우저 상에서 해당 요청의 response값을 분석해서 사용자에게 출력한다(이미지, 텍스트,css)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;http의-단점&quot;&gt;HTTP의 단점&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;HOLB(Head Of Line Blocking)
+    &lt;ul&gt;
+      &lt;li&gt;순차적으로 요청을 받아야 하다 보니 앞의 요청이 끝나지 않으면 뒤의 요청을 처리 할수가 없는 이슈&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;RTT(Round Trip Time)
+    &lt;ul&gt;
+      &lt;li&gt;request를 할때마다 Handshake가 발생하기 때문에 불필요한 RTT가 발생한다&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;무거운 Header 구조
+    &lt;ul&gt;
+      &lt;li&gt;cookie, authorization등 다양한 헤더를 포함하고 있어 트래픽에 부담이 된다&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;reference&quot;&gt;Reference&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://velog.io/@ziyoonee/HTTP1-%EB%B6%80%ED%84%B0-HTTP3-%EA%B9%8C%EC%A7%80-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0&quot;&gt;HTTP/1 부터 HTTP/3 까지 알아보기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://velog.io/@taesunny/HTTP2HTTP-2.0-%EC%A0%95%EB%A6%AC&quot;&gt;HTTP/2(HTTP 2.0) 정리&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP&quot;&gt;HTTP의 진화&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.w3.org/Protocols/rfc2616/rfc2616.html&quot;&gt;Hypertext Transfer Protocol – HTTP/1.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/HTTP/Overview&quot;&gt;HTTP 개요&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://reakwon.tistory.com/106&quot;&gt;[네트워크/보안] TLS(SSL) 개념과 기본 동작 원리&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Web" /><summary type="html">HTTP 1.1</summary></entry><entry><title type="html">HTTP-3&amp;amp;QUIC</title><link href="http://localhost:4000/web/2021/09/20/HTTP-3&QUIC.html" rel="alternate" type="text/html" title="HTTP-3&amp;QUIC" /><published>2021-09-20T23:05:00+09:00</published><updated>2021-09-20T23:05:00+09:00</updated><id>http://localhost:4000/web/2021/09/20/HTTP-3&amp;QUIC</id><content type="html" xml:base="http://localhost:4000/web/2021/09/20/HTTP-3&amp;QUIC.html">&lt;h1 id=&quot;http3--quic&quot;&gt;HTTP/3 &amp;amp; QUIC&lt;/h1&gt;
+
+&lt;h3 id=&quot;quic-protocol&quot;&gt;QUIC Protocol&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Quick UDP Internet Connections의 약자로서 구글이 개발한 UDP 기반에서 구현한 전송 프로토콜&lt;/li&gt;
+  &lt;li&gt;즉 UDP 프로토콜을 커스텀하여 속도와 TCP의 연결성을 확보한 프로토콜&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;구조&quot;&gt;구조&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;UDP는 일반적으로 연결성을 지향하지 않지만 UDP 프로토콜의 유연함을 이용하여 QUIC 계층을 추가하여 TCP와 같은 신뢰성을 확보한 프로토콜&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/HTTP%203%20&amp;amp;%20QUIC%206626e80d84ac444eb6a1b78186f96d39/Untitled.png&quot; alt=&quot;Untitled&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;특징&quot;&gt;특징&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;전송-속도-향상&quot;&gt;전송 속도 향상&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;QUIC 프로토콜은 UDP기반의 프로토콜이기 때문에 RTT가 0이므로 속도적인 면에서 빠르고 오버헤드가 TCP에 비해 감소했음&lt;/li&gt;
+  &lt;li&gt;QUIC 프로토콜은 Connection UUID 고유 패킷 식별자를 발급하여 한번이라도 발급할 경우 이동중 로밍이나 IP 변경이 발생 하더라도 커넥션을 다시 수립 할 필요가 없음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/HTTP%203%20&amp;amp;%20QUIC%206626e80d84ac444eb6a1b78186f96d39/Untitled%201.png&quot; alt=&quot;Untitled&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;보안성-향상&quot;&gt;보안성 향상&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;TLS 암호화가 기본적으로 제공됨&lt;/li&gt;
+  &lt;li&gt;IP Spoofing / Replay Attack 방지
+    &lt;ul&gt;
+      &lt;li&gt;QUIC에서는 필요에 따라 Source Address Token을 발급하여 출발지 아이피를 변조 및 재생공격에 대한 검증을 수행함&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;멀티플렉싱multiplexing&quot;&gt;&lt;strong&gt;멀티플렉싱(multiplexing)&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;단일 채널을 통해 여러 데이터를 보내는 멀티 플렉싱 기능을 제공함
+&lt;em&gt;**&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;향상된-오류정정&quot;&gt;&lt;strong&gt;향상된 오류정정&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;QUIC은 전방 오류정정 FEC(Forward Error Correction) 방식을 이용하여 패킷이 전송 중 변조나 훼손이 발생했을 경우 정정비트를 통해 훼손된 비트를 복구하도록 설계되었습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;reference&quot;&gt;Reference&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/QUIC&quot;&gt;QUIC&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://devahea.github.io/2019/04/30/5G-%EC%B4%88%EC%97%B0%EA%B2%B0%EC%8B%9C%EB%8C%80%EC%97%90-%EC%9B%B9-HTTP%EC%9D%98-%EB%8C%80%EC%95%88%EC%9D%80-QUIC/&quot;&gt;QUIC 소개&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.naver.com/PostView.nhn?blogId=renucs&amp;amp;logNo=220887163028&quot;&gt;QUIC 프로토콜&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.chromium.org/quic&quot;&gt;QUIC&lt;/a&gt; 공식 문서&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://musclebear.tistory.com/51&quot;&gt;[Protocol] QUIC 프로토콜이 뭐지?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://velog.io/@wsong0101/QUIC%EC%9D%84-%ED%96%A5%ED%95%9C-%EC%97%AC%EC%A0%95%EB%B2%88%EC%97%AD&quot;&gt;QUIC을 향한 여정(번역)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.saturnsoft.net/network/2019/03/21/quic-http3-1/&quot;&gt;QUIC과 HTTP/3 - 1. UDP기반 전송 프로토콜의 대두&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.saturnsoft.net/network/2019/03/26/quic-http3-2/&quot;&gt;QUIC과 HTTP/3 - 2. 기존의 성능 개선 기법 및 한계&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.saturnsoft.net/network/2019/08/11/http3-curl-quiche/&quot;&gt;QUIC과 HTTP/3 - 3. curl + quiche 로 HTTP3 요청해 보기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.google.com/document/d/1WJvyZflAO2pq77yOLbp9NsGjC1CHetAXV8I0fQe-B_U/edit?pli=1#&quot;&gt;QUIC 프로토콜 공식 스펙&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ykarma1996.tistory.com/86&quot;&gt;HTTP/3&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Web" /><summary type="html">HTTP/3 &amp;amp; QUIC</summary></entry><entry><title type="html">ML Ops</title><link href="http://localhost:4000/data-engineering/2021/09/05/ML-Ops.html" rel="alternate" type="text/html" title="ML Ops" /><published>2021-09-05T21:17:00+09:00</published><updated>2021-09-05T21:17:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/09/05/ML%20Ops</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/09/05/ML-Ops.html">&lt;h1 id=&quot;ml-ops&quot;&gt;ML Ops&lt;/h1&gt;
 
 &lt;h3 id=&quot;정의&quot;&gt;정의&lt;/h3&gt;
 
@@ -146,233 +389,4 @@
   &lt;li&gt;&lt;a href=&quot;https://ml-ops.org/&quot;&gt;https://ml-ops.org/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://eda-ai-lab.tistory.com/13&quot;&gt;EDA란?&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://blogs.nvidia.com/blog/2020/09/03/what-is-mlops/&quot;&gt;what is ml ops?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="Data-Engineering" /><summary type="html">ML Ops</summary></entry><entry><title type="html">Logstash</title><link href="http://localhost:4000/data-engineering/2021/08/20/Logstash.html" rel="alternate" type="text/html" title="Logstash" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/Logstash</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/Logstash.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">ElasticSearch</title><link href="http://localhost:4000/data-engineering/2021/08/20/ElasticSearch.html" rel="alternate" type="text/html" title="ElasticSearch" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/ElasticSearch</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/ElasticSearch.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">ETL Architecture</title><link href="http://localhost:4000/data-engineering/2021/08/20/ETL-Architecture.html" rel="alternate" type="text/html" title="ETL Architecture" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/ETL%20Architecture</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/ETL-Architecture.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">EDW</title><link href="http://localhost:4000/data-engineering/2021/08/20/EDW.html" rel="alternate" type="text/html" title="EDW" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/EDW</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/EDW.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">Apache Nifi</title><link href="http://localhost:4000/data-engineering/2021/08/20/Apache-Nifi.html" rel="alternate" type="text/html" title="Apache  Nifi" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/Apache%20Nifi</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/Apache-Nifi.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">Hadoop</title><link href="http://localhost:4000/data-engineering/2021/08/20/Hadoop.html" rel="alternate" type="text/html" title="Hadoop" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/Hadoop</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/Hadoop.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">Apache Airflow</title><link href="http://localhost:4000/data-engineering/2021/08/19/Apache-AirFlow.html" rel="alternate" type="text/html" title="Apache Airflow" /><published>2021-08-19T00:00:00+09:00</published><updated>2021-08-19T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/19/Apache%20AirFlow</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/19/Apache-AirFlow.html">&lt;h2 id=&quot;개념&quot;&gt;개념&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;DAG(Directed Acyclic Graph, 비순환 방향 그래프)로 각 배치 스케줄을 관리하는 work flow 스케줄링 및 모니터링  도구&lt;/p&gt;
-
-&lt;h2 id=&quot;단어-설명&quot;&gt;단어 설명&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;DAG (Directed Acyclic Graph) : 관계와 의존성을 가진 작업(Task)들의 집합이다
-    &lt;ul&gt;
-      &lt;li&gt;ex) a 작업 실행 후 b작업을 실행하라는 명령어를 묶은것&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/airbnb-engineering/airflow-a-workflow-management-platform-46318b977fd8&quot;&gt;Airflow: a workflow management platform&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/data-engineering-with-airflow-k8s-1/&quot;&gt;Kubernetes를 이용한 효율적인 데이터 엔지니어링(Airflow on Kubernetes VS Airflow Kubernetes Executor) – 1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/data-engineering-with-airflow-k8s-2/&quot;&gt;Kubernetes를 이용한 효율적인 데이터 엔지니어링(Airflow on Kubernetes VS Airflow Kubernetes Executor) – 2&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://bcho.tistory.com/1184&quot;&gt;데이타 워크플로우 관리를 위한 Apache Airflow #1 - 소개&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.si-analytics.ai/59&quot;&gt;airflow 튜토리얼&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://airflow.apache.org/docs/apache-airflow/stable/start/index.html&quot;&gt;airflow 공식 문서&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="Data-Engineering" /><summary type="html">개념</summary></entry><entry><title type="html">토큰 저장소의 왕은 누구인가?</title><link href="http://localhost:4000/web/2021/08/15/%ED%86%A0%ED%81%B0-%EC%A0%80%EC%9E%A5%EC%86%8C%EC%9D%98-%EC%99%95%EC%9D%80-%EB%88%84%EA%B5%AC%EC%9D%B8%EA%B0%80.html" rel="alternate" type="text/html" title="토큰 저장소의 왕은 누구인가?" /><published>2021-08-15T00:00:00+09:00</published><updated>2021-08-15T00:00:00+09:00</updated><id>http://localhost:4000/web/2021/08/15/%ED%86%A0%ED%81%B0%20%EC%A0%80%EC%9E%A5%EC%86%8C%EC%9D%98%20%EC%99%95%EC%9D%80%20%EB%88%84%EA%B5%AC%EC%9D%B8%EA%B0%80</id><content type="html" xml:base="http://localhost:4000/web/2021/08/15/%ED%86%A0%ED%81%B0-%EC%A0%80%EC%9E%A5%EC%86%8C%EC%9D%98-%EC%99%95%EC%9D%80-%EB%88%84%EA%B5%AC%EC%9D%B8%EA%B0%80.html">&lt;p&gt;aka. Cookie VS LocalStorage VS SessionStorage&lt;/p&gt;
-
-&lt;h2 id=&quot;질문&quot;&gt;질문&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JWT 토큰을 어디에 저장해야하는가?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;대화의-흐름&quot;&gt;대화의 흐름&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;쿠키에 저장하는게 국룰이다&lt;/li&gt;
-  &lt;li&gt;요즘엔 웹 스토리지에 저장하는게 표준이다&lt;/li&gt;
-  &lt;li&gt;스토리지는 세션 스토리지가 정통이다 vs 로컬 스토리지도 모르는 사파 놈들&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;결론적으로 보면 셋중 둘은 다른놈이다(두놈은 형제)&lt;/p&gt;
-
-&lt;p&gt;일단 분류를 하자면&lt;/p&gt;
-
-&lt;p&gt;Cookie는 HTTP 요청 헤더에 들어가는 속성이고&lt;/p&gt;
-
-&lt;p&gt;Local, Session Storage는 HTML5에서 지원하는 클라이언트 Web Storage 종류 중 하나다&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Cookie&lt;/th&gt;
-      &lt;th&gt;Local Storage&lt;/th&gt;
-      &lt;th&gt;Session Storage&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;분류&lt;/td&gt;
-      &lt;td&gt;HTTP&lt;/td&gt;
-      &lt;td&gt;Web Storage(HTML5)&lt;/td&gt;
-      &lt;td&gt;Web Storage(HTML5)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;데이터 크기&lt;/td&gt;
-      &lt;td&gt;4KB&lt;/td&gt;
-      &lt;td&gt;없음&lt;/td&gt;
-      &lt;td&gt;무제한&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;데이터 개수&lt;/td&gt;
-      &lt;td&gt;도메인당 20개&lt;/td&gt;
-      &lt;td&gt;무제한&lt;/td&gt;
-      &lt;td&gt;무제한&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;자동 전송 여부&lt;/td&gt;
-      &lt;td&gt;O&lt;/td&gt;
-      &lt;td&gt;X (JS에서 가져와서 추가작업을 해주어야함)&lt;/td&gt;
-      &lt;td&gt;X (JS에서 가져와서 추가작업을 해주어야함)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;데이터 영속성&lt;/td&gt;
-      &lt;td&gt;소멸함&lt;/td&gt;
-      &lt;td&gt;영구적&lt;/td&gt;
-      &lt;td&gt;브라우저 종료시 삭제&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;JS 접근 가능 여부&lt;/td&gt;
-      &lt;td&gt;O(httponly 옵션이 꺼져 있을 경우)&lt;/td&gt;
-      &lt;td&gt;O&lt;/td&gt;
-      &lt;td&gt;O&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;취약한 공격&lt;/td&gt;
-      &lt;td&gt;CSRF&lt;/td&gt;
-      &lt;td&gt;XSS&lt;/td&gt;
-      &lt;td&gt;XSS&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;접근 가능자&lt;/td&gt;
-      &lt;td&gt;httponly옵션을 할 경우 브라우저에서 접근 불가&lt;/td&gt;
-      &lt;td&gt;JS를 통해서만&lt;/td&gt;
-      &lt;td&gt;JS를 통해서만&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;서브도메인 접근 가능 여부&lt;/td&gt;
-      &lt;td&gt;같은 서브 도메인의 쿠키만 접근가능(쿠키는 일부 보안 기능에 대해 서버측에서 설정 가능)&lt;/td&gt;
-      &lt;td&gt;동일 도메인 주소만&lt;/td&gt;
-      &lt;td&gt;동일 도메인 주소만&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;탭 별 데이터 공유 여부&lt;/td&gt;
-      &lt;td&gt;O&lt;/td&gt;
-      &lt;td&gt;O&lt;/td&gt;
-      &lt;td&gt;X&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;저장 자료형&lt;/td&gt;
-      &lt;td&gt;문자열&lt;/td&gt;
-      &lt;td&gt;문자열 + 객체 정보 저장 가능&lt;/td&gt;
-      &lt;td&gt;문자열 + 객체 정보 저장 가능&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;만료&lt;/td&gt;
-      &lt;td&gt;시간설정&lt;/td&gt;
-      &lt;td&gt;X&lt;/td&gt;
-      &lt;td&gt;X&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;브라우저 종료시&lt;/td&gt;
-      &lt;td&gt;만료되지 않는 이상 재사용가능&lt;/td&gt;
-      &lt;td&gt;재시작 후에도 사용 가능&lt;/td&gt;
-      &lt;td&gt;종료시 삭제&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;접근 범위&lt;/td&gt;
-      &lt;td&gt;제한 없음&lt;/td&gt;
-      &lt;td&gt;동일 도메인일 경우에만&lt;/td&gt;
-      &lt;td&gt;동일 도메인 + 같은 브라우저 컨텍스트에서만(탭)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;취약점 면에서 보면 양쪽다 비슷하며
-개발 목적,기능 혹은 아키텍처 설계에 따라 Cookie VS Web Storage를 골라서 쓰면 된다&lt;/p&gt;
-
-&lt;h2 id=&quot;서브도메인-테스트-결과&quot;&gt;서브도메인 테스트 결과&lt;/h2&gt;
-
-&lt;h3 id=&quot;localstorage&quot;&gt;LocalStorage&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 스토리지 접근 가능&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← test.tempus.com 스토리지 접근 불가&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.com&quot;&gt;test.com&lt;/a&gt; 스토리지 접근 불가&lt;/p&gt;
-
-&lt;h3 id=&quot;sessionstorage&quot;&gt;SessionStorage&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt;  → &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 스토리지 접근 불가&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 스토리지 접근 불가&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.com&quot;&gt;test.com&lt;/a&gt; 스토리지 접근 불가&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → tempus.com 스토리지 접근 불가(다른 탭)&lt;/p&gt;
-
-&lt;h3 id=&quot;cookiedomain-설정-x&quot;&gt;Cookie(Domain 설정 X)&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 쿠키 접근 불가&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.com&quot;&gt;te&lt;/a&gt;mpus.com 쿠키 접근 가능&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 쿠키 접근 불가&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://test.com&quot;&gt;test.com&lt;/a&gt; 쿠기 접근 불가&lt;/p&gt;
-
-&lt;h3 id=&quot;cookiedomain-설정-o-&quot;&gt;Cookie(Domain 설정 O )&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 쿠키 접근 가능&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://test.tempus.com&quot;&gt;test.tempus.com&lt;/a&gt; 쿠키 접근 가능&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://test.com&quot;&gt;test.com&lt;/a&gt; 쿠키 접근 불가&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; → &lt;a href=&quot;http://a.test.tempus.com&quot;&gt;a.test.tempus.com&lt;/a&gt; 쿠키 접근 가능&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://tempus.com&quot;&gt;tempus.com&lt;/a&gt; ← &lt;a href=&quot;http://a.test.tempus.com&quot;&gt;a.test.tempus.com&lt;/a&gt; 쿠키 접근 불가&lt;/p&gt;
-
-&lt;h3 id=&quot;추가-확인-사항&quot;&gt;추가 확인 사항&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SOP정책
-document.cookie로 변경하면 타 도메인의 쿠키탈취가 가능한가? ⇒ 가능함
-subdomain - take over
-
-[a.naver.com](http://a.naver.com) → naver.com → [b.na](http://b.na)ver.com으로 쿠키 를 생성할 수 있는가?
-
-a.naver.com -&amp;gt; naver.com
-
-domain=.naver.com 확인 해보기
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;사용한 코드&lt;/p&gt;
-
-&lt;div class=&quot;language-jsx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;localStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;testValue&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;abc&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;localStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;testValue&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;sessionStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;myCat&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Tom&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;sessionStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;myCat&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;user=John; domain=tempus.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;user=John;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;abc = www; domain=tempus.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;test=www; domain=a.test.tempus.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;참고&quot;&gt;참고&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://velog.io/@ejchaid/localstorage-sessionstorage-cookie%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90&quot;&gt;https://velog.io/@ejchaid/localstorage-sessionstorage-cookie의-차이점&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc2109&quot;&gt;https://datatracker.ietf.org/doc/html/rfc2109&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/swlh/whats-the-secure-way-to-store-jwt-dd362f5b7914&quot;&gt;https://medium.com/swlh/whats-the-secure-way-to-store-jwt-dd362f5b7914&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://velog.io/@0307kwon/JWT%EB%8A%94-%EC%96%B4%EB%94%94%EC%97%90-%EC%A0%80%EC%9E%A5%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C-localStorage-vs-cookie&quot;&gt;https://velog.io/@0307kwon/JWT는-어디에-저장해야할까-localStorage-vs-cookie&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="Web" /><summary type="html">aka. Cookie VS LocalStorage VS SessionStorage</summary></entry></feed>
+&lt;/ul&gt;</content><author><name></name></author><category term="Data-Engineering" /><summary type="html">ML Ops</summary></entry><entry><title type="html">Hadoop</title><link href="http://localhost:4000/data-engineering/2021/08/20/Hadoop.html" rel="alternate" type="text/html" title="Hadoop" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/Hadoop</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/Hadoop.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">ElasticSearch</title><link href="http://localhost:4000/data-engineering/2021/08/20/ElasticSearch.html" rel="alternate" type="text/html" title="ElasticSearch" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/ElasticSearch</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/ElasticSearch.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">ETL Architecture</title><link href="http://localhost:4000/data-engineering/2021/08/20/ETL-Architecture.html" rel="alternate" type="text/html" title="ETL Architecture" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/ETL%20Architecture</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/ETL-Architecture.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">EDW</title><link href="http://localhost:4000/data-engineering/2021/08/20/EDW.html" rel="alternate" type="text/html" title="EDW" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/EDW</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/EDW.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry><entry><title type="html">Apache Nifi</title><link href="http://localhost:4000/data-engineering/2021/08/20/Apache-Nifi.html" rel="alternate" type="text/html" title="Apache  Nifi" /><published>2021-08-20T00:00:00+09:00</published><updated>2021-08-20T00:00:00+09:00</updated><id>http://localhost:4000/data-engineering/2021/08/20/Apache%20Nifi</id><content type="html" xml:base="http://localhost:4000/data-engineering/2021/08/20/Apache-Nifi.html"></content><author><name></name></author><category term="Data-Engineering" /><summary type="html"></summary></entry></feed>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">11</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">10</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			HTTP-1.1
+		</div>
+		<time class="post-date dt-published" datetime="2021-09-20T23:05:00+09:00" itemprop="datePublished">2021/09/20
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<h1 id="http-11">HTTP 1.1</h1>
+
+<h3 id="http란">HTTP란?</h3>
+
+<hr />
+
+<ul>
+  <li>HTTP(HyperText Transfer Protocol)의 약자로서  HTML 문서와 같은 리소스들을 가져올 수 있도록 해주는 TCP 기반 프로토콜</li>
+  <li>HTTP는 웹에서 이루어지는 모든 데이터 교환의 기초이며, 클라이언트-서버 프로토콜</li>
+  <li>HTTP 문서에는 비디오, 이미지, 텍스트, layout등의 하위문서로 구성됨</li>
+</ul>
+
+<p><img src="/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled.png" alt="Untitled" /></p>
+
+<h3 id="http-프로토콜">HTTP 프로토콜</h3>
+
+<hr />
+
+<p><img src="/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled%201.png" alt="Untitled" /></p>
+
+<ul>
+  <li>HTTP는 Application 계층의 프로토콜로서 TCP혹은 암호화된 TCP인 TLS를 통해 전송 됨</li>
+</ul>
+
+<h3 id="http-프로토콜의-작동-순서">HTTP 프로토콜의 작동 순서</h3>
+
+<hr />
+
+<ol>
+  <li>브라우저 상에서 naver.com에 접속한다</li>
+  <li>브라우저는 사용자 PC의 로컬 DNS(/etc/host)에 등록되어 있을경우 해당 서버의 IP로 요청을 날린다</li>
+  <li>로컬 DNS에 없을 경우 DNS프로토콜을 이용해 Domain 서버에 해당 도메인명이 어떤 IP들과 매핑되어 있는지 질의한다</li>
+  <li>naver.com의 IP를 얻어 온 후 해당 서버로 요청을 날린다</li>
+  <li>해당 서버의 Web Server에서 요청한 자원에 대해서 응답값과 함께 컨텐츠를 response한다</li>
+  <li>브라우저 상에서 해당 요청의 response값을 분석해서 사용자에게 출력한다(이미지, 텍스트,css)</li>
+</ol>
+
+<p><img src="/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled%202.png" alt="Untitled" /></p>
+
+<h3 id="https-프로토콜-작동-순서">HTTPS 프로토콜 작동 순서</h3>
+
+<hr />
+
+<ol>
+  <li>브라우저 상에서 naver.com에 접속한다</li>
+  <li>브라우저는 사용자 PC의 로컬 DNS(/etc/host)에 등록되어 있을경우 해당 서버의 IP로 요청을 날린다</li>
+  <li>로컬 DNS에 없을 경우 DNS프로토콜을 이용해 Domain 서버에 해당 도메인명이 어떤 IP들과 매핑되어 있는지 질의한다</li>
+  <li>naver.com의 IP를 얻어 온 후 해당 서버로 요청을 날린다</li>
+  <li>
+    <p>서버와 클라이언트 간에 암호화를 이용한 암호화 과정이 진행된다</p>
+
+    <p><img src="/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled%203.png" alt="Untitled" /></p>
+  </li>
+  <li>해당 서버의 Web Server에서 요청한 자원에 대해서 응답값과 함께 컨텐츠를 response한다</li>
+  <li>브라우저 상에서 해당 요청의 response값을 분석해서 사용자에게 출력한다(이미지, 텍스트,css)</li>
+</ol>
+
+<h3 id="http의-단점">HTTP의 단점</h3>
+
+<hr />
+
+<ul>
+  <li>HOLB(Head Of Line Blocking)
+    <ul>
+      <li>순차적으로 요청을 받아야 하다 보니 앞의 요청이 끝나지 않으면 뒤의 요청을 처리 할수가 없는 이슈</li>
+    </ul>
+  </li>
+  <li>RTT(Round Trip Time)
+    <ul>
+      <li>request를 할때마다 Handshake가 발생하기 때문에 불필요한 RTT가 발생한다</li>
+    </ul>
+  </li>
+  <li>무거운 Header 구조
+    <ul>
+      <li>cookie, authorization등 다양한 헤더를 포함하고 있어 트래픽에 부담이 된다</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="reference">Reference</h3>
+
+<hr />
+
+<ul>
+  <li><a href="https://velog.io/@ziyoonee/HTTP1-%EB%B6%80%ED%84%B0-HTTP3-%EA%B9%8C%EC%A7%80-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0">HTTP/1 부터 HTTP/3 까지 알아보기</a></li>
+  <li><a href="https://velog.io/@taesunny/HTTP2HTTP-2.0-%EC%A0%95%EB%A6%AC">HTTP/2(HTTP 2.0) 정리</a></li>
+  <li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP">HTTP의 진화</a></li>
+  <li><a href="https://www.w3.org/Protocols/rfc2616/rfc2616.html">Hypertext Transfer Protocol – HTTP/1.1</a></li>
+  <li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Overview">HTTP 개요</a></li>
+  <li><a href="https://reakwon.tistory.com/106">[네트워크/보안] TLS(SSL) 개념과 기본 동작 원리</a></li>
+</ul>
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

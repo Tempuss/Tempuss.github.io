@@ -1,0 +1,66 @@
+---
+layout: post
+title: HTTP-2 
+date: 2021-09-20 23:05:00 +0900
+category: Web  
+---
+
+# HTTP/2
+
+## HTTP/2란?
+
+---
+
+- HTTP/2는 Hypertext Transfer Protocol Version 2의 약자로 IETF년에 새로 규정된 차기 HTTP 버전이다
+- SPDY(스피디/speedy로 발음)라는 구글의 비표준 개방형 네트워크 프로토콜에 기반한다. 기존의 HTTP methods, status codes, semantics 개념들이 동일하게 호환된다.
+
+## Frame 구조
+
+---
+
+![Untitled](/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled.png)
+
+- 기존의 HTTP/1.1 은 plain text형태로 데이터를 전송하지만 HTTP/2는 바이너리 포멧으로 인코딩 된 Message, Frame으로 구성되어 전송된다
+- 기존의 HTTP/1.1 Header는 `HEADERS Type Frame` 에, body내용은 `DATA Type Frame` 에 해당한다
+- Frame: HTTP/2에서 통신의 최소 단위. 각 최소 단위에는 하나의 프레임 헤더가 포함된다. 이 프레임 헤더는 최소한으로 프레임이 속하는 스트림을 식별한다. HEADERS Type Frame, DATA Type Frame이 존재한다.
+
+## Stream 구조
+
+---
+
+![Untitled](/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%201.png)
+
+- Stream: 구성된 연결 내에서 전달되는 바이트의 양방향 흐름, 하나 이상의 메시지가 전달 가능하다
+- Message: 논리적 요청 또는 응답 메시지에 매핑되는 프레임의 전체 시퀀스이다.
+
+## 특징
+
+---
+
+- **HTTP Header Data Compression**
+    - Header중복 전송을 막기 위해 Huffman Coding을 사용하는 HPACK이라는 압축방식으로 변환해 전송하는 특징
+    - 첫 stream에서만 Header를 전송하구 이후 stream에서는 전송을 하지 않음
+
+        ![Untitled](/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%202.png)
+
+- **Server Push**
+    - 서버에서 클라이언트가 요청하지 않은 자원(css,js,img)등에 대해서도 한번에 리턴할 수 있음
+
+    ![Untitled](/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%203.png)
+
+- **HTTP 1.x의 HOL(Head-of-Line) Blocking 문제 해결**
+    - HTTP/1.1이하에서는 한번에 하나의 파일만 전송 가능했지만 이때문에 앞의 파일이 느려질 경우 뒤에가 모두 느려지는 문제가 있었음. HTTP/2 에서는 여러 파일을 병렬로 전송 할 수 있다
+    - TCP 연결 하나로 모든 요청과 응답들을 병렬로 보낼수 있게됨
+
+    ![Untitled](/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%204.png)
+
+- **Stream 우선순위**
+    - HTTP가 많은 프레임으로 분리되어 전송되면서 여러 스트림의 프레임이 다중화됨에 따라 스트림에 우선순위를 부여하여 전송할 수 있도록 되었음
+
+### Reference
+
+---
+
+- [HTTP/2 소개](https://developers.google.com/web/fundamentals/performance/http2?hl=ko)
+- [HTTP-1부터-HTTP-3까지](https://velog.io/@ziyoonee/HTTP1-%EB%B6%80%ED%84%B0-HTTP3-%EA%B9%8C%EC%A7%80-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0)
+- [Huffman Coding](https://ko.wikipedia.org/wiki/%ED%97%88%ED%94%84%EB%A8%BC_%EB%B6%80%ED%98%B8%ED%99%94)

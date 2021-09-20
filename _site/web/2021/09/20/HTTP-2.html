@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">11</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">10</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			HTTP-2
+		</div>
+		<time class="post-date dt-published" datetime="2021-09-20T23:05:00+09:00" itemprop="datePublished">2021/09/20
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<h1 id="http2">HTTP/2</h1>
+
+<h2 id="http2란">HTTP/2란?</h2>
+
+<hr />
+
+<ul>
+  <li>HTTP/2는 Hypertext Transfer Protocol Version 2의 약자로 IETF년에 새로 규정된 차기 HTTP 버전이다</li>
+  <li>SPDY(스피디/speedy로 발음)라는 구글의 비표준 개방형 네트워크 프로토콜에 기반한다. 기존의 HTTP methods, status codes, semantics 개념들이 동일하게 호환된다.</li>
+</ul>
+
+<h2 id="frame-구조">Frame 구조</h2>
+
+<hr />
+
+<p><img src="/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled.png" alt="Untitled" /></p>
+
+<ul>
+  <li>기존의 HTTP/1.1 은 plain text형태로 데이터를 전송하지만 HTTP/2는 바이너리 포멧으로 인코딩 된 Message, Frame으로 구성되어 전송된다</li>
+  <li>기존의 HTTP/1.1 Header는 <code class="highlighter-rouge">HEADERS Type Frame</code> 에, body내용은 <code class="highlighter-rouge">DATA Type Frame</code> 에 해당한다</li>
+  <li>Frame: HTTP/2에서 통신의 최소 단위. 각 최소 단위에는 하나의 프레임 헤더가 포함된다. 이 프레임 헤더는 최소한으로 프레임이 속하는 스트림을 식별한다. HEADERS Type Frame, DATA Type Frame이 존재한다.</li>
+</ul>
+
+<h2 id="stream-구조">Stream 구조</h2>
+
+<hr />
+
+<p><img src="/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%201.png" alt="Untitled" /></p>
+
+<ul>
+  <li>Stream: 구성된 연결 내에서 전달되는 바이트의 양방향 흐름, 하나 이상의 메시지가 전달 가능하다</li>
+  <li>Message: 논리적 요청 또는 응답 메시지에 매핑되는 프레임의 전체 시퀀스이다.</li>
+</ul>
+
+<h2 id="특징">특징</h2>
+
+<hr />
+
+<ul>
+  <li><strong>HTTP Header Data Compression</strong>
+    <ul>
+      <li>Header중복 전송을 막기 위해 Huffman Coding을 사용하는 HPACK이라는 압축방식으로 변환해 전송하는 특징</li>
+      <li>
+        <p>첫 stream에서만 Header를 전송하구 이후 stream에서는 전송을 하지 않음</p>
+
+        <p><img src="/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%202.png" alt="Untitled" /></p>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Server Push</strong>
+    <ul>
+      <li>서버에서 클라이언트가 요청하지 않은 자원(css,js,img)등에 대해서도 한번에 리턴할 수 있음</li>
+    </ul>
+
+    <p><img src="/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%203.png" alt="Untitled" /></p>
+  </li>
+  <li><strong>HTTP 1.x의 HOL(Head-of-Line) Blocking 문제 해결</strong>
+    <ul>
+      <li>HTTP/1.1이하에서는 한번에 하나의 파일만 전송 가능했지만 이때문에 앞의 파일이 느려질 경우 뒤에가 모두 느려지는 문제가 있었음. HTTP/2 에서는 여러 파일을 병렬로 전송 할 수 있다</li>
+      <li>TCP 연결 하나로 모든 요청과 응답들을 병렬로 보낼수 있게됨</li>
+    </ul>
+
+    <p><img src="/assets/img/HTTP%202%202a41f2d5837e4883b9a9ae419977973a/Untitled%204.png" alt="Untitled" /></p>
+  </li>
+  <li><strong>Stream 우선순위</strong>
+    <ul>
+      <li>HTTP가 많은 프레임으로 분리되어 전송되면서 여러 스트림의 프레임이 다중화됨에 따라 스트림에 우선순위를 부여하여 전송할 수 있도록 되었음</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="reference">Reference</h3>
+
+<hr />
+
+<ul>
+  <li><a href="https://developers.google.com/web/fundamentals/performance/http2?hl=ko">HTTP/2 소개</a></li>
+  <li><a href="https://velog.io/@ziyoonee/HTTP1-%EB%B6%80%ED%84%B0-HTTP3-%EA%B9%8C%EC%A7%80-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0">HTTP-1부터-HTTP-3까지</a></li>
+  <li><a href="https://ko.wikipedia.org/wiki/%ED%97%88%ED%94%84%EB%A8%BC_%EB%B6%80%ED%98%B8%ED%99%94">Huffman Coding</a></li>
+</ul>
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

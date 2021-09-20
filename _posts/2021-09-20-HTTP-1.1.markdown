@@ -1,0 +1,75 @@
+---
+layout: post
+title: HTTP-1.1 
+date: 2021-09-20 23:05:00 +0900
+category: Web  
+---
+# HTTP 1.1
+
+### HTTP란?
+
+---
+
+- HTTP(HyperText Transfer Protocol)의 약자로서  HTML 문서와 같은 리소스들을 가져올 수 있도록 해주는 TCP 기반 프로토콜
+- HTTP는 웹에서 이루어지는 모든 데이터 교환의 기초이며, 클라이언트-서버 프로토콜
+- HTTP 문서에는 비디오, 이미지, 텍스트, layout등의 하위문서로 구성됨
+
+![Untitled](/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled.png)
+
+### HTTP 프로토콜
+
+---
+
+![Untitled](/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled%201.png)
+
+- HTTP는 Application 계층의 프로토콜로서 TCP혹은 암호화된 TCP인 TLS를 통해 전송 됨
+
+### HTTP 프로토콜의 작동 순서
+
+---
+
+1. 브라우저 상에서 naver.com에 접속한다
+2. 브라우저는 사용자 PC의 로컬 DNS(/etc/host)에 등록되어 있을경우 해당 서버의 IP로 요청을 날린다
+3. 로컬 DNS에 없을 경우 DNS프로토콜을 이용해 Domain 서버에 해당 도메인명이 어떤 IP들과 매핑되어 있는지 질의한다
+4. naver.com의 IP를 얻어 온 후 해당 서버로 요청을 날린다
+5. 해당 서버의 Web Server에서 요청한 자원에 대해서 응답값과 함께 컨텐츠를 response한다
+6. 브라우저 상에서 해당 요청의 response값을 분석해서 사용자에게 출력한다(이미지, 텍스트,css)
+
+![Untitled](/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled%202.png)
+
+### HTTPS 프로토콜 작동 순서
+
+---
+
+1. 브라우저 상에서 naver.com에 접속한다
+2. 브라우저는 사용자 PC의 로컬 DNS(/etc/host)에 등록되어 있을경우 해당 서버의 IP로 요청을 날린다
+3. 로컬 DNS에 없을 경우 DNS프로토콜을 이용해 Domain 서버에 해당 도메인명이 어떤 IP들과 매핑되어 있는지 질의한다
+4. naver.com의 IP를 얻어 온 후 해당 서버로 요청을 날린다
+5. 서버와 클라이언트 간에 암호화를 이용한 암호화 과정이 진행된다
+
+    ![Untitled](/assets/img/HTTP%201%201%2007031b307ca04e8098b3c515f644250c/Untitled%203.png)
+
+6. 해당 서버의 Web Server에서 요청한 자원에 대해서 응답값과 함께 컨텐츠를 response한다
+7. 브라우저 상에서 해당 요청의 response값을 분석해서 사용자에게 출력한다(이미지, 텍스트,css)
+
+### HTTP의 단점
+
+---
+
+- HOLB(Head Of Line Blocking)
+    - 순차적으로 요청을 받아야 하다 보니 앞의 요청이 끝나지 않으면 뒤의 요청을 처리 할수가 없는 이슈
+- RTT(Round Trip Time)
+    - request를 할때마다 Handshake가 발생하기 때문에 불필요한 RTT가 발생한다
+- 무거운 Header 구조
+    - cookie, authorization등 다양한 헤더를 포함하고 있어 트래픽에 부담이 된다
+
+### Reference
+
+---
+
+- [HTTP/1 부터 HTTP/3 까지 알아보기](https://velog.io/@ziyoonee/HTTP1-%EB%B6%80%ED%84%B0-HTTP3-%EA%B9%8C%EC%A7%80-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0)
+- [HTTP/2(HTTP 2.0) 정리](https://velog.io/@taesunny/HTTP2HTTP-2.0-%EC%A0%95%EB%A6%AC)
+- [HTTP의 진화](https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP)
+- [Hypertext Transfer Protocol -- HTTP/1.1](https://www.w3.org/Protocols/rfc2616/rfc2616.html)
+- [HTTP 개요](https://developer.mozilla.org/ko/docs/Web/HTTP/Overview)
+- [[네트워크/보안] TLS(SSL) 개념과 기본 동작 원리](https://reakwon.tistory.com/106)
