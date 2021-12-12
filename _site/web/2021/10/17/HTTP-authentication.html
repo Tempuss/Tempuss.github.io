@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Tempuss Blog" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>Tempuss Blog</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">Tempuss Blog</a>
+	</div>
+	<p class="lead">보안하는 개발자</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Hacking">
+				<span class="name">Hacking</span>
+				<span class="badge">39</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Web">
+				<span class="name">Web</span>
+				<span class="badge">13</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BoB">
+				<span class="name">BoB</span>
+				<span class="badge">10</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Data-Engineering">
+				<span class="name">Data-Engineering</span>
+				<span class="badge">9</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			HTTP Authorization
+		</div>
+		<time class="post-date dt-published" datetime="2021-10-17T23:05:00+09:00" itemprop="datePublished">2021/10/17
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<h1 id="http-authorization">HTTP Authorization</h1>
+
+<h2 id="1-basic-인증">1. Basic 인증</h2>
+
+<hr />
+
+<ul>
+  <li>클라이언트에서 사용자 이름과 암호를 base64인코드 하고 인증하는 방식</li>
+  <li>사실상 평문에 가깝다 보니 스니핑 공격에 취약하고 널리 쓰이지 않는 인증 방식</li>
+  <li>연관된 인증 방식들
+    <ul>
+      <li>Apache와 Basic 인증으로 접근 제한</li>
+      <li>nginx와 Basic 인증으로 접근 제한</li>
+      <li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Authentication#url%EC%97%90_%EC%9D%B8%EC%A6%9D_%EC%A0%95%EB%B3%B4%EB%A5%BC_%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC_%EC%A0%91%EA%B7%BC%ED%95%98%EA%B8%B0">URL에 인증 정보를 사용하여 접근</a>
+        <ul>
+          <li>ctf에 가끔 나왔던 인증 방식으로 현재 크롬 버전에서는 기능상 제거를 시작함</li>
+        </ul>
+
+        <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">https</span><span class="p">:</span><span class="c1">//username:password@www.example.com/</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+
+    <p><img src="/assets/img/HTTP-Authentication/Untitled.png" alt="Untitled" /></p>
+  </li>
+</ul>
+
+<h2 id="2-digest-인증">2. Digest 인증</h2>
+
+<hr />
+
+<ul>
+  <li>사용자 정보를 조합하여 md5해시를 만든 후 인증하는 방식</li>
+  <li>절대 비밀번호를 네트워크를 통해 보내지 않겠다는 마인드의 인증 방식</li>
+</ul>
+
+<p><img src="/assets/img/HTTP-Authentication/Untitled 1.png" alt="Untitled" /></p>
+
+<h2 id="3-form-base-인증">3. Form base 인증</h2>
+
+<hr />
+
+<ul>
+  <li>사용자 정보를 전송 후 세션과 쿠키를 이용한 인증 방식</li>
+</ul>
+
+<p><img src="/assets/img/HTTP-Authentication/Untitled 2.png" alt="Untitled" /></p>
+
+<h2 id="4-bearer-인증">4. Bearer 인증</h2>
+
+<hr />
+
+<ul>
+  <li>사용자 정보를 이용한 인증 후 짧은 유효기간의 토큰을 발급하여 인증하는 방식</li>
+  <li>jwt 토큰은 그 종류 중 1개</li>
+  <li>
+    <p>이때 토큰은 header, token, signature로 구성되어 있으며 실제 문자열 방식은 아래와 같음</p>
+
+    <p>헤더에는 <strong>토큰 타임과 해싱 알고리즘 정보</strong>를 저장하고, payload에는 담고자 하는 일부 <strong>사용자 식별 정보 + 추가 정보</strong>가 담기며 Signature에는 header에 명시된 해싱 알고리즘으로 <strong>해싱된 해시값</strong>이 저장된다</p>
+
+    <p>이때 해싱할때는 보통 서버측만 알고 있는 secret 값을 salt 값으로 사용해서 무결성을 보장한다
+  (이렇게 될 경우 secret 값을 모르면 클라이언트 측에서는 토큰에 대한 조작이 불가능해 진다)</p>
+
+    <p><img src="/assets/img/HTTP-Authentication/Untitled 3.png" alt="Untitled" /></p>
+  </li>
+</ul>
+
+<p><img src="/assets/img/HTTP-Authentication/Untitled 4.png" alt="Untitled" /></p>
+
+<h2 id="5-hoba-인증">5. HOBA 인증</h2>
+
+<hr />
+
+<ul>
+  <li>전자 서명 기반 인증 (RFC 7486)</li>
+  <li>관련 자료가 별로 없음;; 추가 리서치 필요</li>
+</ul>
+
+<h2 id="6-mutual-인증">6. Mutual 인증</h2>
+
+<hr />
+
+<ul>
+  <li>SSL인증서를 이용한 클라이언트-서버 상호 인증 (draft-ietf-httpauth-mutual)</li>
+</ul>
+
+<h2 id="7-aws4-hmac-sha256-인증">7. AWS4-HMAC-SHA256 인증</h2>
+
+<hr />
+
+<ul>
+  <li>AWS 전자 서명 기반 인증 (<a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html">링크</a>)</li>
+</ul>
+
+<h3 id="reference">Reference</h3>
+
+<hr />
+
+<ul>
+  <li><a href="https://velog.io/@cada/%ED%86%A0%EA%B7%BC-%EA%B8%B0%EB%B0%98-%EC%9D%B8%EC%A6%9D%EC%97%90%EC%84%9C-bearer%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C">토근 기반 인증에서 bearer는 무엇일까?</a></li>
+  <li><a href="https://velog.io/@rmfrn2901/HTTP-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D%EC%97%90-%EB%8C%80%ED%95%B4-%EC%84%A4%EB%AA%85">HTTP 인증 방식에 대해 설명</a></li>
+  <li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Authentication">HTTP 표준 문서</a></li>
+  <li><a href="https://velog.io/@cada/%ED%86%A0%EA%B7%BC-%EA%B8%B0%EB%B0%98-%EC%9D%B8%EC%A6%9D%EC%97%90%EC%84%9C-bearer%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C">토근 기반 인증에서 bearer는 무엇일까?</a></li>
+  <li><a href="https://velog.io/@ljinsk3/%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D%EA%B3%BC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B9%84%EA%B5%90">인증 방식과 프로세스 비교</a></li>
+  <li><a href="https://jwt.io/">jwt 공식</a> 문서</li>
+  <li><a href="https://velopert.com/2389">[JWT] JSON Web Token 소개 및 구조</a></li>
+  <li><a href="https://showerbugs.github.io/2017-11-16/OAuth-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C">https://showerbugs.github.io/2017-11-16/OAuth-란-무엇일까</a></li>
+  <li><a href="https://remocon33.tistory.com/631">HTTP Digest 인증 문제 경험기</a></li>
+  <li><a href="https://feel5ny.github.io/2019/11/24/HTTP_013_01/">다이제스트 인증 (1) - 다이제스트 인증과 특징</a></li>
+</ul>
+
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>
