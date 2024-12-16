@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-![profile](/assets/img/profile.png){:height="417px" width="556px"}.
+![profile](/assets/img/profile.png)
 
 ### Contact.
 
